@@ -13,3 +13,4 @@ if __name__ == '__main__':
     root = tk.Tk()
     app = votingApplication(root)
     root.mainloop()
+	# Testing
