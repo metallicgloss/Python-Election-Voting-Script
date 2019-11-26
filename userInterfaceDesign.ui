@@ -29,6 +29,76 @@
       <property name="propagate">False</property>
       <property name="row">0</property>
     </layout>
+    <child>
+      <object id="create_candidate_title_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Create Candidate</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="Label_13" class="ttk.Label">
+        <property name="text" translatable="yes">Label_13</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="Entry_10" class="ttk.Entry">
+        <property name="text" translatable="yes">Entry_10</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="Label_14" class="ttk.Label">
+        <property name="text" translatable="yes">Label_14</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="Entry_11" class="ttk.Entry">
+        <property name="text" translatable="yes">Entry_11</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="Button_15" class="ttk.Button">
+        <property name="text" translatable="yes">Button_15</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="Button_16" class="ttk.Button">
+        <property name="text" translatable="yes">Button_16</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">6</property>
+        </layout>
+      </object>
+    </child>
   </object>
   <object id="backend_create_election_frame" class="ttk.Frame">
     <property name="height">400</property>
@@ -39,6 +109,76 @@
       <property name="propagate">False</property>
       <property name="row">0</property>
     </layout>
+    <child>
+      <object id="Label_9" class="ttk.Label">
+        <property name="text" translatable="yes">Label_9</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="Label_10" class="ttk.Label">
+        <property name="text" translatable="yes">Label_10</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="Entry_8" class="ttk.Entry">
+        <property name="text" translatable="yes">Entry_8</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="Label_11" class="ttk.Label">
+        <property name="text" translatable="yes">Label_11</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="Entry_9" class="ttk.Entry">
+        <property name="text" translatable="yes">Entry_9</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="Button_14" class="ttk.Button">
+        <property name="text" translatable="yes">Button_14</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="Button_17" class="ttk.Button">
+        <property name="text" translatable="yes">Button_17</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">6</property>
+        </layout>
+      </object>
+    </child>
   </object>
   <object id="backend_create_student_frame" class="ttk.Frame">
     <property name="height">400</property>
@@ -49,6 +189,76 @@
       <property name="propagate">False</property>
       <property name="row">0</property>
     </layout>
+    <child>
+      <object id="Label_6" class="ttk.Label">
+        <property name="text" translatable="yes">Label_6</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="Label_7" class="ttk.Label">
+        <property name="text" translatable="yes">Label_7</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="Entry_5" class="ttk.Entry">
+        <property name="text" translatable="yes">Entry_5</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="Label_8" class="ttk.Label">
+        <property name="text" translatable="yes">Label_8</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="Entry_6" class="ttk.Entry">
+        <property name="text" translatable="yes">Entry_6</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="Button_13" class="ttk.Button">
+        <property name="text" translatable="yes">Button_13</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="Button_18" class="ttk.Button">
+        <property name="text" translatable="yes">Button_18</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">6</property>
+        </layout>
+      </object>
+    </child>
   </object>
   <object id="startup_menu_frame" class="ttk.Frame">
     <property name="height">280</property>
@@ -76,6 +286,7 @@
     <child>
       <object id="startup_admin_mode_btn" class="ttk.Button">
         <property name="command">startup_select_admin_mode</property>
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Administration Mode</property>
         <property name="width">100</property>
         <layout>
@@ -87,12 +298,26 @@
     </child>
     <child>
       <object id="startup_standard_mode_btn" class="ttk.Button">
+        <property name="command">startup_select_standard_mode</property>
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Standard Mode</property>
         <property name="width">100</property>
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
           <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="startup_quit_btn" class="ttk.Button">
+        <property name="command">exit_application</property>
+        <property name="text" translatable="yes">Quit Application</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
         </layout>
       </object>
     </child>
@@ -106,22 +331,174 @@
       <property name="propagate">False</property>
       <property name="row">0</property>
     </layout>
+    <child>
+      <object id="Label_2" class="ttk.Label">
+        <property name="text" translatable="yes">Label_2</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="Button_7" class="ttk.Button">
+        <property name="text" translatable="yes">Button_7</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="Button_8" class="ttk.Button">
+        <property name="text" translatable="yes">Button_8</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="Button_9" class="ttk.Button">
+        <property name="text" translatable="yes">Button_9</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="Button_10" class="ttk.Button">
+        <property name="text" translatable="yes">Button_10</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="Button_11" class="ttk.Button">
+        <property name="text" translatable="yes">Button_11</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="Button_20" class="ttk.Button">
+        <property name="text" translatable="yes">Button_20</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">6</property>
+        </layout>
+      </object>
+    </child>
   </object>
   <object id="student_login_frame" class="ttk.Frame">
-    <property name="height">200</property>
-    <property name="width">200</property>
+    <property name="height">330</property>
+    <property name="padding">50</property>
+    <property name="relief">flat</property>
+    <property name="width">730</property>
     <layout>
       <property name="column">0</property>
-      <property name="propagate">True</property>
+      <property name="propagate">False</property>
       <property name="row">0</property>
     </layout>
+    <child>
+      <object id="Label_3" class="ttk.Label">
+        <property name="font">{Montserrat SemiBold} 20 {}</property>
+        <property name="padding">30</property>
+        <property name="text" translatable="yes">Student Login</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_login_username_txtbx" class="ttk.Entry">
+        <property name="takefocus">true</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_login_password_txtbx" class="ttk.Entry">
+        <property name="show">•</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_login_btn" class="ttk.Button">
+        <property name="command">student_login</property>
+        <property name="cursor">hand2</property>
+        <property name="text" translatable="yes">Login</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="pady">20</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_login_username_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Username</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_login_Password_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Password</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
   </object>
   <object id="student_vote_frame" class="ttk.Frame">
     <property name="height">200</property>
     <property name="width">200</property>
     <layout>
       <property name="column">0</property>
-      <property name="propagate">True</property>
+      <property name="propagate">False</property>
+      <property name="row">0</property>
+    </layout>
+  </object>
+  <object id="backend_create_candidate_application" class="ttk.Frame">
+    <property name="height">200</property>
+    <property name="width">200</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">False</property>
       <property name="row">0</property>
     </layout>
   </object>
