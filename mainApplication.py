@@ -43,6 +43,18 @@ class Student:
             # Query returned data, user authenticated. Crude way of doing it, but acceptable for this task.
             return True
             
+    def cast_votes(self, position_id, candidate_id_one, candidate_id_two, candidate_id_three, candidate_id_four):
+        current_election = Election()
+        # Loop to iterate the voting for all positions.
+        while True:
+            # Handled primarily by the user interface so holding off, shouldn't be performed within this class.
+            # List all positions
+            # Get user to select position to vote
+            # List all candidates for that position
+            # Take 4 input values
+            # Validate input
+            # Exit position, display positions remaining from array.
+            
 # Define candidate class.
 class Candidate:
     def __init__(self, name, email):
@@ -110,6 +122,8 @@ class Election:
         # Execute MySQL Query, substitute %s with values with student details.
         mysql_cursor.execute("INSERT INTO `gsuElection` (`electionStartTime`, `electionEndTime`) VALUES (%s, %s)", [parse(start_time), parse(end_time)])
         database_connection.commit()
+        
+        # Return election ID
         return mysql_cursor.lastrowid
     
     # Check status of any election curretly running.
@@ -148,7 +162,21 @@ class Election:
 class Position:
     # No init class due to its very simple nature, just returning available positions.
     
-    # Create a new election time period in the database.
+    # List all positions currently in the GSU.
+    def get_positions():
+        # Execute MySQL Query
+        
+        election = Election()
+        election_id = election.get_current_election()
+        
+        mysql_cursor.execute("SELECT * FROM `gsuPositions`")
+        
+        # Store query_result as all values returned.
+        query_result = mysql_cursor.fetchall()
+        
+        return query_result
+        
+    # List all available positions to apply for.
     def get_available_positions():
         # Execute MySQL Query
         
