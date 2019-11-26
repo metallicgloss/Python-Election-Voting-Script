@@ -103,6 +103,7 @@ class Election:
         # Define class variables.
         self.start_time = start_time
         self.end_time = end_time
+        self.id = ""
         
     # Create a new election time period in the database.
     def create_election(self):
@@ -118,6 +119,7 @@ class Election:
         
         # Store query_result as all values returned.
         query_result = mysql_cursor.fetchall()
+        self.id = query_result
         
         if(mysql_cursor.rowcount == 0):
             # No election currently running.
@@ -125,6 +127,22 @@ class Election:
         else:
             # Return ID of the election currently running.
             return query_result
+            
+    # Get all candidates running in the election.
+    def get_all_candidates(self):
+        # Execute MySQL Query
+        mysql_cursor.execute("SELECT * FROM `gsuCandidateApplications` WHERE `electionID` = '%s'", [self.id])
+        
+        # Store query_result as all values returned.
+        query_result = mysql_cursor.fetchall()
+        
+        if(mysql_cursor.rowcount == 0):
+            # No current applications.
+            return False
+        else:
+            # Return array of all candidates running.
+            return query_result
+            
             
 # Define position class.
 class Position:
