@@ -49,6 +49,8 @@ class Candidate:
         # Define class variables.
         self.name = name
         self.email = email
+        self.id = ""
+        self.position = ""
         
     # Insert a new candidate to the system.
     def insert_new_candidate(self):
@@ -59,17 +61,41 @@ class Candidate:
     
     # Perform verification on student login credentials to database.
     def get_candidate_id(self):
-        #
-        # NOTE: This section may have to be changed dependant on how the candidate is used later in the application.
-        #
+        ###
+        ### NOTE: This section may have to be changed dependant on how the candidate is used later in the application.
+        ###
+        
         # Execute MySQL Query
         mysql_cursor.execute("SELECT `candidateID` FROM `gsuCandidates` WHERE `candidateName` = '%s'", [self.name])
         
         # Store query_result as all values returned.
         query_result = mysql_cursor.fetchall()
         
+        self.id = query_result
+        
         # Return ID of the candidate searched.
         return query_result
+        
+    # Create application for the current election.
+    def create_application(self):
+        current_election = Election()
+        election_id = current_election.get_current_election()
+        if(election_id != False):
+            election_positions = Position()
+            
+            ###
+            ### NOTE: Will need to change to output to the user interface and take input from the user interface.
+            ###
+            for line in election_positions.get_positions():
+                print("Position Available: Option " + str(line['positionID']) + " - " + line['positionTitle'])
+
+            mysql_cursor.execute("INSERT INTO `gsuCandidateApplication` (`candidateID`, `positionID`, `electionID`) VALUES (%s, %s, %s)", [self.id, input("Please enter the position you would like to apply for: "), election_id])
+            database_connection.commit()
+            return mysql_cursor.lastrowid
+            
+        else:
+            print("Error, no election.")
+            return False
         
 # Define election class.
 class Election:
@@ -99,6 +125,20 @@ class Election:
         else:
             # Return ID of the election currently running.
             return query_result
+            
+# Define position class.
+class Position:
+    # No init class due to its very simple nature, just returning available positions.
+    
+    # Create a new election time period in the database.
+    def get_positions():
+        # Execute MySQL Query
+        mysql_cursor.execute("SELECT * FROM `gsuPositions`")
+        
+        # Store query_result as all values returned.
+        query_result = mysql_cursor.fetchall()
+        
+        return query_result
         
 # Define primary class to initiate the user interface.
 class votingApplication:
