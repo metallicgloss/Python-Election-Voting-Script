@@ -149,9 +149,13 @@ class Position:
     # No init class due to its very simple nature, just returning available positions.
     
     # Create a new election time period in the database.
-    def get_positions():
+    def get_available_positions():
         # Execute MySQL Query
-        mysql_cursor.execute("SELECT * FROM `gsuPositions`")
+        
+        election = Election()
+        election_id = election.get_current_election()
+        
+        mysql_cursor.execute("SELECT * FROM `gsuPositions` WHERE `positionID` NOT IN (SELECT `positionID` FROM `gsuCandidateApplications` WHERE `electionID` = '%s' AND COUNT(SELECT `positionID` FROM `gsuCandidateApplications` WHERE `electionID` = '%s') < 5)", [election_id, election_id])
         
         # Store query_result as all values returned.
         query_result = mysql_cursor.fetchall()
