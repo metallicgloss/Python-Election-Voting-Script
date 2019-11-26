@@ -191,17 +191,16 @@ class Position:
         return query_result
         
 # Define primary class to initiate the user interface.
-class votingApplication:
+class votingApplication(tk.Tk()):
     def __init__(self, master):
         # Create PYGUBU builder
         self.interfaceBuilder = interfaceBuilder = pygubu.Builder()
         
         # Load main menu interface design.
-        interfaceBuilder.add_from_file('designerFiles/mainMenu.ui')
-        self.mainMenu = interfaceBuilder.get_object('mainMenu', master)
+        interfaceBuilder.add_from_file('userInterfaceDesign.ui')
+        self.userInterface = interfaceBuilder.get_object('startup_menu_frame', master)
 
 
 if __name__ == '__main__':
-    root = tk.Tk()
-    app = votingApplication(root)
-    root.mainloop()
+    mainApplication = votingApplication()
+    mainApplication.mainloop()

@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface>
+  <object id="backend_visualise_results" class="ttk.Frame">
+    <property name="height">400</property>
+    <property name="relief">flat</property>
+    <property name="width">600</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">False</property>
+      <property name="row">0</property>
+    </layout>
+  </object>
+  <object id="backend_view_results" class="ttk.Frame">
+    <property name="height">400</property>
+    <property name="relief">flat</property>
+    <property name="width">600</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">False</property>
+      <property name="row">0</property>
+    </layout>
+  </object>
+  <object id="backend_create_candidate_frame" class="ttk.Frame">
+    <property name="height">400</property>
+    <property name="relief">flat</property>
+    <property name="width">600</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">False</property>
+      <property name="row">0</property>
+    </layout>
+  </object>
+  <object id="backend_create_election_frame" class="ttk.Frame">
+    <property name="height">400</property>
+    <property name="relief">flat</property>
+    <property name="width">600</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">False</property>
+      <property name="row">0</property>
+    </layout>
+  </object>
+  <object id="backend_create_student_frame" class="ttk.Frame">
+    <property name="height">400</property>
+    <property name="relief">flat</property>
+    <property name="width">600</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">False</property>
+      <property name="row">0</property>
+    </layout>
+  </object>
+  <object id="startup_menu_frame" class="ttk.Frame">
+    <property name="height">280</property>
+    <property name="padding">50</property>
+    <property name="relief">flat</property>
+    <property name="takefocus">true</property>
+    <property name="width">730</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">False</property>
+      <property name="row">0</property>
+    </layout>
+    <child>
+      <object id="startup_menu_title_lbl" class="ttk.Label">
+        <property name="font">{Montserrat SemiBold} 16 {}</property>
+        <property name="padding">30</property>
+        <property name="text" translatable="yes">Welcome to the GSU Voting Application</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="startup_admin_mode_btn" class="ttk.Button">
+        <property name="command">startup_select_admin_mode</property>
+        <property name="text" translatable="yes">Administration Mode</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="startup_standard_mode_btn" class="ttk.Button">
+        <property name="text" translatable="yes">Standard Mode</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+  <object id="backend_menu_frame" class="ttk.Frame">
+    <property name="height">400</property>
+    <property name="relief">flat</property>
+    <property name="width">600</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">False</property>
+      <property name="row">0</property>
+    </layout>
+  </object>
+  <object id="student_login_frame" class="ttk.Frame">
+    <property name="height">200</property>
+    <property name="width">200</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">True</property>
+      <property name="row">0</property>
+    </layout>
+  </object>
+  <object id="student_vote_frame" class="ttk.Frame">
+    <property name="height">200</property>
+    <property name="width">200</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">True</property>
+      <property name="row">0</property>
+    </layout>
+  </object>
+</interface>
