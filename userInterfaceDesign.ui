@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <interface>
-  <object id="backend_visualise_results" class="ttk.Frame">
+  <object id="backend_visualise_results_frame" class="ttk.Frame">
     <property name="height">400</property>
     <property name="relief">flat</property>
     <property name="width">600</property>
@@ -10,7 +10,7 @@
       <property name="row">0</property>
     </layout>
   </object>
-  <object id="backend_view_results" class="ttk.Frame">
+  <object id="backend_view_results_frame" class="ttk.Frame">
     <property name="height">400</property>
     <property name="relief">flat</property>
     <property name="width">600</property>
@@ -205,12 +205,13 @@
       </object>
     </child>
     <child>
-      <object id="Label_7" class="ttk.Label">
+      <object id="student_username_lbl" class="ttk.Label">
         <property name="text" translatable="yes">Username</property>
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
           <property name="row">1</property>
+          <property name="sticky">w</property>
         </layout>
       </object>
     </child>
@@ -541,7 +542,7 @@
       <property name="row">0</property>
     </layout>
   </object>
-  <object id="backend_create_candidate_application" class="ttk.Frame">
+  <object id="backend_create_candidate_application_frame" class="ttk.Frame">
     <property name="height">200</property>
     <property name="width">200</property>
     <layout>

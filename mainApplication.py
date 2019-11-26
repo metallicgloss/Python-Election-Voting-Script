@@ -211,20 +211,65 @@ class voting_application(pygubu.TkApplication):
         
         # Load main interface design.
         self.interfaceBuilder.add_from_file('userInterfaceDesign.ui')
-        messagebox.showinfo('Message', frame)
         self.userInterface = self.interfaceBuilder.get_object(frame, self.master)
         
         # Connect buttons to methods.
         self.interfaceBuilder.connect_callbacks(self)
-        
-    # On sub-page access through the backend menu, provide a back button.
-    def return_to_backend(self):
-        self.change_frame('backend_menu_frame')
+    
+    #############################################################
+    #              Backend Menu Navigation Control              #
+    #############################################################
     
     # Exit backend menu to return to startup.
     def menu_backend_return(self):
         self.change_frame('startup_menu_frame')
     
+    # Navigate to create student voter.
+    def menu_create_student_voter(self):
+        self.change_frame('backend_create_student_frame')
+    
+    # Navigate to create candidate.
+    def menu_create_candidate(self):
+        self.change_frame('backend_create_candidate_frame')
+    
+    # Navigate to create election.
+    def menu_create_election(self):
+        self.change_frame('backend_create_election_frame')
+    
+    # Navigate to create candidate application.
+    def menu_create_candidate_application(self):
+        self.change_frame('backend_create_candidate_application_frame')
+    
+    # Navigate to view results page.
+    def menu_view_results(self):
+        self.change_frame('backend_view_results_frame')
+    
+    # Navigate to visualise results page.
+    def menu_visualise_results(self):
+        self.change_frame('backend_visualise_results_frame')
+    
+    # On sub-page access through the backend menu, provide a back button.
+    def return_to_backend(self):
+        self.change_frame('backend_menu_frame')
+    
+    
+    #############################################################
+    #              Backend Menu Navigation Control              #
+    #############################################################
+    
+    # Navigate to student voter login.
+    def startup_select_standard_mode(self):
+        self.change_frame('student_login_frame')
+        
+    # Navigate to backend menu.
+    def startup_select_admin_mode(self):
+        self.change_frame('backend_menu_frame')
+    
+    def exit_application(self):
+        # Destroy the tkinter mainloop. Quit leaves the loop running, use destroy.
+        global tkinter_app
+        tkinter_app.destroy()
+        
     def create_student(self):
         pass
         
@@ -235,17 +280,8 @@ class voting_application(pygubu.TkApplication):
         #startup_select_standard_mode
         #startup_select_admin_mode
         #student_login
-        #menu_create_student_voter
-        #menu_create_candidate
-        #menu_create_election
-        #menu_create_candidate_application
-        #menu_visualise_results
-        #menu_view_results
-        #menu_backend_return
-        #return_to_backend
         #create_student
-        
-
+  
 
 if __name__ == '__main__':
     tkinter_app = tk.Tk()
