@@ -5,6 +5,7 @@ from dateutil.parser import parse
 import datetime
 import connectionString
 import tkinter as tk
+from tkinter import messagebox
 import pygubu
 
 # Module initialisation - open MySQL connection using connection query data, initialise cursor.
@@ -47,6 +48,7 @@ class Student:
         current_election = Election()
         # Loop to iterate the voting for all positions.
         while True:
+            break
             # Handled primarily by the user interface so holding off, shouldn't be performed within this class.
             # List all positions
             # Get user to select position to vote
@@ -191,19 +193,61 @@ class Position:
         return query_result
         
 # Define primary class to initiate the user interface.
-class votingApplication(tk.Tk()):
+class voting_application(pygubu.TkApplication):
     def __init__(self, master):
-        # Create PYGUBU builder
-        self.interfaceBuilder = interfaceBuilder = pygubu.Builder()
+        self.master = master
+        self.change_frame('startup_menu_frame')
+    
+    # Function to change/load the frame.
+    def change_frame(self, frame):
+        # If userInterface not defined yet (startup), bypass destroy. Destroy current view and load frame of desired window. 
+        try:
+            self.userInterface.destroy()
+        except AttributeError:
+            pass
+            
+        # Create Pygubu builder
+        self.interfaceBuilder = pygubu.Builder()
         
         # Load main interface design.
-        interfaceBuilder.add_from_file('userInterfaceDesign.ui')
-        self.userInterface = interfaceBuilder.get_object('startup_menu_frame', master)
+        self.interfaceBuilder.add_from_file('userInterfaceDesign.ui')
+        messagebox.showinfo('Message', frame)
+        self.userInterface = self.interfaceBuilder.get_object(frame, self.master)
         
         # Connect buttons to methods.
-        interfaceBuilder.connect_callbacks(self)
+        self.interfaceBuilder.connect_callbacks(self)
+        
+    # On sub-page access through the backend menu, provide a back button.
+    def return_to_backend(self):
+        self.change_frame('backend_menu_frame')
+    
+    # Exit backend menu to return to startup.
+    def menu_backend_return(self):
+        self.change_frame('startup_menu_frame')
+    
+    def create_student(self):
+        pass
+        
+        
+        
+        # Required button handlers.
+        #exit_application
+        #startup_select_standard_mode
+        #startup_select_admin_mode
+        #student_login
+        #menu_create_student_voter
+        #menu_create_candidate
+        #menu_create_election
+        #menu_create_candidate_application
+        #menu_visualise_results
+        #menu_view_results
+        #menu_backend_return
+        #return_to_backend
+        #create_student
+        
 
 
 if __name__ == '__main__':
-    mainApplication = votingApplication()
-    mainApplication.mainloop()
+    tkinter_app = tk.Tk()
+    main_application = voting_application(tkinter_app)
+    tkinter_app.mainloop()

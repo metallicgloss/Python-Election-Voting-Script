@@ -81,6 +81,7 @@
     </child>
     <child>
       <object id="Button_15" class="ttk.Button">
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Button_15</property>
         <layout>
           <property name="column">0</property>
@@ -91,6 +92,7 @@
     </child>
     <child>
       <object id="Button_16" class="ttk.Button">
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Button_16</property>
         <layout>
           <property name="column">0</property>
@@ -161,6 +163,7 @@
     </child>
     <child>
       <object id="Button_14" class="ttk.Button">
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Button_14</property>
         <layout>
           <property name="column">0</property>
@@ -171,6 +174,7 @@
     </child>
     <child>
       <object id="Button_17" class="ttk.Button">
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Button_17</property>
         <layout>
           <property name="column">0</property>
@@ -182,16 +186,17 @@
   </object>
   <object id="backend_create_student_frame" class="ttk.Frame">
     <property name="height">400</property>
+    <property name="padding">50</property>
     <property name="relief">flat</property>
-    <property name="width">600</property>
+    <property name="width">730</property>
     <layout>
       <property name="column">0</property>
       <property name="propagate">False</property>
       <property name="row">0</property>
     </layout>
     <child>
-      <object id="Label_6" class="ttk.Label">
-        <property name="text" translatable="yes">Label_6</property>
+      <object id="create_student_title_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Create Student</property>
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
@@ -201,7 +206,7 @@
     </child>
     <child>
       <object id="Label_7" class="ttk.Label">
-        <property name="text" translatable="yes">Label_7</property>
+        <property name="text" translatable="yes">Username</property>
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
@@ -210,8 +215,9 @@
       </object>
     </child>
     <child>
-      <object id="Entry_5" class="ttk.Entry">
-        <property name="text" translatable="yes">Entry_5</property>
+      <object id="student_userame_txtbx" class="ttk.Entry">
+        <property name="takefocus">true</property>
+        <property name="width">100</property>
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
@@ -220,18 +226,20 @@
       </object>
     </child>
     <child>
-      <object id="Label_8" class="ttk.Label">
-        <property name="text" translatable="yes">Label_8</property>
+      <object id="student_password_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Password</property>
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
           <property name="row">3</property>
+          <property name="sticky">w</property>
         </layout>
       </object>
     </child>
     <child>
-      <object id="Entry_6" class="ttk.Entry">
-        <property name="text" translatable="yes">Entry_6</property>
+      <object id="student_password_txtbx" class="ttk.Entry">
+        <property name="show">•</property>
+        <property name="width">100</property>
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
@@ -240,8 +248,11 @@
       </object>
     </child>
     <child>
-      <object id="Button_13" class="ttk.Button">
-        <property name="text" translatable="yes">Button_13</property>
+      <object id="create_student_btn" class="ttk.Button">
+        <property name="command">create_student</property>
+        <property name="cursor">hand2</property>
+        <property name="text" translatable="yes">Submit</property>
+        <property name="width">100</property>
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
@@ -250,8 +261,11 @@
       </object>
     </child>
     <child>
-      <object id="Button_18" class="ttk.Button">
-        <property name="text" translatable="yes">Button_18</property>
+      <object id="return_to_backend_btn" class="ttk.Button">
+        <property name="command">return_to_backend</property>
+        <property name="cursor">hand2</property>
+        <property name="text" translatable="yes">Cancel</property>
+        <property name="width">100</property>
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
@@ -312,6 +326,7 @@
     <child>
       <object id="startup_quit_btn" class="ttk.Button">
         <property name="command">exit_application</property>
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Quit Application</property>
         <property name="width">100</property>
         <layout>
@@ -323,17 +338,20 @@
     </child>
   </object>
   <object id="backend_menu_frame" class="ttk.Frame">
-    <property name="height">400</property>
+    <property name="height">375</property>
+    <property name="padding">50</property>
     <property name="relief">flat</property>
-    <property name="width">600</property>
+    <property name="width">730</property>
     <layout>
       <property name="column">0</property>
       <property name="propagate">False</property>
       <property name="row">0</property>
     </layout>
     <child>
-      <object id="Label_2" class="ttk.Label">
-        <property name="text" translatable="yes">Label_2</property>
+      <object id="backend_menu_title_lbl" class="ttk.Label">
+        <property name="font">{Montserrat SemiBold} 20 {}</property>
+        <property name="padding">30</property>
+        <property name="text" translatable="yes">Backend Menu</property>
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
@@ -342,8 +360,11 @@
       </object>
     </child>
     <child>
-      <object id="Button_7" class="ttk.Button">
-        <property name="text" translatable="yes">Button_7</property>
+      <object id="backend_menu_create_student_btn" class="ttk.Button">
+        <property name="command">menu_create_student_voter</property>
+        <property name="cursor">hand2</property>
+        <property name="text" translatable="yes">Create Student Voter</property>
+        <property name="width">100</property>
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
@@ -352,8 +373,11 @@
       </object>
     </child>
     <child>
-      <object id="Button_8" class="ttk.Button">
-        <property name="text" translatable="yes">Button_8</property>
+      <object id="backend_menu_create_candidate_btn" class="ttk.Button">
+        <property name="command">menu_create_candidate</property>
+        <property name="cursor">hand2</property>
+        <property name="text" translatable="yes">Create Candidate</property>
+        <property name="width">100</property>
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
@@ -362,8 +386,11 @@
       </object>
     </child>
     <child>
-      <object id="Button_9" class="ttk.Button">
-        <property name="text" translatable="yes">Button_9</property>
+      <object id="backend_menu_create_election_btn" class="ttk.Button">
+        <property name="command">menu_create_election</property>
+        <property name="cursor">hand2</property>
+        <property name="text" translatable="yes">Create Election</property>
+        <property name="width">100</property>
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
@@ -372,18 +399,24 @@
       </object>
     </child>
     <child>
-      <object id="Button_10" class="ttk.Button">
-        <property name="text" translatable="yes">Button_10</property>
+      <object id="backend_menu_return_btn" class="ttk.Button">
+        <property name="command">menu_backend_return</property>
+        <property name="cursor">hand2</property>
+        <property name="text" translatable="yes">Main Menu</property>
+        <property name="width">100</property>
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
-          <property name="row">4</property>
+          <property name="row">7</property>
         </layout>
       </object>
     </child>
     <child>
-      <object id="Button_11" class="ttk.Button">
-        <property name="text" translatable="yes">Button_11</property>
+      <object id="backend_menu_view_results_btn" class="ttk.Button">
+        <property name="command">menu_view_results</property>
+        <property name="cursor">hand2</property>
+        <property name="text" translatable="yes">View Results</property>
+        <property name="width">100</property>
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
@@ -392,12 +425,27 @@
       </object>
     </child>
     <child>
-      <object id="Button_20" class="ttk.Button">
-        <property name="text" translatable="yes">Button_20</property>
+      <object id="backend_menu_visualise_results_btn" class="ttk.Button">
+        <property name="command">menu_visualise_results</property>
+        <property name="cursor">hand2</property>
+        <property name="text" translatable="yes">Visualise Results</property>
+        <property name="width">100</property>
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
           <property name="row">6</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="backend_menu_create_candidate_application_btn" class="ttk.Button">
+        <property name="command">menu_create_candidate_application</property>
+        <property name="text" translatable="yes">Create Candidate Application</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
         </layout>
       </object>
     </child>
@@ -413,7 +461,7 @@
       <property name="row">0</property>
     </layout>
     <child>
-      <object id="Label_3" class="ttk.Label">
+      <object id="student_login_title_lbl" class="ttk.Label">
         <property name="font">{Montserrat SemiBold} 20 {}</property>
         <property name="padding">30</property>
         <property name="text" translatable="yes">Student Login</property>
