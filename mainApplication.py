@@ -196,9 +196,12 @@ class votingApplication(tk.Tk()):
         # Create PYGUBU builder
         self.interfaceBuilder = interfaceBuilder = pygubu.Builder()
         
-        # Load main menu interface design.
+        # Load main interface design.
         interfaceBuilder.add_from_file('userInterfaceDesign.ui')
         self.userInterface = interfaceBuilder.get_object('startup_menu_frame', master)
+        
+        # Connect buttons to methods.
+        interfaceBuilder.connect_callbacks(self)
 
 
 if __name__ == '__main__':
