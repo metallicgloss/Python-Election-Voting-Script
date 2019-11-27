@@ -165,7 +165,7 @@ class Candidate:
         
 # Define election class.
 class Election:
-    def __init__(self, start_time, end_time):
+    def __init__(self, start_time="", end_time=""):
         # Define class variables.
         self.start_time = start_time
         self.end_time = end_time
@@ -174,7 +174,7 @@ class Election:
     # Create a new election time period in the database.
     def create_election(self):
         # Execute MySQL Query, substitute %s with values with student details.
-        mysql_cursor.execute("INSERT INTO `gsuElection` (`electionStartTime`, `electionEndTime`) VALUES (%s, %s)", [parse(start_time), parse(end_time)])
+        mysql_cursor.execute("INSERT INTO `gsuElection` (`electionStartTime`, `electionEndTime`) VALUES (%s, %s)", [self.start_time, self.end_time])
         database_connection.commit()
         
         # Return election ID
@@ -183,7 +183,7 @@ class Election:
     # Check status of any election curretly running.
     def get_current_election(self):
         # Execute MySQL Query
-        mysql_cursor.execute("SELECT `electionID` FROM `gsuElection` WHERE `electionStartTime` < %s AND `electionEndTime` > %s", [parse(datetime.datetime.now())])
+        mysql_cursor.execute("SELECT `electionID` FROM `gsuElection` WHERE `electionStartTime` < %s AND `electionEndTime` > %s", [datetime.datetime.now(), datetime.datetime.now()])
         
         # Store query_result as all values returned.
         query_result = mysql_cursor.fetchall()
@@ -217,7 +217,7 @@ class Position:
     # No init class due to its very simple nature, just returning available positions.
     
     # List all positions currently in the GSU.
-    def get_positions():
+    def get_positions(self):
         # Execute MySQL Query
         
         election = Election()
@@ -231,14 +231,15 @@ class Position:
         return query_result
         
     # List all available positions to apply for.
-    def get_available_positions():
+    def get_available_positions(self):
         # Execute MySQL Query
         
         election = Election()
         election_id = election.get_current_election()
+        election_id = election_id[0][0]
         
         # Select all positions where they're not in the list containing positions applied for more than 4 times in a given election.
-        mysql_cursor.execute("SELECT * FROM `gsuPositions` WHERE `positionID` NOT IN (SELECT `positionID` FROM `gsuCandidateApplications` WHERE `electionID` = '%s' AND COUNT(SELECT `positionID` FROM `gsuCandidateApplications` WHERE `electionID` = '%s') < 5)", [election_id, election_id])
+        mysql_cursor.execute("SELECT * FROM `gsuPositions` WHERE `positionID` NOT IN (SELECT `positionID` FROM `gsuCandidateApplication` WHERE `electionID` = %s GROUP BY `positionID` HAVING COUNT(*) = 4)", [election_id])
         
         # Store query_result as all values returned.
         query_result = mysql_cursor.fetchall()
@@ -292,8 +293,15 @@ class voting_application(pygubu.TkApplication):
     # Navigate to create candidate application.
     def menu_create_candidate_application(self):
         self.change_frame('backend_create_candidate_application_frame')
-        self.interfaceBuilder.get_object('candidate_application_election_cmbobx').choices("Test", "test")
-        messagebox.showinfo('Success', 'Created successfully.')
+        
+        positions = Position()
+        available_list = []
+        
+        for position in positions.get_available_positions():
+            available_list.append(position[1])
+        
+        self.interfaceBuilder.get_object('candidate_application_election_cmbobx').configure(values=available_list)
+        
     
     # Navigate to view results page.
     def menu_view_results(self):
@@ -362,8 +370,8 @@ class voting_application(pygubu.TkApplication):
     # Create new election period on the system.
     def create_election(self):
         # Get user input from the page.
-        start_date_time = parse(self.interfaceBuilder.get_object('election_start_date_txtbx').get())
-        end_date_time = parse(self.interfaceBuilder.get_object('election_end_date_txtbx').get())
+        start_date_time = parse(self.interfaceBuilder.get_object('election_start_time_txtbx').get())
+        end_date_time = parse(self.interfaceBuilder.get_object('election_end_time_txtbx').get())
         
         if ((start_date_time != "") and (end_date_time != "")):
             new_election = Election(start_date_time, end_date_time)

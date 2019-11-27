@@ -634,6 +634,7 @@
     </child>
     <child>
       <object id="candidate_application_election_cmbobx" class="ttk.Combobox">
+        <property name="values">test</property>
         <property name="width">100</property>
         <layout>
           <property name="column">0</property>
