@@ -292,6 +292,8 @@ class voting_application(pygubu.TkApplication):
     # Navigate to create candidate application.
     def menu_create_candidate_application(self):
         self.change_frame('backend_create_candidate_application_frame')
+        self.interfaceBuilder.get_object('candidate_application_election_cmbobx').choices("Test", "test")
+        messagebox.showinfo('Success', 'Created successfully.')
     
     # Navigate to view results page.
     def menu_view_results(self):
@@ -304,6 +306,7 @@ class voting_application(pygubu.TkApplication):
     # On sub-page access through the backend menu, provide a back button.
     def return_to_backend(self):
         self.change_frame('backend_menu_frame')
+        
     
     
     #############################################################
@@ -422,7 +425,7 @@ class voting_application(pygubu.TkApplication):
                 self.change_frame('student_vote_frame')
             else:
                 # If not unique, inform user to add custom tag to surname (other option is to change name) to help voters.
-                self.interfaceBuilder.get_object('student_login_error_lbl').configure(text="Uh Oh! Wrong username or password!")
+                self.interfaceBuilder.get_object('student_login_error_lbl').configure(text="Uh Oh! Wrong username or password or you're not eligible to vote!")
             
         else:
             # Else change label text to error message.
