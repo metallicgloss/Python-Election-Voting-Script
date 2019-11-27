@@ -41,7 +41,8 @@ class Student:
     
     # Generate and return hashed password
     def get_hashed_password(self):
-        return binascii.hexlify(hashlib.pbkdf2_hmac('sha512', self.password.encode('utf-8'), self._salt, 100000))
+        # Re-calculate generated hashed version of the password converted to hex.
+        self._hashed_password = (binascii.hexlify(hashlib.pbkdf2_hmac('sha512', (self.password).encode('utf-8'), (self._salt).encode('ascii'), 100000))).decode('ascii')
     
     # Verify password
     def verify_password(self):
@@ -51,14 +52,16 @@ class Student:
         # Store query_result as all values returned.
         query_result = mysql_cursor.fetchall()
         
-        messagebox.showinfo('Success', query_result[1])
+        # Set hash to match the hash value returned in the database.
+        self._salt = str(query_result[0][1])
         
-        self._hash = query_result['studentSalt']
+        # Re-generate hash using passed provided to see it matches the stored DB value.
+        self.get_hashed_password()
         
-        if(self.get_hashed_password() == query_result['studentPassword']):
-            messagebox.showinfo('Success', 'Yes.')
+        if(self._hashed_password == query_result[0][0]):
+            return True
         else:
-            messagebox.showinfo('Success', 'No')
+            return False
                 
          
     # Verify username does not already exist.
@@ -413,9 +416,9 @@ class voting_application(pygubu.TkApplication):
         
         if ((username != "") and (password != "")):
             student_login = Student(username, password)
-            student_login.verify_password()
             
-            if(student_login.verify_student_details()):
+            # If password is valid, login, else, inform user.
+            if(student_login.verify_password()):
                 self.change_frame('student_vote_frame')
             else:
                 # If not unique, inform user to add custom tag to surname (other option is to change name) to help voters.
