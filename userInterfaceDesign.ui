@@ -274,6 +274,17 @@
         </layout>
       </object>
     </child>
+    <child>
+      <object id="create_student_error_lbl" class="ttk.Label">
+        <property name="font">{Montserrat SemiBold} 12 {}</property>
+        <property name="foreground">#ff0000</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">7</property>
+        </layout>
+      </object>
+    </child>
   </object>
   <object id="startup_menu_frame" class="ttk.Frame">
     <property name="height">280</property>
