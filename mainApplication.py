@@ -95,7 +95,7 @@ class Student:
             
 # Define candidate class.
 class Candidate:
-    def __init__(self, name, email):
+    def __init__(self, name="", email=""):
         # Define class variables.
         self.name = name
         self.email = email
@@ -137,32 +137,28 @@ class Candidate:
         # Store query_result as all values returned.
         query_result = mysql_cursor.fetchall()
         
-        self._id = query_result
-        
-        # Return ID of the candidate searched.
-        return query_result
+        self._id = query_result[0][0]
         
     # Create application for the current election.
-    def create_application(self):
-        current_election = Election()
-        election_id = current_election.get_current_election()
-        if(election_id != False):
-            election_positions = Position()
-            
-            ###
-            ### NOTE: Will need to change to output to the user interface and take input from the user interface.
-            ###
-            for line in election_positions.get_positions():
-                print("Position Available: Option " + str(line['positionID']) + " - " + line['positionTitle'])
-
-            mysql_cursor.execute("INSERT INTO `gsuCandidateApplication` (`candidateID`, `positionID`, `electionID`) VALUES (%s, %s, %s)", [self._id, input("Please enter the position you would like to apply for: "), election_id])
-            database_connection.commit()
-            return mysql_cursor.lastrowid
-            
-        else:
-            print("Error, no election.")
-            return False
+    def create_application(self, election_id, position_id):
+        self.get_candidate_id()
+        mysql_cursor.execute("INSERT INTO `gsuCandidateApplication` (`candidateID`, `positionID`, `electionID`) VALUES (%s, %s, %s)", [self._id, position_id, election_id])
+        database_connection.commit()
+    
+    # Get all candidates created.
+    def list_candidates(self):
+        # Execute MySQL Query
+        mysql_cursor.execute("SELECT * FROM `gsuCandidates`")
         
+        # Store query_result as all values returned.
+        query_result = mysql_cursor.fetchall()
+        
+        if(mysql_cursor.rowcount == 0):
+            # No current applications.
+            return False
+        else:
+            # Return array of all candidates running.
+            return query_result
 # Define election class.
 class Election:
     def __init__(self, start_time="", end_time=""):
@@ -183,7 +179,7 @@ class Election:
     # Check status of any election curretly running.
     def get_current_election(self):
         # Execute MySQL Query
-        mysql_cursor.execute("SELECT `electionID` FROM `gsuElection` WHERE `electionStartTime` < %s AND `electionEndTime` > %s", [datetime.datetime.now(), datetime.datetime.now()])
+        mysql_cursor.execute("SELECT `electionID`, `electionStartTime`, `electionEndTime` FROM `gsuElection` WHERE `electionStartTime` < %s AND `electionEndTime` > %s", [datetime.datetime.now(), datetime.datetime.now()])
         
         # Store query_result as all values returned.
         query_result = mysql_cursor.fetchall()
@@ -294,15 +290,31 @@ class voting_application(pygubu.TkApplication):
     def menu_create_candidate_application(self):
         self.change_frame('backend_create_candidate_application_frame')
         
+        # Create position instance, append to list the remaining available positions
         positions = Position()
-        available_list = []
-        
+        available_positions = []
         for position in positions.get_available_positions():
-            available_list.append(position[1])
+            available_positions.append(str(position[0]) + " - " + position[1])
+            
+        # Create election instance, append to list the election times
+        elections = Election()
+        current_election = []
+        election_compile = elections.get_current_election()
         
-        self.interfaceBuilder.get_object('candidate_application_election_cmbobx').configure(values=available_list)
+        # Format nicely for combo box.
+        current_election.append(str(election_compile[0][0]) + " - Start time: " + str(election_compile[0][1]) + " - End Time: " + str(election_compile[0][2]))
         
-    
+        # Create candidate instance, append to list the candidate names
+        candidates = Candidate()
+        available_candidates = []
+        for candidate in candidates.list_candidates():
+            available_candidates.append(candidate[1])
+        
+        # Set choices in combo boxes to lists created.
+        self.interfaceBuilder.get_object('candidate_application_election_cmbobx').configure(values=current_election)
+        self.interfaceBuilder.get_object('candidate_application_candidate_cmbobx').configure(values=available_candidates)
+        self.interfaceBuilder.get_object('candidate_application_position_cmbobx').configure(values=available_positions)
+        
     # Navigate to view results page.
     def menu_view_results(self):
         self.change_frame('backend_view_results_frame')
@@ -438,6 +450,34 @@ class voting_application(pygubu.TkApplication):
         else:
             # Else change label text to error message.
             self.interfaceBuilder.get_object('student_login_error_lbl').configure(text="Please ensure you've entered data into both boxes.")
+  
+    #############################################################
+    #                Create Candidate Application               #
+    #############################################################
+    
+    # Submit application for candidate to current available election.
+    def submit_application(self):
+        # Get user input from the page.
+        election = (self.interfaceBuilder.get_object('candidate_application_election_cmbobx').get()).split()[0]
+        candidate = self.interfaceBuilder.get_object('candidate_application_candidate_cmbobx').get()
+        position = (self.interfaceBuilder.get_object('candidate_application_position_cmbobx').get()).split()[0]
+        
+        if(election != ""):
+            # Election not selected.
+            if((candidate != "") or (position != "")):
+                # If other values are not selected
+                new_application = Candidate(candidate)
+                new_application.create_application(election, position)
+                self.return_to_backend()
+            else:
+                # Else change label text to error message.
+                self.interfaceBuilder.get_object('candidate_application_error_lbl').configure(text="Please ensure you've selected one value for all options.")
+        else:
+            # Else change label text to error message.
+            self.interfaceBuilder.get_object('candidate_application_error_lbl').configure(text="Election not selected. Unable to apply.")
+            
+        
+        
   
 if __name__ == '__main__':
     tkinter_app = tk.Tk()
