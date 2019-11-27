@@ -44,6 +44,22 @@ class Student:
             # Query returned data, user authenticated. Crude way of doing it, but acceptable for this task.
             return True
             
+    # Verify username does not already exist.
+    def verify_unique_username(self):
+        # Execute MySQL Query, substitute %s with values with student username.
+        mysql_cursor.execute("SELECT `studentLogin` FROM `studentVoters` WHERE `studentLogin` = %s", [self.username])
+        
+        # Store query_result as all values returned.
+        query_result = mysql_cursor.fetchall()
+        
+        if(mysql_cursor.rowcount == 0):
+            # No user found.
+            return True
+        else:
+            # User Found
+            return False
+        return mysql_cursor.lastrowid
+            
     def cast_votes(self, position_id, candidate_id_one, candidate_id_two, candidate_id_three, candidate_id_four):
         current_election = Election()
         # Loop to iterate the voting for all positions.
@@ -269,18 +285,34 @@ class voting_application(pygubu.TkApplication):
         # Destroy the tkinter mainloop. Quit leaves the loop running, use destroy.
         global tkinter_app
         tkinter_app.destroy()
-        
+    
+    
+    #############################################################
+    #                       Create Student                      #
+    #############################################################
+    
+    # Create new student on submission from user.
     def create_student(self):
-        pass
+        # Get user input from the page.
+        username = self.interfaceBuilder.get_object('student_userame_txtbx').get()
+        password = self.interfaceBuilder.get_object('student_password_txtbx').get()
         
-        
-        
-        # Required button handlers.
-        #exit_application
-        #startup_select_standard_mode
-        #startup_select_admin_mode
-        #student_login
-        #create_student
+        if ((username != "") and (password != "")):
+            # If input is not blank, create user.
+            new_student = Student(username, password)
+            
+            if(new_student.verify_unique_username()):
+                #Verify that the username hasn't been used before. If unique, insert student.
+                new_student.insert_new_student()
+                messagebox.showinfo('Success', 'Created successfully.')
+                self.menu_backend_return()
+            else:
+                # If not unique, alert user.
+                self.interfaceBuilder.get_object('create_student_error_lbl').configure(text="Username is not unique. Please try again.")
+            
+        else:
+            # Else change label text to error message.
+            self.interfaceBuilder.get_object('create_student_error_lbl').configure(text="Please ensure you've entered both a username and password.")
   
 
 if __name__ == '__main__':
