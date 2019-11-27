@@ -88,6 +88,22 @@ class Candidate:
         mysql_cursor.execute("INSERT INTO `gsuCandidates` (`candidateName`, `candidateEmail`) VALUES (%s, %s)", [self.name, self.email])
         database_connection.commit()
         return mysql_cursor.lastrowid
+            
+    # Verify candidate does not have name matching another.
+    def verify_unique_name(self):
+        # Execute MySQL Query, substitute %s with values with student username.
+        mysql_cursor.execute("SELECT `candidateName` FROM `gsuCandidates` WHERE `candidateName` = %s", [self.name])
+        
+        # Store query_result as all values returned.
+        query_result = mysql_cursor.fetchall()
+        
+        if(mysql_cursor.rowcount == 0):
+            # No user found.
+            return True
+        else:
+            # User Found
+            return False
+        return mysql_cursor.lastrowid
     
     # Perform verification on student login credentials to database.
     def get_candidate_id(self):
@@ -314,7 +330,58 @@ class voting_application(pygubu.TkApplication):
             # Else change label text to error message.
             self.interfaceBuilder.get_object('create_student_error_lbl').configure(text="Please ensure you've entered both a username and password.")
   
-
+    #############################################################
+    #                       Create Election                     #
+    #############################################################
+    
+    # Create new election period on the system.
+    def create_election(self):
+        # Get user input from the page.
+        start_date_time = parse(self.interfaceBuilder.get_object('election_start_date_txtbx').get())
+        end_date_time = parse(self.interfaceBuilder.get_object('election_end_date_txtbx').get())
+        
+        if ((start_date_time != "") and (end_date_time != "")):
+            new_election = Election(start_date_time, end_date_time)
+            
+            if(start_date_time < end_date_time):
+                # End date comes after start time, acceptable input.
+                new_election.create_election()
+                messagebox.showinfo('Success', 'Created successfully.')
+                self.menu_backend_return()
+            else:
+                # If not valid, alert user.
+                self.interfaceBuilder.get_object('create_election_error_lbl').configure(text="Please double check your end date. Please try again.")
+            
+        else:
+            # Else change label text to error message.
+            self.interfaceBuilder.get_object('create_election_error_lbl').configure(text="Please ensure you've entered both a start and end datetime.")
+  
+    #############################################################
+    #                      Create Candidate                     #
+    #############################################################
+    
+    # Create new election period on the system.
+    def create_candidate(self):
+        # Get user input from the page.
+        name = self.interfaceBuilder.get_object('candidate_name_txtbx').get()
+        email = self.interfaceBuilder.get_object('candidate_email_txtbx').get()
+        
+        if ((name != "") and (email != "")):
+            new_candidate = Candidate(name, email)
+            
+            if(verify_unique_name()):
+                # Check there isn't already a candidate with same name.
+                new_candidate.insert_new_candidate()
+                messagebox.showinfo('Success', 'Created successfully.')
+                self.menu_backend_return()
+            else:
+                # If not unique, inform user to add custom tag to surname (other option is to change name) to help voters.
+                self.interfaceBuilder.get_object('create_candidate_error_lbl').configure(text="Uh Oh! You've got a common name, please add a unique addition to your surname to help voters!")
+            
+        else:
+            # Else change label text to error message.
+            self.interfaceBuilder.get_object('create_candidate_error_lbl').configure(text="Please ensure you've entered data into both boxes.")
+  
 if __name__ == '__main__':
     tkinter_app = tk.Tk()
     main_application = voting_application(tkinter_app)
