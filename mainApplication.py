@@ -18,6 +18,7 @@ class Student:
         # Define class variables.
         self.username = username
         self.password = password
+        self._id = ""
         self._salt = ""
         self._hashed_password = ""
         
@@ -63,7 +64,18 @@ class Student:
         else:
             return False
                 
-         
+    # Get student ID
+    def get_student_id(self):
+        # Execute MySQL Query
+        mysql_cursor.execute("SELECT `studentID` FROM `studentVoters` WHERE `studentLogin` = %s", [self.username])
+        
+        # Store query_result as all values returned.
+        query_result = mysql_cursor.fetchall()
+        
+        self._id = query_result[0][0]
+        
+        return self._id
+        
     # Verify username does not already exist.
     def verify_unique_username(self):
         # Execute MySQL Query, substitute %s with values with student username.
@@ -234,8 +246,27 @@ class Position:
         election_id = election.get_current_election()
         election_id = election_id[0][0]
         
+        student = Student()
+        student_id = student.get_current_election()
+        election_id = election_id[0][0]
+        
         # Select all positions where they're not in the list containing positions applied for more than 4 times in a given election.
         mysql_cursor.execute("SELECT * FROM `gsuPositions` WHERE `positionID` NOT IN (SELECT `positionID` FROM `gsuCandidateApplication` WHERE `electionID` = %s GROUP BY `positionID` HAVING COUNT(*) = 4)", [election_id])
+        
+        # Store query_result as all values returned.
+        query_result = mysql_cursor.fetchall()
+        
+        return query_result
+        
+        
+     # List all available positions to apply for.
+    def list_available_voting_positions(self, student_id):        
+        election = Election()
+        election_id = election.get_current_election()
+        election_id = election_id[0][0]
+        
+        # Select all positions where not in election votes from current student.
+        mysql_cursor.execute("SELECT * FROM `gsuPositions` WHERE `positionID` NOT IN (SELECT `positionID` FROM `gsuElectionVotes` WHERE `electionID` = %s AND `studentID` = %s)", [election_id, student_id])
         
         # Store query_result as all values returned.
         query_result = mysql_cursor.fetchall()
@@ -326,6 +357,16 @@ class voting_application(pygubu.TkApplication):
     # On sub-page access through the backend menu, provide a back button.
     def return_to_backend(self):
         self.change_frame('backend_menu_frame')
+        
+        
+        
+    #############################################################
+    #              Student Menu Navigation Control              #
+    #############################################################
+    
+    # Exit page within student menu, return to login.
+    def return_to_student(self):
+        self.change_frame('student_menu_frame')
         
     
     
@@ -442,7 +483,27 @@ class voting_application(pygubu.TkApplication):
             
             # If password is valid, login, else, inform user.
             if(student_login.verify_password()):
-                self.change_frame('student_vote_frame')
+                self.change_frame('student_vote_position_select_frame')
+                
+                # Create election instance, append to list the election times
+                elections = Election()
+                current_election = []
+                election_compile = elections.get_current_election()
+                
+                # Format nicely for combo box.
+                current_election.append(str(election_compile[0][0]) + " - Start time: " + str(election_compile[0][1]) + " - End Time: " + str(election_compile[0][2]))
+                
+                # Create combo box of positions currently available to vote.
+                positions = Position()
+                position_list = []
+                
+                
+                for position in positions.list_available_voting_positions(student_login.get_student_id()):
+                    position_list.append(str(position[0]) + " - " + position[1])
+                
+                # Set choices in combo boxes to lists created.
+                self.interfaceBuilder.get_object('student_vote_confirm_election_cmbobx').configure(values=current_election)
+                self.interfaceBuilder.get_object('student_vote_position_cmbobx').configure(values=position_list)
             else:
                 # If not unique, inform user to add custom tag to surname (other option is to change name) to help voters.
                 self.interfaceBuilder.get_object('student_login_error_lbl').configure(text="Uh Oh! Wrong username or password or you're not eligible to vote!")
@@ -476,8 +537,14 @@ class voting_application(pygubu.TkApplication):
             # Else change label text to error message.
             self.interfaceBuilder.get_object('candidate_application_error_lbl').configure(text="Election not selected. Unable to apply.")
             
+            
+    #############################################################
+    #                Student Vote Select Position               #
+    #############################################################
         
+    def vote_select_position(self):
         
+        pass
   
 if __name__ == '__main__':
     tkinter_app = tk.Tk()
