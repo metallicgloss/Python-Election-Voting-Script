@@ -14,7 +14,7 @@ except Error as e:
         
 # Define student class.
 class Student:
-    def __init__(self, username, password):
+    def __init__(self, username="", password=""):
         # Define class variables.
         self.username = username
         self.password = password
@@ -94,24 +94,18 @@ class Student:
             
     def cast_votes(self, position_id, candidate_id_one, candidate_id_two, candidate_id_three, candidate_id_four):
         current_election = Election()
-        # Loop to iterate the voting for all positions.
-        while True:
-            break
-            # Handled primarily by the user interface so holding off, shouldn't be performed within this class.
-            # List all positions
-            # Get user to select position to vote
-            # List all candidates for that position
-            # Take 4 input values
-            # Validate input
-            # Exit position, display positions remaining from array.
+        global logged_in_student
+        mysql_cursor.execute("INSERT INTO `gsuElectionVotes` (`studentID`, `electionID`, `positionID`, `firstVoteCandidateID_FK`, `secondVoteCandidateID_FK`, `thirdVoteCandidateID_FK`, `fourthVoteCandidateID_FK`) VALUES (%s, %s, %s, %s, %s, %s, %s)", [logged_in_student, current_election.get_current_election()[0][0], position_id, candidate_id_one, candidate_id_two, candidate_id_three, candidate_id_four])
+        database_connection.commit()
+        
             
 # Define candidate class.
 class Candidate:
-    def __init__(self, name="", email=""):
+    def __init__(self, name="", email="", id=""):
         # Define class variables.
         self.name = name
         self.email = email
-        self._id = ""
+        self.id = id
         self._position = ""
         
     # Insert a new candidate to the system.
@@ -138,18 +132,26 @@ class Candidate:
         return mysql_cursor.lastrowid
     
     # Perform verification on student login credentials to database.
-    def get_candidate_id(self):
-        ###
-        ### NOTE: This section may have to be changed dependant on how the candidate is used later in the application.
-        ###
-        
+    def get_candidate_id(self):        
         # Execute MySQL Query
         mysql_cursor.execute("SELECT `candidateID` FROM `gsuCandidates` WHERE `candidateName` = %s", [self.name])
         
         # Store query_result as all values returned.
         query_result = mysql_cursor.fetchall()
         
-        self._id = query_result[0][0]
+        self.id = query_result[0][0]
+        
+    # Perform verification on student login credentials to database.
+    def get_candidate_name(self):        
+        # Execute MySQL Query
+        mysql_cursor.execute("SELECT `candidateName` FROM `gsuCandidates` WHERE `candidateID` = %s", [self.id])
+        
+        # Store query_result as all values returned.
+        query_result = mysql_cursor.fetchall()
+        
+        self.name = query_result[0][0]
+        
+        return self.name
         
     # Create application for the current election.
     def create_application(self, election_id, position_id):
@@ -574,10 +576,9 @@ class voting_application(pygubu.TkApplication):
                 self.interfaceBuilder.get_object('student_vote_error_lbl').configure(text="No candidates. Please contact system administrator.")
             else:
                 candidate_formatted = []
-                i = 1
                 for candidate in candidate_data:
-                    candidate_formatted.append("Candidate Example " + str(i))
-                    i += 1
+                    candidate_temp = Candidate(id=candidate[1])
+                    candidate_formatted.append(str(candidate[1]) + " - " + str(candidate_temp.get_candidate_name()))
             self.interfaceBuilder.get_object('student_vote_first_choice_cmbobx').configure(values=candidate_formatted)
             global candidate_list
             candidate_list = candidate_formatted
@@ -630,9 +631,9 @@ class voting_application(pygubu.TkApplication):
     def fourth_choice_confirm(self):
         selected_value = self.interfaceBuilder.get_object('student_vote_fourth_choice_cmbobx').get()
         if(selected_value != ""):
-            pass
-        else:
-            pass
+            student = Student()
+            global voting_position
+            student.cast_votes(voting_position, (self.interfaceBuilder.get_object('student_vote_first_choice_cmbobx').get()).split()[0], (self.interfaceBuilder.get_object('student_vote_second_choice_cmbobx').get()).split()[0],(self.interfaceBuilder.get_object('student_vote_third_choice_cmbobx').get()).split()[0],(self.interfaceBuilder.get_object('student_vote_fourth_choice_cmbobx').get()).split()[0])
         
 if __name__ == '__main__':
     tkinter_app = tk.Tk()
