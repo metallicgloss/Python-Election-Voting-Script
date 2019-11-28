@@ -207,7 +207,7 @@ class Election:
     # Get all candidates running in the election.
     def get_all_candidates(self):
         # Execute MySQL Query
-        mysql_cursor.execute("SELECT * FROM `gsuCandidateApplications` WHERE `electionID` = '%s'", [self._id])
+        mysql_cursor.execute("SELECT * FROM `gsuCandidateApplication` WHERE `electionID` = '%s'", [self._id])
         
         # Store query_result as all values returned.
         query_result = mysql_cursor.fetchall()
@@ -246,10 +246,6 @@ class Position:
         election_id = election.get_current_election()
         election_id = election_id[0][0]
         
-        student = Student()
-        student_id = student.get_current_election()
-        election_id = election_id[0][0]
-        
         # Select all positions where they're not in the list containing positions applied for more than 4 times in a given election.
         mysql_cursor.execute("SELECT * FROM `gsuPositions` WHERE `positionID` NOT IN (SELECT `positionID` FROM `gsuCandidateApplication` WHERE `electionID` = %s GROUP BY `positionID` HAVING COUNT(*) = 4)", [election_id])
         
@@ -270,6 +266,24 @@ class Position:
         
         # Store query_result as all values returned.
         query_result = mysql_cursor.fetchall()
+        
+        return query_result
+        
+        
+    # List all candiates for given position in election.
+    def list_candidates_for_position(self):        
+        election = Election()
+        election_id = election.get_current_election()
+        election_id = election_id[0][0]
+                
+        global voting_position
+        
+        # Select all positions where not in election votes from current student.
+        mysql_cursor.execute("SELECT * FROM `gsuCandidateApplication` WHERE `positionID` =  %s AND `electionID` = %s", [election_id, voting_position])
+        
+        # Store query_result as all values returned.
+        query_result = mysql_cursor.fetchall()
+
         
         return query_result
         
@@ -366,7 +380,7 @@ class voting_application(pygubu.TkApplication):
     
     # Exit page within student menu, return to login.
     def return_to_student(self):
-        self.change_frame('student_menu_frame')
+        self.change_frame('student_login_frame')
         
     
     
@@ -485,6 +499,10 @@ class voting_application(pygubu.TkApplication):
             if(student_login.verify_password()):
                 self.change_frame('student_vote_position_select_frame')
                 
+                # Set global variables for 'session'
+                global logged_in_student
+                logged_in_student = student_login.get_student_id()
+        
                 # Create election instance, append to list the election times
                 elections = Election()
                 current_election = []
@@ -543,10 +561,83 @@ class voting_application(pygubu.TkApplication):
     #############################################################
         
     def vote_select_position(self):
+        voting_position_selected = (self.interfaceBuilder.get_object('student_vote_position_cmbobx').get()).split()[0]
+        election = (self.interfaceBuilder.get_object('student_vote_confirm_election_cmbobx').get()).split()[0]
+        global voting_position
+        voting_position = voting_position_selected
+        if((voting_position_selected != "") or (election != "")):
+            self.change_frame('student_vote_frame')
+            position = Position()
+            candidate_data = position.list_candidates_for_position()
+            if not position.list_candidates_for_position():
+                # List returned empty, no candidates.
+                self.interfaceBuilder.get_object('student_vote_error_lbl').configure(text="No candidates. Please contact system administrator.")
+            else:
+                candidate_formatted = []
+                i = 1
+                for candidate in candidate_data:
+                    candidate_formatted.append("Candidate Example " + str(i))
+                    i += 1
+            self.interfaceBuilder.get_object('student_vote_first_choice_cmbobx').configure(values=candidate_formatted)
+            global candidate_list
+            candidate_list = candidate_formatted
+        else:
+            # Else change label text to error message.
+            self.interfaceBuilder.get_object('student_vote_position_error_lbl').configure(text="Please ensure you've selected values for both fields.")
+           
+    
+    #############################################################
+    #                      Student Vote Place                   #
+    #############################################################
         
-        pass
-  
+    def first_choice_confirm(self):
+        selected_value = self.interfaceBuilder.get_object('student_vote_first_choice_cmbobx').get()
+        if(selected_value != ""):
+            global candidate_list
+            candidate_list.remove(selected_value)
+            candidate_list.append("N/A")
+            self.interfaceBuilder.get_object('student_vote_first_choice_btn').configure(state="disabled")
+            self.interfaceBuilder.get_object('student_vote_first_choice_cmbobx').configure(state="disabled")
+            self.interfaceBuilder.get_object('student_vote_second_choice_btn').configure(state="normal")
+            self.interfaceBuilder.get_object('student_vote_second_choice_cmbobx').configure(state="normal", values=candidate_list)
+        
+    def second_choice_confirm(self):
+        selected_value = self.interfaceBuilder.get_object('student_vote_second_choice_cmbobx').get()
+        if(selected_value != ""):
+            global candidate_list
+            if(selected_value != "N/A"):
+                candidate_list.remove(selected_value)
+            else: 
+                candidate_list = ["N/A",]
+            self.interfaceBuilder.get_object('student_vote_second_choice_btn').configure(state="disabled")
+            self.interfaceBuilder.get_object('student_vote_second_choice_cmbobx').configure(state="disabled")
+            self.interfaceBuilder.get_object('student_vote_third_choice_btn').configure(state="normal")
+            self.interfaceBuilder.get_object('student_vote_third_choice_cmbobx').configure(state="normal", values=candidate_list)
+        
+    def third_choice_confirm(self):
+        selected_value = self.interfaceBuilder.get_object('student_vote_third_choice_cmbobx').get()
+        if(selected_value != ""):
+            global candidate_list
+            if(selected_value != "N/A"):
+                candidate_list.remove(selected_value)
+            else: 
+                candidate_list = ["N/A",]
+            self.interfaceBuilder.get_object('student_vote_third_choice_btn').configure(state="disabled")
+            self.interfaceBuilder.get_object('student_vote_third_choice_cmbobx').configure(state="disabled")
+            self.interfaceBuilder.get_object('student_vote_fourth_choice_btn').configure(state="normal")
+            self.interfaceBuilder.get_object('student_vote_fourth_choice_cmbobx').configure(state="normal", values=candidate_list)
+        
+    def fourth_choice_confirm(self):
+        selected_value = self.interfaceBuilder.get_object('student_vote_fourth_choice_cmbobx').get()
+        if(selected_value != ""):
+            pass
+        else:
+            pass
+        
 if __name__ == '__main__':
     tkinter_app = tk.Tk()
     main_application = voting_application(tkinter_app)
+    logged_in_student = 0
+    candidate_list = 0
+    voting_position = 0
     tkinter_app.mainloop()
