@@ -781,7 +781,7 @@
     </child>
     <child>
       <object id="startup_admin_mode_btn" class="ttk.Button">
-        <property name="command">startup_select_admin_mode</property>
+        <property name="command">startup_select_backend</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Administration Mode</property>
         <property name="width">100</property>
@@ -794,7 +794,7 @@
     </child>
     <child>
       <object id="startup_standard_mode_btn" class="ttk.Button">
-        <property name="command">startup_select_standard_mode</property>
+        <property name="command">startup_select_student</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Standard Mode</property>
         <property name="width">100</property>
@@ -882,7 +882,7 @@
     </child>
     <child>
       <object id="backend_menu_return_btn" class="ttk.Button">
-        <property name="command">menu_backend_return</property>
+        <property name="command">return_to_startup</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Main Menu</property>
         <property name="width">100</property>
@@ -907,8 +907,8 @@
       </object>
     </child>
     <child>
-      <object id="backend_menu_create_candidate_application_btn" class="ttk.Button">
-        <property name="command">menu_create_candidate_application</property>
+      <object id="backend_menu_create_application_btn" class="ttk.Button">
+        <property name="command">menu_create_application</property>
         <property name="text" translatable="yes">Create Candidate Application</property>
         <property name="width">100</property>
         <layout>
@@ -1190,6 +1190,7 @@
         <property name="foreground">#ff0000</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">17</property>
         </layout>
@@ -1278,7 +1279,7 @@
     </child>
     <child>
       <object id="candidate_application_create_btn" class="ttk.Button">
-        <property name="command">submit_application</property>
+        <property name="command">create_application</property>
         <property name="text" translatable="yes">Submit</property>
         <property name="width">50</property>
         <layout>
