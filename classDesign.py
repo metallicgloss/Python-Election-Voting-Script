@@ -4,17 +4,28 @@ from mainApplication import *
 
 #-----------------------------------------------------------------------------------------------------#
 #                                               CONTENTS                                              #
-#                                      1. Student Class                                               #
-#                                      2. Candidate Class                                             #
-#                                      3. Election Class                                              #
-#                                      4. Position Class                                              #
-#                                      5. Results Class                                               #
+#                                      1. Control Class                                               #
+#                                      2. Student Class                                               #
+#                                      3. Candidate Class                                             #
+#                                      4. Election Class                                              #
+#                                      5. Position Class                                              #
+#                                      6. Results Class                                               #
 #-----------------------------------------------------------------------------------------------------#
 
 
 
 #-----------------------------------------------------------------------------------------------------#
-#                                           1. Student Class                                          #
+#                                           1. Control Class                                          #
+#-----------------------------------------------------------------------------------------------------#
+
+# Define control class, parent abstract class to define basic required variables and methods for primary classes.
+class Control:
+    def __init__(self):
+        # Define class variables.
+        self._select_query_output = ""
+
+#-----------------------------------------------------------------------------------------------------#
+#                                           2. Student Class                                          #
 #-----------------------------------------------------------------------------------------------------#
 
 # Define student class.
@@ -26,6 +37,7 @@ class Student:
         self._id = ""
         self._salt = ""
         self._hashed_password = ""
+        self._select_query_output = ""
         
         
     # Insert a new student voter to the system.
@@ -38,6 +50,19 @@ class Student:
         database_connection.commit()
         
         return mysql_cursor.lastrowid
+        
+    
+    # Get student ID
+    def get_student_id(self):
+        # Execute MySQL Query
+        mysql_cursor.execute("SELECT `studentID` FROM `studentVoters` WHERE `studentLogin` = %s", [self.username])
+        
+        # Store self._select_query_output as all values returned.
+        self._select_query_output = mysql_cursor.fetchall()
+        
+        self._id = self._select_query_output[0][0]
+        
+        return self._id
     
     
     # Generate and store new hashed password
@@ -60,41 +85,29 @@ class Student:
         # Execute MySQL Query to get password and hash.
         mysql_cursor.execute("SELECT `studentPassword`, `studentSalt` FROM `studentVoters` WHERE `studentLogin` = %s", [self.username])
         
-        # Store query_result as all values returned.
-        query_result = mysql_cursor.fetchall()
+        # Store self._select_query_output as all values returned.
+        self._select_query_output = mysql_cursor.fetchall()
         
-        # Set hash to match the hash value returned in the database.
-        self._salt = str(query_result[0][1])
+        # Set salt to match the salt value returned in the database.
+        self._salt = str(self._select_query_output[0][1])
         
         # Re-generate hash using passed provided to see it matches the stored DB value.
         self.get_hashed_password()
         
-        if(self._hashed_password == query_result[0][0]):
+        # If passwords match, return true, else, false.
+        if(self._hashed_password == self._select_query_output[0][0]):
             return True
         else:
             return False
-                
-                
-    # Get student ID
-    def get_student_id(self):
-        # Execute MySQL Query
-        mysql_cursor.execute("SELECT `studentID` FROM `studentVoters` WHERE `studentLogin` = %s", [self.username])
-        
-        # Store query_result as all values returned.
-        query_result = mysql_cursor.fetchall()
-        
-        self._id = query_result[0][0]
-        
-        return self._id
-        
+
         
     # Verify username does not already exist.
     def verify_unique_username(self):
         # Execute MySQL Query, substitute %s with values with student username.
         mysql_cursor.execute("SELECT `studentLogin` FROM `studentVoters` WHERE `studentLogin` LIKE %s", [self.username])
         
-        # Store query_result as all values returned.
-        query_result = mysql_cursor.fetchall()
+        # Store self._select_query_output as all values returned.
+        self._select_query_output = mysql_cursor.fetchall()
         
         if(mysql_cursor.rowcount == 0):
             # No user found.
@@ -103,17 +116,20 @@ class Student:
             # User Found
             return False
             
-            
-    def cast_votes(self, position_id, candidate_id_one, candidate_id_two, candidate_id_three, candidate_id_four):
+       
+    # Submit votes inputted by the user.
+    def cast_votes(self, position_id, student_id, candidate_id_one, candidate_id_two, candidate_id_three, candidate_id_four):
+        # Initialise election object to get correct current election.
         current_election = Election()
-        global logged_in_student
+        
+        # Execute MySQL insert into the database.
         mysql_cursor.execute("INSERT INTO `gsuElectionVotes` (`studentID`, `electionID`, `positionID`, `firstVoteCandidateID_FK`, `secondVoteCandidateID_FK`, `thirdVoteCandidateID_FK`, `fourthVoteCandidateID_FK`) VALUES (%s, %s, %s, %s, %s, %s, %s)", [logged_in_student, current_election.get_current_election()[0][0], position_id, candidate_id_one, candidate_id_two, candidate_id_three, candidate_id_four])
         database_connection.commit()
    
 
 
 #-----------------------------------------------------------------------------------------------------#
-#                                          2. Candidate Class                                         #
+#                                          3. Candidate Class                                         #
 #-----------------------------------------------------------------------------------------------------#
 
 # Define candidate class.
@@ -131,6 +147,9 @@ class Candidate:
         # Execute MySQL Query, substitute %s with values with student details.
         mysql_cursor.execute("INSERT INTO `gsuCandidates` (`candidateName`, `candidateEmail`) VALUES (%s, %s)", [self.name, self.email])
         database_connection.commit()
+        
+        # Inform user of successful creation.
+        messagebox.showinfo('Success', 'Created successfully.')
             
             
     # Verify candidate does not have name matching another.
@@ -207,7 +226,7 @@ class Candidate:
 
 
 #-----------------------------------------------------------------------------------------------------#
-#                                          3. Election Class                                          #
+#                                          4. Election Class                                          #
 #-----------------------------------------------------------------------------------------------------#
         
 # Define election class.
@@ -234,8 +253,8 @@ class Election:
         mysql_cursor.execute("INSERT INTO `gsuElection` (`electionStartTime`, `electionEndTime`) VALUES (%s, %s)", [self.start_time, self.end_time])
         database_connection.commit()
         
-        # Return election ID
-        return mysql_cursor.lastrowid
+        # Inform user of successful creation.
+        messagebox.showinfo('Success', 'Created successfully.')
     
     
     # Check status of any election curretly running.
@@ -273,37 +292,30 @@ class Election:
             
  
 #-----------------------------------------------------------------------------------------------------#
-#                                          4. Position Class                                          #
+#                                          5. Position Class                                          #
 #-----------------------------------------------------------------------------------------------------#
 
 # Define position class.
 class Position:
-    # No init class due to its very simple nature, just returning available positions.
-    
-    def list_formatted_positions(self):
+    def __init__(self, start_time="", end_time=""):
+        # Define class variables.
+        self.start_time = start_time
+        self.end_time = end_time
+        self._id = ""
+        
+        
+    # Return list of positions available formatted for a combobox.
+    def list_all_positions_formatted(self):
         available_positions = []
         for position in self.get_available_positions():
             available_positions.append(str(position[0]) + " - " + position[1])
             
         return available_positions
+        
+        
     # List all positions currently in the GSU.
-    def get_positions(self):
-        # Execute MySQL Query
-        
-        election = Election()
-        election_id = election.get_current_election()
-        
-        mysql_cursor.execute("SELECT * FROM `gsuPositions`")
-        
-        # Store query_result as all values returned.
-        query_result = mysql_cursor.fetchall()
-        
-        return query_result
-        
-    
-    # List all available positions to apply for.
-    def list_positions(self):
-        # Execute MySQL Query
+    def list_all_positions(self):
+        # Execute MySQL Query to get all positions
         mysql_cursor.execute("SELECT * FROM `gsuPositions`")
         
         # Store query_result as all values returned.
@@ -361,7 +373,7 @@ class Position:
         
         
 #-----------------------------------------------------------------------------------------------------#
-#                                           5. Results Class                                          #
+#                                           6. Results Class                                          #
 #-----------------------------------------------------------------------------------------------------#
 
 # Define results class.
@@ -394,20 +406,16 @@ class Results:
             elif(candidate == vote[3]):
                 count += 1
         
-        return [candidate, count]
+        return [candidate, count,]
         
         
     # Return list of the final results & formatting data for per-position results.
-    def get_position_results(self):
-    
+    def get_position_results(self, position_id):
         # Select results for the position provided.
         mysql_cursor.execute("SELECT `firstVoteCandidateID_FK`, `secondVoteCandidateID_FK`, `thirdVoteCandidateID_FK`, `fourthVoteCandidateID_FK` FROM `gsuElectionVotes` WHERE `electionID` = %s AND `positionID` = %s", [self.election_id, self.position_id])
         
         # Store query_result as all values returned.
         query_result = mysql_cursor.fetchall()
-        
-        global voting_position
-        voting_position = self.position_id
         
         positions = Position()
         candidates_list = positions.list_candidates_for_position()
