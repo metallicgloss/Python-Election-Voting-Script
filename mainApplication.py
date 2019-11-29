@@ -156,7 +156,7 @@ class Candidate:
     # Create application for the current election.
     def create_application(self, election_id, position_id):
         self.get_candidate_id()
-        mysql_cursor.execute("INSERT INTO `gsuCandidateApplication` (`candidateID`, `positionID`, `electionID`) VALUES (%s, %s, %s)", [self._id, position_id, election_id])
+        mysql_cursor.execute("INSERT INTO `gsuCandidateApplication` (`candidateID`, `positionID`, `electionID`) VALUES (%s, %s, %s)", [self.id, position_id, election_id])
         database_connection.commit()
     
     # Get all candidates created.
@@ -173,6 +173,9 @@ class Candidate:
         else:
             # Return array of all candidates running.
             return query_result
+            
+            
+            
 # Define election class.
 class Election:
     def __init__(self, start_time="", end_time=""):
@@ -288,6 +291,113 @@ class Position:
 
         
         return query_result
+        
+        
+# Define results class.
+class Results:
+    def __init__(self, election_id="", position_id=""):
+        # Define class variables.
+        self.election_id = election_id
+        self.position_id = position_id
+        self._first_candidate = ""
+        self._second_candidate = ""
+        self._third_candidate = ""
+        self._fourth_candidate = ""
+        
+        
+        self._first_candidate_count = 0
+        self._second_candidate_count = 0
+        self._third_candidate_count = 0
+        self._fourth_candidate_count = 0
+     
+     def calculate_result_score(self, candidate, votes):
+        count = 0
+        for vote in votes:
+            if(candidate == vote[0]):
+                count += 4
+            elif(candidate == vote[1]):
+                count += 3
+            elif(candidate == vote[2]):
+                count += 2
+            elif(candidate == vote[3]):
+                count += 1
+        
+        return [candidate, count]
+        
+    # Return list of the final results & formatting data for per-position results.
+    def get_position_results(self):
+    
+        # Select results for the position provided.
+        mysql_cursor.execute("SELECT `firstVoteCandidateID_FK`, `secondVoteCandidateID_FK`, `thirdVoteCandidateID_FK`, `fourthVoteCandidateID_FK` FROM `gsuElectionVotes` WHERE `electionID` = %s AND `positionID` = %s", [self.election_id, self.position_id])
+        
+        # Store query_result as all values returned.
+        query_result = mysql_cursor.fetchall()
+        
+        #
+        # NOTE: Will need to redo, functionality will work but extremely unefficient and should be refactored.
+        #
+        
+        global voting_position
+        voting_position = 1
+        
+        positions = Position()
+        candidates_list = positions.list_candidates_for_position()
+        
+        self._first_candidate, self._first_candidate_count = self.calculate_result_score(candidates_list[0][1], query_result)
+        self._second_candidate = candidates_list[1][1]
+        self._third_candidate = candidates_list[2][1]
+        self._fourth_candidate = candidates_list[3][1]
+        
+        for vote in query_result:
+            if(self._first_candidate == vote[0]):
+                self._first_candidate_count += 4
+            elif(self._first_candidate == vote[1]):
+                self._first_candidate_count += 3
+            elif(self._first_candidate == vote[2]):
+                self._first_candidate_count += 2
+            elif(self._first_candidate == vote[3]):
+                self._first_candidate_count += 1
+                
+                
+            if(self._second_candidate == vote[0]):
+                self._second_candidate_count += 4
+            elif(self._second_candidate == vote[1]):
+                self._second_candidate_count += 3
+            elif(self._second_candidate == vote[2]):
+                self._second_candidate_count += 2
+            elif(self._second_candidate == vote[3]):
+                self._second_candidate_count += 1
+                
+                
+            if(self._third_candidate == vote[0]):
+                self._third_candidate_count += 4
+            elif(self._third_candidate == vote[1]):
+                self._third_candidate_count += 3
+            elif(self._third_candidate == vote[2]):
+                self._third_candidate_count += 2
+            elif(self._third_candidate == vote[3]):
+                self._third_candidate_count += 1
+                
+                
+            if(self._fourth_candidate == vote[0]):
+                self._fourth_candidate_count += 4
+            elif(self._fourth_candidate == vote[1]):
+                self._fourth_candidate_count += 3
+            elif(self._fourth_candidate == vote[2]):
+                self._fourth_candidate_count += 2
+            elif(self._fourth_candidate == vote[3]):
+                self._fourth_candidate_count += 1
+                
+        compiled_list = [[self._first_candidate, self._first_candidate_count], [self._second_candidate, self._second_candidate_count], [self._third_candidate, self._third_candidate_count], [self._fourth_candidate, self._fourth_candidate_count]]
+        
+        messagebox.showinfo('Success', compiled_list)
+                
+                
+        return compiled_list
+        
+    # Return list to user interface to allow the user to visualise the results for positions they've already voted. 
+    def show_user_voted_results(self):
+        pass
         
 # Define primary class to initiate the user interface.
 class voting_application(pygubu.TkApplication):
@@ -633,7 +743,24 @@ class voting_application(pygubu.TkApplication):
         if(selected_value != ""):
             student = Student()
             global voting_position
-            student.cast_votes(voting_position, (self.interfaceBuilder.get_object('student_vote_first_choice_cmbobx').get()).split()[0], (self.interfaceBuilder.get_object('student_vote_second_choice_cmbobx').get()).split()[0],(self.interfaceBuilder.get_object('student_vote_third_choice_cmbobx').get()).split()[0],(self.interfaceBuilder.get_object('student_vote_fourth_choice_cmbobx').get()).split()[0])
+            
+            first_choice = (self.interfaceBuilder.get_object('student_vote_first_choice_cmbobx').get()).split()[0]
+            second_choice = (self.interfaceBuilder.get_object('student_vote_second_choice_cmbobx').get()).split()[0]
+            third_choice = (self.interfaceBuilder.get_object('student_vote_third_choice_cmbobx').get()).split()[0]
+            fourth_choice = (self.interfaceBuilder.get_object('student_vote_fourth_choice_cmbobx').get()).split()[0]
+            
+            if(second_choice == "N/A"):
+                second_choice = ""
+            if(third_choice == "N/A"):
+                third_choice = ""
+            if(fourth_choice == "N/A"):
+                fourth_choice = ""
+            
+            
+            student.cast_votes(voting_position, first_choice, second_choice, third_choice, fourth_choice)            
+            messagebox.showinfo('Success', 'Votes submitted.')
+            self.change_frame('student_vote_position_select_frame')
+            
         
 if __name__ == '__main__':
     tkinter_app = tk.Tk()
