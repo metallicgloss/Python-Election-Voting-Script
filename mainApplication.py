@@ -243,6 +243,17 @@ class Position:
         
         return query_result
         
+    
+    # List all available positions to apply for.
+    def list_positions(self):
+        # Execute MySQL Query
+        mysql_cursor.execute("SELECT * FROM `gsuPositions`")
+        
+        # Store query_result as all values returned.
+        query_result = mysql_cursor.fetchall()
+        
+        return query_result
+        
     # List all available positions to apply for.
     def get_available_positions(self):
         # Execute MySQL Query
@@ -310,7 +321,7 @@ class Results:
         self._third_candidate_count = 0
         self._fourth_candidate_count = 0
      
-     def calculate_result_score(self, candidate, votes):
+    def calculate_result_score(self, candidate, votes):
         count = 0
         for vote in votes:
             if(candidate == vote[0]):
@@ -334,7 +345,7 @@ class Results:
         query_result = mysql_cursor.fetchall()
         
         global voting_position
-        voting_position = 1
+        voting_position = self.position_id
         
         positions = Position()
         candidates_list = positions.list_candidates_for_position()
@@ -346,8 +357,6 @@ class Results:
         
         compiled_list = [[self._first_candidate, self._first_candidate_count], [self._second_candidate, self._second_candidate_count], [self._third_candidate, self._third_candidate_count], [self._fourth_candidate, self._fourth_candidate_count]]
         
-        messagebox.showinfo('Success', compiled_list)
-                
         return compiled_list
         
     # Return list to user interface to allow the user to visualise the results for positions they've already voted. 
@@ -429,7 +438,26 @@ class voting_application(pygubu.TkApplication):
         
     # Navigate to view results page.
     def menu_view_results(self):
-        self.change_frame('backend_view_results_frame')
+        self.change_frame('backend_select_results_position_frame')
+
+        # Create election instance, append to list the election times
+        elections = Election()
+        current_election = []
+        election_compile = elections.get_current_election()
+        
+        # Format nicely for combo box.
+        current_election.append(str(election_compile[0][0]) + " - Start time: " + str(election_compile[0][1]) + " - End Time: " + str(election_compile[0][2]))
+        
+        # Create combo box of positions currently available to vote.
+        positions = Position()
+        position_list = []
+        
+        for position in positions.list_positions():
+            position_list.append(str(position[0]) + " - " + position[1])
+        
+        # Set choices in combo boxes to lists created.
+        self.interfaceBuilder.get_object('backend_confirm_election_cmbobx').configure(values=current_election)
+        self.interfaceBuilder.get_object('backend_position_cmbobx').configure(values=position_list)
     
     # On sub-page access through the backend menu, provide a back button.
     def return_to_backend(self):
@@ -718,6 +746,31 @@ class voting_application(pygubu.TkApplication):
             messagebox.showinfo('Success', 'Votes submitted.')
             self.change_frame('student_vote_position_select_frame')
             
+    def results_view_select_position(self):
+        voting_position_selected = (self.interfaceBuilder.get_object('backend_position_cmbobx').get()).split()[0]
+        election = (self.interfaceBuilder.get_object('backend_confirm_election_cmbobx').get()).split()[0]
+        global voting_position
+        voting_position = voting_position_selected
+        if((voting_position_selected != "") or (election != "")):
+            self.change_frame('backend_view_results_frame')
+            position = Position()
+            candidate_data = position.list_candidates_for_position()
+            candidate_formatted = []
+            results_temp = Results(1, voting_position_selected)
+            results_temp = results_temp.get_position_results()
+            loop = 0
+            for candidate in candidate_data:
+                candidate_temp = Candidate(id=candidate[1])
+                candidate_formatted.append(str(candidate[1]) + " - " + str(candidate_temp.get_candidate_name()) + str(results_temp[loop][1]))
+                loop += 1
+            global candidate_list
+            candidate_list = candidate_formatted
+            
+            self.interfaceBuilder.get_object('view_results_position_title_lbl').configure(text=candidate_formatted)
+            
+        else:
+            # Else change label text to error message.
+            self.interfaceBuilder.get_object('student_vote_position_error_lbl').configure(text="Please ensure you've selected values for both fields.")
         
 if __name__ == '__main__':
     tkinter_app = tk.Tk()
