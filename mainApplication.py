@@ -333,10 +333,6 @@ class Results:
         # Store query_result as all values returned.
         query_result = mysql_cursor.fetchall()
         
-        #
-        # NOTE: Will need to redo, functionality will work but extremely unefficient and should be refactored.
-        #
-        
         global voting_position
         voting_position = 1
         
@@ -344,59 +340,18 @@ class Results:
         candidates_list = positions.list_candidates_for_position()
         
         self._first_candidate, self._first_candidate_count = self.calculate_result_score(candidates_list[0][1], query_result)
-        self._second_candidate = candidates_list[1][1]
-        self._third_candidate = candidates_list[2][1]
-        self._fourth_candidate = candidates_list[3][1]
+        self._second_candidate, self._second_candidate_count = self.calculate_result_score(candidates_list[1][1], query_result)
+        self._third_candidate, self._third_candidate_count = self.calculate_result_score(candidates_list[2][1], query_result)
+        self._fourth_candidate, self._fourth_candidate_count = self.calculate_result_score(candidates_list[3][1], query_result)
         
-        for vote in query_result:
-            if(self._first_candidate == vote[0]):
-                self._first_candidate_count += 4
-            elif(self._first_candidate == vote[1]):
-                self._first_candidate_count += 3
-            elif(self._first_candidate == vote[2]):
-                self._first_candidate_count += 2
-            elif(self._first_candidate == vote[3]):
-                self._first_candidate_count += 1
-                
-                
-            if(self._second_candidate == vote[0]):
-                self._second_candidate_count += 4
-            elif(self._second_candidate == vote[1]):
-                self._second_candidate_count += 3
-            elif(self._second_candidate == vote[2]):
-                self._second_candidate_count += 2
-            elif(self._second_candidate == vote[3]):
-                self._second_candidate_count += 1
-                
-                
-            if(self._third_candidate == vote[0]):
-                self._third_candidate_count += 4
-            elif(self._third_candidate == vote[1]):
-                self._third_candidate_count += 3
-            elif(self._third_candidate == vote[2]):
-                self._third_candidate_count += 2
-            elif(self._third_candidate == vote[3]):
-                self._third_candidate_count += 1
-                
-                
-            if(self._fourth_candidate == vote[0]):
-                self._fourth_candidate_count += 4
-            elif(self._fourth_candidate == vote[1]):
-                self._fourth_candidate_count += 3
-            elif(self._fourth_candidate == vote[2]):
-                self._fourth_candidate_count += 2
-            elif(self._fourth_candidate == vote[3]):
-                self._fourth_candidate_count += 1
-                
         compiled_list = [[self._first_candidate, self._first_candidate_count], [self._second_candidate, self._second_candidate_count], [self._third_candidate, self._third_candidate_count], [self._fourth_candidate, self._fourth_candidate_count]]
         
         messagebox.showinfo('Success', compiled_list)
                 
-                
         return compiled_list
         
     # Return list to user interface to allow the user to visualise the results for positions they've already voted. 
-    def show_user_voted_results(self):
+    def show_visualised_results(self):
         pass
         
 # Define primary class to initiate the user interface.
@@ -476,10 +431,6 @@ class voting_application(pygubu.TkApplication):
     def menu_view_results(self):
         self.change_frame('backend_view_results_frame')
     
-    # Navigate to visualise results page.
-    def menu_visualise_results(self):
-        self.change_frame('backend_visualise_results_frame')
-    
     # On sub-page access through the backend menu, provide a back button.
     def return_to_backend(self):
         self.change_frame('backend_menu_frame')
@@ -494,6 +445,12 @@ class voting_application(pygubu.TkApplication):
     def return_to_student(self):
         self.change_frame('student_login_frame')
         
+    # Exit submenu page, return to position select.
+    def return_to_position_select(self):
+        self.change_frame('student_login_frame')
+        
+    def visualise_results(self):
+        self.change_frame('student_visualise_results_frame')
     
     
     #############################################################

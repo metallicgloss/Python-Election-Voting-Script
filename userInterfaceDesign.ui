@@ -1,24 +1,434 @@
 <?xml version='1.0' encoding='utf-8'?>
 <interface>
-  <object id="backend_visualise_results_frame" class="ttk.Frame">
-    <property name="height">400</property>
+  <object id="student_visualise_results_frame" class="ttk.Frame">
+    <property name="height">500</property>
+    <property name="padding">50</property>
     <property name="relief">flat</property>
-    <property name="width">600</property>
+    <property name="width">730</property>
     <layout>
       <property name="column">0</property>
       <property name="propagate">False</property>
       <property name="row">0</property>
     </layout>
+    <child>
+      <object id="visualise_results_title_lbl" class="ttk.Label">
+        <property name="font">{Montserrat SemiBold} 12 {}</property>
+        <property name="text" translatable="yes">View Results</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="results_first_place_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">First Place:</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="results_first_place_candidate_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="results_second_place_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Second Place:</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="results_second_place_candidate_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="results_third_place_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Third Place:</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="results_third_place_candidate_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="results_fourth_place_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Fourth Place:</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="results_fourth_place_candidate_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="Canvas_1" class="tk.Canvas">
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="return_to_student_vote_btn" class="ttk.Button">
+        <property name="command">return_to_position_select</property>
+        <property name="text" translatable="yes">Back</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">6</property>
+        </layout>
+      </object>
+    </child>
   </object>
   <object id="backend_view_results_frame" class="ttk.Frame">
-    <property name="height">400</property>
+    <property name="height">330</property>
+    <property name="padding">50</property>
     <property name="relief">flat</property>
-    <property name="width">600</property>
+    <property name="width">750</property>
     <layout>
       <property name="column">0</property>
       <property name="propagate">False</property>
       <property name="row">0</property>
     </layout>
+    <child>
+      <object id="view_results_title_lbl" class="ttk.Label">
+        <property name="font">{Montserrat SemiBold} 12 {}</property>
+        <property name="text" translatable="yes">View Results</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">5</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="return_to_backend_3" class="ttk.Button">
+        <property name="command">return_to_backend</property>
+        <property name="text" translatable="yes">Back</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">5</property>
+          <property name="pady">20</property>
+          <property name="propagate">True</property>
+          <property name="row">11</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_position_title_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">GSU Position:</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_title_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Candidate</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_first_title_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">1st Preference</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_second_title_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">2nd Preference</property>
+        <layout>
+          <property name="column">2</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_third_title_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">3rd Preference</property>
+        <layout>
+          <property name="column">3</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_fourth_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">4th Preference</property>
+        <layout>
+          <property name="column">4</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_one_name_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_one_first_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_one_second_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">2</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_one_third_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">3</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_one_fourth_lb" class="ttk.Label">
+        <layout>
+          <property name="column">4</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_two_name_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_two_first_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_two_second_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">2</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_two_third_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">3</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_two_fourth_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">4</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_three_name_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_three_first_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_three_second_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">2</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_three_third_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">3</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_three_fourth_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">4</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_four_name_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">6</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_four_first_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">6</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_four_second_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">2</property>
+          <property name="propagate">True</property>
+          <property name="row">6</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_four_third_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">3</property>
+          <property name="propagate">True</property>
+          <property name="row">6</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_four_fourth_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">4</property>
+          <property name="propagate">True</property>
+          <property name="row">6</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_winner_name_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Winner:</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">8</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_winner_votes_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Winner Total Votes:</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">9</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_total_votes_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Position Total Votes:</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">10</property>
+        </layout>
+      </object>
+    </child>
   </object>
   <object id="backend_create_candidate_frame" class="ttk.Frame">
     <property name="height">250</property>
@@ -36,6 +446,7 @@
         <property name="text" translatable="yes">Create Candidate</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">0</property>
         </layout>
@@ -46,6 +457,7 @@
         <property name="text" translatable="yes">Candidate Name</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">1</property>
           <property name="sticky">w</property>
@@ -54,9 +466,10 @@
     </child>
     <child>
       <object id="candidate_name_txtbx" class="ttk.Entry">
-        <property name="width">100</property>
+        <property name="width">102</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">2</property>
         </layout>
@@ -67,6 +480,7 @@
         <property name="text" translatable="yes">Candidate Email</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">3</property>
           <property name="sticky">w</property>
@@ -75,9 +489,10 @@
     </child>
     <child>
       <object id="candidate_email_txtbx" class="ttk.Entry">
-        <property name="width">100</property>
+        <property name="width">102</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">4</property>
         </layout>
@@ -88,9 +503,10 @@
         <property name="command">create_candidate</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Submit</property>
-        <property name="width">100</property>
+        <property name="width">50</property>
         <layout>
           <property name="column">0</property>
+          <property name="pady">10</property>
           <property name="propagate">True</property>
           <property name="row">5</property>
         </layout>
@@ -101,11 +517,11 @@
         <property name="command">return_to_backend</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Cancel</property>
-        <property name="width">100</property>
+        <property name="width">50</property>
         <layout>
-          <property name="column">0</property>
+          <property name="column">1</property>
           <property name="propagate">True</property>
-          <property name="row">6</property>
+          <property name="row">5</property>
         </layout>
       </object>
     </child>
@@ -114,6 +530,7 @@
         <property name="foreground">#ff0000</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">7</property>
         </layout>
@@ -136,6 +553,7 @@
         <property name="text" translatable="yes">Create Election</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">0</property>
         </layout>
@@ -146,6 +564,7 @@
         <property name="text" translatable="yes">Start Date/Time (HH:MM dd/mm/yyyy)</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">1</property>
           <property name="sticky">w</property>
@@ -154,9 +573,10 @@
     </child>
     <child>
       <object id="election_start_time_txtbx" class="ttk.Entry">
-        <property name="width">100</property>
+        <property name="width">102</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">2</property>
         </layout>
@@ -167,6 +587,7 @@
         <property name="text" translatable="yes">End Date/Time (HH:MM dd/mm/yyyy)</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">3</property>
           <property name="sticky">w</property>
@@ -175,9 +596,10 @@
     </child>
     <child>
       <object id="election_end_time_txtbx" class="ttk.Entry">
-        <property name="width">100</property>
+        <property name="width">102</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">4</property>
         </layout>
@@ -188,9 +610,10 @@
         <property name="command">create_election</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Submit</property>
-        <property name="width">100</property>
+        <property name="width">50</property>
         <layout>
           <property name="column">0</property>
+          <property name="pady">10</property>
           <property name="propagate">True</property>
           <property name="row">5</property>
         </layout>
@@ -201,11 +624,12 @@
         <property name="command">return_to_backend</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Cancel</property>
-        <property name="width">100</property>
+        <property name="width">50</property>
         <layout>
-          <property name="column">0</property>
+          <property name="column">1</property>
+          <property name="pady">10</property>
           <property name="propagate">True</property>
-          <property name="row">6</property>
+          <property name="row">5</property>
         </layout>
       </object>
     </child>
@@ -215,6 +639,7 @@
         <property name="foreground">#ff0000</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">7</property>
         </layout>
@@ -237,6 +662,7 @@
         <property name="text" translatable="yes">Create Student</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">0</property>
         </layout>
@@ -247,6 +673,7 @@
         <property name="text" translatable="yes">Username</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">1</property>
           <property name="sticky">w</property>
@@ -256,9 +683,10 @@
     <child>
       <object id="student_userame_txtbx" class="ttk.Entry">
         <property name="takefocus">true</property>
-        <property name="width">100</property>
+        <property name="width">102</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">2</property>
         </layout>
@@ -269,6 +697,7 @@
         <property name="text" translatable="yes">Password</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">3</property>
           <property name="sticky">w</property>
@@ -278,9 +707,10 @@
     <child>
       <object id="student_password_txtbx" class="ttk.Entry">
         <property name="show">•</property>
-        <property name="width">100</property>
+        <property name="width">102</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">4</property>
         </layout>
@@ -291,9 +721,10 @@
         <property name="command">create_student</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Submit</property>
-        <property name="width">100</property>
+        <property name="width">50</property>
         <layout>
           <property name="column">0</property>
+          <property name="pady">10</property>
           <property name="propagate">True</property>
           <property name="row">5</property>
         </layout>
@@ -304,11 +735,11 @@
         <property name="command">return_to_backend</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Cancel</property>
-        <property name="width">100</property>
+        <property name="width">50</property>
         <layout>
-          <property name="column">0</property>
+          <property name="column">1</property>
           <property name="propagate">True</property>
-          <property name="row">6</property>
+          <property name="row">5</property>
         </layout>
       </object>
     </child>
@@ -318,6 +749,7 @@
         <property name="foreground">#ff0000</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">7</property>
         </layout>
@@ -471,19 +903,6 @@
           <property name="column">0</property>
           <property name="propagate">True</property>
           <property name="row">5</property>
-        </layout>
-      </object>
-    </child>
-    <child>
-      <object id="backend_menu_visualise_results_btn" class="ttk.Button">
-        <property name="command">menu_visualise_results</property>
-        <property name="cursor">hand2</property>
-        <property name="text" translatable="yes">Visualise Results</property>
-        <property name="width">100</property>
-        <layout>
-          <property name="column">0</property>
-          <property name="propagate">True</property>
-          <property name="row">6</property>
         </layout>
       </object>
     </child>
@@ -754,12 +1173,13 @@
     </child>
     <child>
       <object id="return_to_student_btn_1" class="ttk.Button">
-        <property name="command">return_to_student</property>
+        <property name="command">return_to_position_select</property>
         <property name="text" translatable="yes">Cancel</property>
-        <property name="width">100</property>
+        <property name="width">102</property>
         <layout>
           <property name="column">0</property>
           <property name="columnspan">3</property>
+          <property name="pady">10</property>
           <property name="propagate">True</property>
           <property name="row">16</property>
         </layout>
@@ -791,6 +1211,7 @@
         <property name="text" translatable="yes">Candidate Application</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">0</property>
         </layout>
@@ -801,6 +1222,7 @@
         <property name="text" translatable="yes">Select Election</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">1</property>
           <property name="sticky">w</property>
@@ -813,6 +1235,7 @@
         <property name="width">100</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">2</property>
         </layout>
@@ -823,6 +1246,7 @@
         <property name="text" translatable="yes">Select Candidate</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">3</property>
           <property name="sticky">w</property>
@@ -834,6 +1258,7 @@
         <property name="width">100</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">4</property>
         </layout>
@@ -844,6 +1269,7 @@
         <property name="text" translatable="yes">Select Position</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">5</property>
           <property name="sticky">w</property>
@@ -854,9 +1280,10 @@
       <object id="candidate_application_create_btn" class="ttk.Button">
         <property name="command">submit_application</property>
         <property name="text" translatable="yes">Submit</property>
-        <property name="width">100</property>
+        <property name="width">50</property>
         <layout>
           <property name="column">0</property>
+          <property name="pady">10</property>
           <property name="propagate">True</property>
           <property name="row">7</property>
         </layout>
@@ -867,6 +1294,7 @@
         <property name="width">100</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">6</property>
         </layout>
@@ -876,11 +1304,12 @@
       <object id="return_to_backend_btn_3" class="ttk.Button">
         <property name="command">return_to_backend</property>
         <property name="text" translatable="yes">Cancel</property>
-        <property name="width">100</property>
+        <property name="width">50</property>
         <layout>
-          <property name="column">0</property>
+          <property name="column">1</property>
+          <property name="pady">10</property>
           <property name="propagate">True</property>
-          <property name="row">8</property>
+          <property name="row">7</property>
         </layout>
       </object>
     </child>
@@ -900,6 +1329,7 @@
         <property name="text" translatable="yes">Select Position</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">0</property>
         </layout>
@@ -910,6 +1340,7 @@
         <property name="text" translatable="yes">Select Election</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">1</property>
           <property name="sticky">w</property>
@@ -921,6 +1352,7 @@
         <property name="width">100</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">2</property>
         </layout>
@@ -931,6 +1363,7 @@
         <property name="text" translatable="yes">Select Position</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">3</property>
           <property name="sticky">w</property>
@@ -942,6 +1375,7 @@
         <property name="width">100</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">4</property>
         </layout>
@@ -951,9 +1385,10 @@
       <object id="student_vote_confirm_position_btn" class="ttk.Button">
         <property name="command">vote_select_position</property>
         <property name="text" translatable="yes">Submit</property>
-        <property name="width">100</property>
+        <property name="width">50</property>
         <layout>
           <property name="column">0</property>
+          <property name="pady">10</property>
           <property name="propagate">True</property>
           <property name="row">5</property>
         </layout>
@@ -963,11 +1398,12 @@
       <object id="return_to_student_menu_btn" class="ttk.Button">
         <property name="command">return_to_student</property>
         <property name="text" translatable="yes">Cancel</property>
-        <property name="width">100</property>
+        <property name="width">50</property>
         <layout>
-          <property name="column">0</property>
+          <property name="column">1</property>
+          <property name="pady">10</property>
           <property name="propagate">True</property>
-          <property name="row">6</property>
+          <property name="row">5</property>
         </layout>
       </object>
     </child>
@@ -976,8 +1412,22 @@
         <property name="foreground">#ff0000</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">7</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_btn" class="ttk.Button">
+        <property name="command">visualise_results</property>
+        <property name="text" translatable="yes">View Results</property>
+        <property name="width">102</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">6</property>
         </layout>
       </object>
     </child>
