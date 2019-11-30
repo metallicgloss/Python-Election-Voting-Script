@@ -394,6 +394,21 @@ class Results:
         self._fourth_candidate_count = 0
      
      
+    # Return array for counted votes
+    def get_count(self, candidate, votes):
+        
+        
+    # Return list of the final results.
+    def get_election_results(self, position_id):
+        # Select results for the position provided.
+        mysql_cursor.execute("SELECT `firstVoteCandidateID_FK`, `secondVoteCandidateID_FK`, `thirdVoteCandidateID_FK`, `fourthVoteCandidateID_FK` FROM `gsuElectionVotes` WHERE `electionID` = %s AND `positionID` = %s", [self.election_id, self.position_id])
+        
+        Candidate Name
+        Count 1St
+        Count 2nd
+        Cound 3rd
+        Count 4th
+        
     def calculate_result_score(self, candidate, votes):
         count = 0
         for vote in votes:
@@ -420,14 +435,7 @@ class Results:
         positions = Position()
         candidates_list = positions.list_candidates_for_position()
         
-        self._first_candidate, self._first_candidate_count = self.calculate_result_score(candidates_list[0][1], query_result)
-        self._second_candidate, self._second_candidate_count = self.calculate_result_score(candidates_list[1][1], query_result)
-        self._third_candidate, self._third_candidate_count = self.calculate_result_score(candidates_list[2][1], query_result)
-        self._fourth_candidate, self._fourth_candidate_count = self.calculate_result_score(candidates_list[3][1], query_result)
-        
-        compiled_list = [[self._first_candidate, self._first_candidate_count], [self._second_candidate, self._second_candidate_count], [self._third_candidate, self._third_candidate_count], [self._fourth_candidate, self._fourth_candidate_count]]
-        
-        return compiled_list
+        self.calculate_result_score(candidates_list[0][1], query_result)
         
         
     # Return list to user interface to allow the user to visualise the results for positions they've already voted. 

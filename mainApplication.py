@@ -311,28 +311,24 @@ class voting_application(pygubu.TkApplication):
             results = Results()
             results_array = results.get_election_results(self.voting_position)
             
-            
-            
-            position = classDesign.Position()
-            candidate_data = position.list_candidates_for_position()
-            candidate_formatted = []
-            results_temp = classDesign.Results(1, voting_position_selected)
-            results_temp = results_temp.get_position_results(self.voting_position)
-            loop = 0
-            for candidate in candidate_data:
-                candidate_temp = classDesign.Candidate(id=candidate[1])
-                candidate_formatted.append(str(candidate[1]) + " - " + str(candidate_temp.get_candidate_name()) + str(results_temp[loop][1]))
-                loop += 1
-            global candidate_list
-            candidate_list = candidate_formatted
-            
             self.ui_builder.get_object('view_results_position_title_lbl').configure(text=candidate_formatted)
+            
+            self.display_results("view_results_candidate_one")
+            
             
         else:
             # Else change label text to error message.
             self.ui_builder.get_object('student_vote_position_error_lbl').configure(text="Please ensure you've selected values for both fields.")
     
     
+    # Sets results page labels, helps to avoid massive amounts of duplication.
+    def display_results(self, element_name, name, first, second, third, fourth):
+        self.ui_builder.get_object(element_name + '_name_lbl').configure(text=name)
+        self.ui_builder.get_object(element_name + '_first_lbl').configure(text=first)
+        self.ui_builder.get_object(element_name + '_second_lbl').configure(text=second)
+        self.ui_builder.get_object(element_name + '_third_lbl').configure(text=third)
+        self.ui_builder.get_object(element_name + '_fourth_lbl').configure(text=fourth)
+        pass
     
     #-----------------------------------------------------------------------------------------------------#
     #                                     2.5 Frontent Menu Functions                                     #
