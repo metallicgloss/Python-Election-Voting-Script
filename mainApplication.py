@@ -338,19 +338,13 @@ class voting_application(pygubu.TkApplication):
     #                                     2.5 Frontent Menu Functions                                     #
     #                                                                                                     #
     #                      return_to_student - Changes frame to `student_login_frame`                     #
-    #          return_to_position_select - Changes frame to `student_vote_position_select_frame`          #
     #                visualise_results - Changes frame to `student_visualise_results_frame`               #
     #-----------------------------------------------------------------------------------------------------#
     
     # Exit page within student menu, return to login.
     def return_to_student(self):
         self.change_frame('student_login_frame')
-        
-        
-    # Exit submenu page, return to position select.
-    def return_to_position_select(self):
-        self.change_frame('student_vote_position_select_frame')
-        
+
         
     def visualise_results(self):
         self.change_frame('student_visualise_results_frame')
@@ -393,7 +387,10 @@ class voting_application(pygubu.TkApplication):
                 
                 # Create combo box of positions currently available to vote.
                 positions = classDesign.Position()
-                position_list = positions.list_all_positions_formatted()
+                position_list = []                
+                for position in positions.list_available_voting_positions(student_login.get_student_id()):
+                    position_list.append(str(position[0]) + " - " + position[1])
+                
                 
                 # Set choices in combo boxes to lists created.
                 self.ui_builder.get_object('student_vote_confirm_election_cmbobx').configure(values=current_election)
@@ -452,8 +449,8 @@ class voting_application(pygubu.TkApplication):
         
         if(selected_value is not None):
             # If selection has been made, remove value from list and make N/A available for future preferences.
-            candidate_list.remove(selected_value)
-            candidate_list.append("N/A")
+            self.candidate_list.remove(selected_value)
+            self.candidate_list.append("N/A")
             
             # Toggle box availability to next preference
             self.toggle_vote_box("student_vote_first_choice", "student_vote_second_choice")
@@ -462,7 +459,7 @@ class voting_application(pygubu.TkApplication):
         # Get the user input value for second choice.
         selected_value = self.ui_builder.get_object('student_vote_second_choice_cmbobx').get()
         
-        if(selected_value is  None):
+        if(selected_value is not None):
             # If selection has been made, continue.
             if(selected_value == "N/A"):
                 self.fourth_choice_confirm()
@@ -489,22 +486,25 @@ class voting_application(pygubu.TkApplication):
         box_two = self.ui_builder.get_object('student_vote_second_choice_cmbobx').get()
         if(selected_value != "" or box_two == "N/A"):
             student = classDesign.Student()
-            global voting_position
             
+            # Get user input for votes.
             first_choice = (self.ui_builder.get_object('student_vote_first_choice_cmbobx').get()).split()[0]
             second_choice = (self.ui_builder.get_object('student_vote_second_choice_cmbobx').get()).split()[0]
-            third_choice = (self.ui_builder.get_object('student_vote_third_choice_cmbobx').get()).split()[0]
-            fourth_choice = (self.ui_builder.get_object('student_vote_fourth_choice_cmbobx').get()).split()[0]
             
             if(second_choice == "N/A"):
-                second_choice = ""
-                third_choice = ""
-                fourth_choice = ""
+                # If user selected to not enter a 2nd pref, set all other preferences to blank.
+                second_choice = None
+                third_choice = None
+                fourth_choice = None
+            else:
+                # Else get values from user input.
+                third_choice = (self.ui_builder.get_object('student_vote_third_choice_cmbobx').get()).split()[0]
+                fourth_choice = (self.ui_builder.get_object('student_vote_fourth_choice_cmbobx').get()).split()[0]
             
-            
-            student.cast_votes(voting_position, first_choice, second_choice, third_choice, fourth_choice)            
+            # Submit votens.
+            student.cast_votes(self.voting_position, self.logged_in_student, first_choice, second_choice, third_choice, fourth_choice)            
             messagebox.showinfo('Success', 'Votes submitted.')
-            self.change_frame('student_vote_position_select_frame')
+            self.return_to_student()
             
         
 

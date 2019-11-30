@@ -111,7 +111,7 @@
     </child>
     <child>
       <object id="return_to_student_vote_btn" class="ttk.Button">
-        <property name="command">return_to_position_select</property>
+        <property name="command">return_to_student</property>
         <property name="text" translatable="yes">Back</property>
         <property name="width">100</property>
         <layout>
@@ -1173,7 +1173,7 @@
     </child>
     <child>
       <object id="return_to_student_btn_1" class="ttk.Button">
-        <property name="command">return_to_position_select</property>
+        <property name="command">return_to_student</property>
         <property name="text" translatable="yes">Cancel</property>
         <property name="width">102</property>
         <layout>
