@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <interface>
-  <object id="student_visualise_results_frame" class="ttk.Frame">
+  <object class="ttk.Frame" id="student_visualise_results_frame">
     <property name="height">500</property>
     <property name="padding">50</property>
     <property name="relief">flat</property>
@@ -11,7 +11,7 @@
       <property name="row">0</property>
     </layout>
     <child>
-      <object id="visualise_results_title_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="visualise_results_title_lbl">
         <property name="font">{Montserrat SemiBold} 12 {}</property>
         <property name="text" translatable="yes">View Results</property>
         <layout>
@@ -23,7 +23,7 @@
       </object>
     </child>
     <child>
-      <object id="results_first_place_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="results_first_place_lbl">
         <property name="text" translatable="yes">First Place:</property>
         <layout>
           <property name="column">0</property>
@@ -33,7 +33,7 @@
       </object>
     </child>
     <child>
-      <object id="results_first_place_candidate_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="results_first_place_candidate_lbl">
         <layout>
           <property name="column">1</property>
           <property name="propagate">True</property>
@@ -42,7 +42,7 @@
       </object>
     </child>
     <child>
-      <object id="results_second_place_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="results_second_place_lbl">
         <property name="text" translatable="yes">Second Place:</property>
         <layout>
           <property name="column">0</property>
@@ -52,7 +52,7 @@
       </object>
     </child>
     <child>
-      <object id="results_second_place_candidate_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="results_second_place_candidate_lbl">
         <layout>
           <property name="column">1</property>
           <property name="propagate">True</property>
@@ -61,7 +61,7 @@
       </object>
     </child>
     <child>
-      <object id="results_third_place_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="results_third_place_lbl">
         <property name="text" translatable="yes">Third Place:</property>
         <layout>
           <property name="column">0</property>
@@ -71,7 +71,7 @@
       </object>
     </child>
     <child>
-      <object id="results_third_place_candidate_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="results_third_place_candidate_lbl">
         <layout>
           <property name="column">1</property>
           <property name="propagate">True</property>
@@ -80,7 +80,7 @@
       </object>
     </child>
     <child>
-      <object id="results_fourth_place_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="results_fourth_place_lbl">
         <property name="text" translatable="yes">Fourth Place:</property>
         <layout>
           <property name="column">0</property>
@@ -90,7 +90,7 @@
       </object>
     </child>
     <child>
-      <object id="results_fourth_place_candidate_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="results_fourth_place_candidate_lbl">
         <layout>
           <property name="column">1</property>
           <property name="propagate">True</property>
@@ -99,7 +99,7 @@
       </object>
     </child>
     <child>
-      <object id="results_graph" class="tk.Canvas">
+      <object class="tk.Canvas" id="results_graph">
         <property name="width">100</property>
         <layout>
           <property name="column">0</property>
@@ -110,7 +110,7 @@
       </object>
     </child>
     <child>
-      <object id="return_to_student_vote_btn" class="ttk.Button">
+      <object class="ttk.Button" id="return_to_student_vote_btn">
         <property name="command">return_to_student</property>
         <property name="text" translatable="yes">Back</property>
         <property name="width">100</property>
@@ -123,7 +123,7 @@
       </object>
     </child>
   </object>
-  <object id="backend_view_results_frame" class="ttk.Frame">
+  <object class="ttk.Frame" id="backend_view_results_frame">
     <property name="height">330</property>
     <property name="padding">50</property>
     <property name="relief">flat</property>
@@ -134,7 +134,7 @@
       <property name="row">0</property>
     </layout>
     <child>
-      <object id="view_results_title_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_title_lbl">
         <property name="font">{Montserrat SemiBold} 12 {}</property>
         <property name="text" translatable="yes">View Results</property>
         <layout>
@@ -146,7 +146,7 @@
       </object>
     </child>
     <child>
-      <object id="return_to_backend_3" class="ttk.Button">
+      <object class="ttk.Button" id="return_to_backend_3">
         <property name="command">return_to_backend</property>
         <property name="text" translatable="yes">Back</property>
         <property name="width">100</property>
@@ -160,7 +160,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_position_title_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_position_title_lbl">
         <property name="text" translatable="yes">GSU Position:</property>
         <layout>
           <property name="column">0</property>
@@ -170,7 +170,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_candidate_title_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_candidate_title_lbl">
         <property name="text" translatable="yes">Candidate</property>
         <layout>
           <property name="column">0</property>
@@ -180,7 +180,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_first_title_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_first_title_lbl">
         <property name="text" translatable="yes">1st Preference</property>
         <layout>
           <property name="column">1</property>
@@ -190,7 +190,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_second_title_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_second_title_lbl">
         <property name="text" translatable="yes">2nd Preference</property>
         <layout>
           <property name="column">2</property>
@@ -200,7 +200,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_third_title_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_third_title_lbl">
         <property name="text" translatable="yes">3rd Preference</property>
         <layout>
           <property name="column">3</property>
@@ -210,7 +210,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_fourth_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_fourth_lbl">
         <property name="text" translatable="yes">4th Preference</property>
         <layout>
           <property name="column">4</property>
@@ -220,7 +220,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_candidate_one_name_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_candidate_one_name_lbl">
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
@@ -229,7 +229,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_candidate_one_first_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_candidate_one_first_lbl">
         <layout>
           <property name="column">1</property>
           <property name="propagate">True</property>
@@ -238,7 +238,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_candidate_one_second_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_candidate_one_second_lbl">
         <layout>
           <property name="column">2</property>
           <property name="propagate">True</property>
@@ -247,7 +247,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_candidate_one_third_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_candidate_one_third_lbl">
         <layout>
           <property name="column">3</property>
           <property name="propagate">True</property>
@@ -256,7 +256,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_candidate_one_fourth_lb" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_candidate_one_fourth_lbl">
         <layout>
           <property name="column">4</property>
           <property name="propagate">True</property>
@@ -265,7 +265,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_candidate_two_name_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_candidate_two_name_lbl">
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
@@ -274,7 +274,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_candidate_two_first_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_candidate_two_first_lbl">
         <layout>
           <property name="column">1</property>
           <property name="propagate">True</property>
@@ -283,7 +283,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_candidate_two_second_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_candidate_two_second_lbl">
         <layout>
           <property name="column">2</property>
           <property name="propagate">True</property>
@@ -292,7 +292,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_candidate_two_third_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_candidate_two_third_lbl">
         <layout>
           <property name="column">3</property>
           <property name="propagate">True</property>
@@ -301,7 +301,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_candidate_two_fourth_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_candidate_two_fourth_lbl">
         <layout>
           <property name="column">4</property>
           <property name="propagate">True</property>
@@ -310,7 +310,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_candidate_three_name_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_candidate_three_name_lbl">
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
@@ -319,7 +319,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_candidate_three_first_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_candidate_three_first_lbl">
         <layout>
           <property name="column">1</property>
           <property name="propagate">True</property>
@@ -328,7 +328,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_candidate_three_second_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_candidate_three_second_lbl">
         <layout>
           <property name="column">2</property>
           <property name="propagate">True</property>
@@ -337,7 +337,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_candidate_three_third_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_candidate_three_third_lbl">
         <layout>
           <property name="column">3</property>
           <property name="propagate">True</property>
@@ -346,7 +346,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_candidate_three_fourth_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_candidate_three_fourth_lbl">
         <layout>
           <property name="column">4</property>
           <property name="propagate">True</property>
@@ -355,7 +355,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_candidate_four_name_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_candidate_four_name_lbl">
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
@@ -364,7 +364,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_candidate_four_first_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_candidate_four_first_lbl">
         <layout>
           <property name="column">1</property>
           <property name="propagate">True</property>
@@ -373,7 +373,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_candidate_four_second_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_candidate_four_second_lbl">
         <layout>
           <property name="column">2</property>
           <property name="propagate">True</property>
@@ -382,7 +382,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_candidate_four_third_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_candidate_four_third_lbl">
         <layout>
           <property name="column">3</property>
           <property name="propagate">True</property>
@@ -391,7 +391,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_candidate_four_fourth_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_candidate_four_fourth_lbl">
         <layout>
           <property name="column">4</property>
           <property name="propagate">True</property>
@@ -400,8 +400,24 @@
       </object>
     </child>
     <child>
-      <object id="view_results_winner_name_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_winner_name_lbl">
+        <property name="anchor">center</property>
+        <property name="relief">flat</property>
+        <property name="takefocus">false</property>
         <property name="text" translatable="yes">Winner:</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">8</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Label" id="view_results_winner_votes_lbl">
+        <property name="compound">top</property>
+        <property name="justify">left</property>
+        <property name="takefocus">false</property>
+        <property name="text" translatable="yes">Winner Total Votes:</property>
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
@@ -410,27 +426,18 @@
       </object>
     </child>
     <child>
-      <object id="view_results_winner_votes_lbl" class="ttk.Label">
-        <property name="text" translatable="yes">Winner Total Votes:</property>
-        <layout>
-          <property name="column">0</property>
-          <property name="propagate">True</property>
-          <property name="row">9</property>
-        </layout>
-      </object>
-    </child>
-    <child>
-      <object id="view_results_total_votes_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="view_results_total_votes_lbl">
         <property name="text" translatable="yes">Position Total Votes:</property>
         <layout>
-          <property name="column">0</property>
+          <property name="column">3</property>
           <property name="propagate">True</property>
-          <property name="row">10</property>
+          <property name="row">8</property>
+          <property name="sticky">e</property>
         </layout>
       </object>
     </child>
   </object>
-  <object id="backend_create_candidate_frame" class="ttk.Frame">
+  <object class="ttk.Frame" id="backend_create_candidate_frame">
     <property name="height">250</property>
     <property name="padding">50</property>
     <property name="relief">flat</property>
@@ -441,7 +448,7 @@
       <property name="row">0</property>
     </layout>
     <child>
-      <object id="create_candidate_title_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="create_candidate_title_lbl">
         <property name="font">{Montserrat SemiBold} 12 {}</property>
         <property name="text" translatable="yes">Create Candidate</property>
         <layout>
@@ -453,7 +460,7 @@
       </object>
     </child>
     <child>
-      <object id="candidate_name_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="candidate_name_lbl">
         <property name="text" translatable="yes">Candidate Name</property>
         <layout>
           <property name="column">0</property>
@@ -465,7 +472,7 @@
       </object>
     </child>
     <child>
-      <object id="candidate_name_txtbx" class="ttk.Entry">
+      <object class="ttk.Entry" id="candidate_name_txtbx">
         <property name="width">102</property>
         <layout>
           <property name="column">0</property>
@@ -476,7 +483,7 @@
       </object>
     </child>
     <child>
-      <object id="candidate_email_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="candidate_email_lbl">
         <property name="text" translatable="yes">Candidate Email</property>
         <layout>
           <property name="column">0</property>
@@ -488,7 +495,7 @@
       </object>
     </child>
     <child>
-      <object id="candidate_email_txtbx" class="ttk.Entry">
+      <object class="ttk.Entry" id="candidate_email_txtbx">
         <property name="width">102</property>
         <layout>
           <property name="column">0</property>
@@ -499,7 +506,7 @@
       </object>
     </child>
     <child>
-      <object id="create_candidate_btn" class="ttk.Button">
+      <object class="ttk.Button" id="create_candidate_btn">
         <property name="command">create_candidate</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Submit</property>
@@ -513,7 +520,7 @@
       </object>
     </child>
     <child>
-      <object id="return_to_backend_btn_2" class="ttk.Button">
+      <object class="ttk.Button" id="return_to_backend_btn_2">
         <property name="command">return_to_backend</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Cancel</property>
@@ -526,7 +533,7 @@
       </object>
     </child>
     <child>
-      <object id="create_candidate_error_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="create_candidate_error_lbl">
         <property name="foreground">#ff0000</property>
         <layout>
           <property name="column">0</property>
@@ -537,7 +544,7 @@
       </object>
     </child>
   </object>
-  <object id="backend_create_election_frame" class="ttk.Frame">
+  <object class="ttk.Frame" id="backend_create_election_frame">
     <property name="height">250</property>
     <property name="padding">50</property>
     <property name="relief">flat</property>
@@ -548,7 +555,7 @@
       <property name="row">0</property>
     </layout>
     <child>
-      <object id="create_election_title_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="create_election_title_lbl">
         <property name="font">{Montserrat SemiBold} 12 {}</property>
         <property name="text" translatable="yes">Create Election</property>
         <layout>
@@ -560,7 +567,7 @@
       </object>
     </child>
     <child>
-      <object id="election_start_time_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="election_start_time_lbl">
         <property name="text" translatable="yes">Start Date/Time (HH:MM dd/mm/yyyy)</property>
         <layout>
           <property name="column">0</property>
@@ -572,7 +579,7 @@
       </object>
     </child>
     <child>
-      <object id="election_start_time_txtbx" class="ttk.Entry">
+      <object class="ttk.Entry" id="election_start_time_txtbx">
         <property name="width">102</property>
         <layout>
           <property name="column">0</property>
@@ -583,7 +590,7 @@
       </object>
     </child>
     <child>
-      <object id="election_end_time_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="election_end_time_lbl">
         <property name="text" translatable="yes">End Date/Time (HH:MM dd/mm/yyyy)</property>
         <layout>
           <property name="column">0</property>
@@ -595,7 +602,7 @@
       </object>
     </child>
     <child>
-      <object id="election_end_time_txtbx" class="ttk.Entry">
+      <object class="ttk.Entry" id="election_end_time_txtbx">
         <property name="width">102</property>
         <layout>
           <property name="column">0</property>
@@ -606,7 +613,7 @@
       </object>
     </child>
     <child>
-      <object id="create_election_btn" class="ttk.Button">
+      <object class="ttk.Button" id="create_election_btn">
         <property name="command">create_election</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Submit</property>
@@ -620,7 +627,7 @@
       </object>
     </child>
     <child>
-      <object id="return_to_backend_btn" class="ttk.Button">
+      <object class="ttk.Button" id="return_to_backend_btn">
         <property name="command">return_to_backend</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Cancel</property>
@@ -634,7 +641,7 @@
       </object>
     </child>
     <child>
-      <object id="create_election_error_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="create_election_error_lbl">
         <property name="font">{Montserrat SemiBold} 12 {}</property>
         <property name="foreground">#ff0000</property>
         <layout>
@@ -646,7 +653,7 @@
       </object>
     </child>
   </object>
-  <object id="backend_create_student_frame" class="ttk.Frame">
+  <object class="ttk.Frame" id="backend_create_student_frame">
     <property name="height">250</property>
     <property name="padding">50</property>
     <property name="relief">flat</property>
@@ -657,7 +664,7 @@
       <property name="row">0</property>
     </layout>
     <child>
-      <object id="create_student_title_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="create_student_title_lbl">
         <property name="font">{Montserrat SemiBold} 12 {}</property>
         <property name="text" translatable="yes">Create Student</property>
         <layout>
@@ -669,7 +676,7 @@
       </object>
     </child>
     <child>
-      <object id="student_username_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="student_username_lbl">
         <property name="text" translatable="yes">Username</property>
         <layout>
           <property name="column">0</property>
@@ -681,7 +688,7 @@
       </object>
     </child>
     <child>
-      <object id="student_userame_txtbx" class="ttk.Entry">
+      <object class="ttk.Entry" id="student_userame_txtbx">
         <property name="takefocus">true</property>
         <property name="width">102</property>
         <layout>
@@ -693,7 +700,7 @@
       </object>
     </child>
     <child>
-      <object id="student_password_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="student_password_lbl">
         <property name="text" translatable="yes">Password</property>
         <layout>
           <property name="column">0</property>
@@ -705,7 +712,7 @@
       </object>
     </child>
     <child>
-      <object id="student_password_txtbx" class="ttk.Entry">
+      <object class="ttk.Entry" id="student_password_txtbx">
         <property name="show">•</property>
         <property name="width">102</property>
         <layout>
@@ -717,7 +724,7 @@
       </object>
     </child>
     <child>
-      <object id="create_student_btn" class="ttk.Button">
+      <object class="ttk.Button" id="create_student_btn">
         <property name="command">create_student</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Submit</property>
@@ -731,7 +738,7 @@
       </object>
     </child>
     <child>
-      <object id="return_to_backend_btn_1" class="ttk.Button">
+      <object class="ttk.Button" id="return_to_backend_btn_1">
         <property name="command">return_to_backend</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Cancel</property>
@@ -744,7 +751,7 @@
       </object>
     </child>
     <child>
-      <object id="create_student_error_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="create_student_error_lbl">
         <property name="font">{Montserrat SemiBold} 12 {}</property>
         <property name="foreground">#ff0000</property>
         <layout>
@@ -756,7 +763,7 @@
       </object>
     </child>
   </object>
-  <object id="startup_menu_frame" class="ttk.Frame">
+  <object class="ttk.Frame" id="startup_menu_frame">
     <property name="height">280</property>
     <property name="padding">50</property>
     <property name="relief">flat</property>
@@ -768,7 +775,7 @@
       <property name="row">0</property>
     </layout>
     <child>
-      <object id="startup_menu_title_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="startup_menu_title_lbl">
         <property name="font">{Montserrat SemiBold} 16 {}</property>
         <property name="padding">30</property>
         <property name="text" translatable="yes">Welcome to the GSU Voting Application</property>
@@ -780,7 +787,7 @@
       </object>
     </child>
     <child>
-      <object id="startup_admin_mode_btn" class="ttk.Button">
+      <object class="ttk.Button" id="startup_admin_mode_btn">
         <property name="command">startup_select_backend</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Administration Mode</property>
@@ -793,7 +800,7 @@
       </object>
     </child>
     <child>
-      <object id="startup_standard_mode_btn" class="ttk.Button">
+      <object class="ttk.Button" id="startup_standard_mode_btn">
         <property name="command">startup_select_student</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Standard Mode</property>
@@ -806,7 +813,7 @@
       </object>
     </child>
     <child>
-      <object id="startup_quit_btn" class="ttk.Button">
+      <object class="ttk.Button" id="startup_quit_btn">
         <property name="command">exit_application</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Quit Application</property>
@@ -819,7 +826,7 @@
       </object>
     </child>
   </object>
-  <object id="backend_menu_frame" class="ttk.Frame">
+  <object class="ttk.Frame" id="backend_menu_frame">
     <property name="height">375</property>
     <property name="padding">50</property>
     <property name="relief">flat</property>
@@ -830,7 +837,7 @@
       <property name="row">0</property>
     </layout>
     <child>
-      <object id="backend_menu_title_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="backend_menu_title_lbl">
         <property name="font">{Montserrat SemiBold} 20 {}</property>
         <property name="padding">30</property>
         <property name="text" translatable="yes">Backend Menu</property>
@@ -842,7 +849,7 @@
       </object>
     </child>
     <child>
-      <object id="backend_menu_create_student_btn" class="ttk.Button">
+      <object class="ttk.Button" id="backend_menu_create_student_btn">
         <property name="command">menu_create_student_voter</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Create Student Voter</property>
@@ -855,7 +862,7 @@
       </object>
     </child>
     <child>
-      <object id="backend_menu_create_candidate_btn" class="ttk.Button">
+      <object class="ttk.Button" id="backend_menu_create_candidate_btn">
         <property name="command">menu_create_candidate</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Create Candidate</property>
@@ -868,7 +875,7 @@
       </object>
     </child>
     <child>
-      <object id="backend_menu_create_election_btn" class="ttk.Button">
+      <object class="ttk.Button" id="backend_menu_create_election_btn">
         <property name="command">menu_create_election</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Create Election</property>
@@ -881,7 +888,7 @@
       </object>
     </child>
     <child>
-      <object id="backend_menu_return_btn" class="ttk.Button">
+      <object class="ttk.Button" id="backend_menu_return_btn">
         <property name="command">return_to_startup</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Main Menu</property>
@@ -894,7 +901,7 @@
       </object>
     </child>
     <child>
-      <object id="backend_menu_view_results_btn" class="ttk.Button">
+      <object class="ttk.Button" id="backend_menu_view_results_btn">
         <property name="command">menu_view_results</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">View Results</property>
@@ -907,7 +914,7 @@
       </object>
     </child>
     <child>
-      <object id="backend_menu_create_application_btn" class="ttk.Button">
+      <object class="ttk.Button" id="backend_menu_create_application_btn">
         <property name="command">menu_create_application</property>
         <property name="text" translatable="yes">Create Candidate Application</property>
         <property name="width">100</property>
@@ -919,7 +926,7 @@
       </object>
     </child>
   </object>
-  <object id="student_login_frame" class="ttk.Frame">
+  <object class="ttk.Frame" id="student_login_frame">
     <property name="height">330</property>
     <property name="padding">50</property>
     <property name="relief">flat</property>
@@ -930,7 +937,7 @@
       <property name="row">0</property>
     </layout>
     <child>
-      <object id="student_login_title_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="student_login_title_lbl">
         <property name="font">{Montserrat SemiBold} 20 {}</property>
         <property name="padding">30</property>
         <property name="text" translatable="yes">Student Login</property>
@@ -942,7 +949,7 @@
       </object>
     </child>
     <child>
-      <object id="student_login_username_txtbx" class="ttk.Entry">
+      <object class="ttk.Entry" id="student_login_username_txtbx">
         <property name="takefocus">true</property>
         <property name="width">100</property>
         <layout>
@@ -953,7 +960,7 @@
       </object>
     </child>
     <child>
-      <object id="student_login_password_txtbx" class="ttk.Entry">
+      <object class="ttk.Entry" id="student_login_password_txtbx">
         <property name="show">•</property>
         <property name="width">100</property>
         <layout>
@@ -964,7 +971,7 @@
       </object>
     </child>
     <child>
-      <object id="student_login_btn" class="ttk.Button">
+      <object class="ttk.Button" id="student_login_btn">
         <property name="command">student_login</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Login</property>
@@ -978,7 +985,7 @@
       </object>
     </child>
     <child>
-      <object id="student_login_username_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="student_login_username_lbl">
         <property name="text" translatable="yes">Username</property>
         <layout>
           <property name="column">0</property>
@@ -989,7 +996,7 @@
       </object>
     </child>
     <child>
-      <object id="student_login_Password_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="student_login_Password_lbl">
         <property name="text" translatable="yes">Password</property>
         <property name="width">100</property>
         <layout>
@@ -1001,7 +1008,7 @@
       </object>
     </child>
     <child>
-      <object id="student_login_error_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="student_login_error_lbl">
         <property name="foreground">#ff0000</property>
         <layout>
           <property name="column">0</property>
@@ -1011,7 +1018,7 @@
       </object>
     </child>
   </object>
-  <object id="student_vote_frame" class="ttk.Frame">
+  <object class="ttk.Frame" id="student_vote_frame">
     <property name="height">290</property>
     <property name="padding">40</property>
     <property name="width">730</property>
@@ -1021,7 +1028,7 @@
       <property name="row">0</property>
     </layout>
     <child>
-      <object id="student_vote_title_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="student_vote_title_lbl">
         <property name="font">{Montserrat SemiBold} 12 {}</property>
         <property name="padding">30</property>
         <property name="text" translatable="yes">Voting</property>
@@ -1034,7 +1041,7 @@
       </object>
     </child>
     <child>
-      <object id="student_vote_first_choice_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="student_vote_first_choice_lbl">
         <property name="text" translatable="yes">1st Choice:</property>
         <layout>
           <property name="column">0</property>
@@ -1045,7 +1052,7 @@
       </object>
     </child>
     <child>
-      <object id="student_vote_first_choice_cmbobx" class="ttk.Combobox">
+      <object class="ttk.Combobox" id="student_vote_first_choice_cmbobx">
         <property name="width">50</property>
         <layout>
           <property name="column">1</property>
@@ -1055,7 +1062,7 @@
       </object>
     </child>
     <child>
-      <object id="student_vote_first_choice_btn" class="ttk.Button">
+      <object class="ttk.Button" id="student_vote_first_choice_btn">
         <property name="command">first_choice_confirm</property>
         <property name="text" translatable="yes">Confirm</property>
         <property name="width">40</property>
@@ -1067,7 +1074,7 @@
       </object>
     </child>
     <child>
-      <object id="student_vote_second_choice_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="student_vote_second_choice_lbl">
         <property name="text" translatable="yes">2nd Choice:</property>
         <layout>
           <property name="column">0</property>
@@ -1078,7 +1085,7 @@
       </object>
     </child>
     <child>
-      <object id="student_vote_second_choice_cmbobx" class="ttk.Combobox">
+      <object class="ttk.Combobox" id="student_vote_second_choice_cmbobx">
         <property name="state">disabled</property>
         <property name="width">50</property>
         <layout>
@@ -1089,7 +1096,7 @@
       </object>
     </child>
     <child>
-      <object id="student_vote_second_choice_btn" class="ttk.Button">
+      <object class="ttk.Button" id="student_vote_second_choice_btn">
         <property name="command">second_choice_confirm</property>
         <property name="state">disabled</property>
         <property name="text" translatable="yes">Confirm</property>
@@ -1102,7 +1109,7 @@
       </object>
     </child>
     <child>
-      <object id="student_vote_third_choice_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="student_vote_third_choice_lbl">
         <property name="text" translatable="yes">3rd Choice:</property>
         <layout>
           <property name="column">0</property>
@@ -1113,7 +1120,7 @@
       </object>
     </child>
     <child>
-      <object id="student_vote_third_choice_cmbobx" class="ttk.Combobox">
+      <object class="ttk.Combobox" id="student_vote_third_choice_cmbobx">
         <property name="state">disabled</property>
         <property name="width">50</property>
         <layout>
@@ -1124,7 +1131,7 @@
       </object>
     </child>
     <child>
-      <object id="student_vote_third_choice_btn" class="ttk.Button">
+      <object class="ttk.Button" id="student_vote_third_choice_btn">
         <property name="command">third_choice_confirm</property>
         <property name="state">disabled</property>
         <property name="text" translatable="yes">Confirm</property>
@@ -1137,7 +1144,7 @@
       </object>
     </child>
     <child>
-      <object id="student_vote_forth_choice_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="student_vote_forth_choice_lbl">
         <property name="text" translatable="yes">4th Choice:</property>
         <layout>
           <property name="column">0</property>
@@ -1148,7 +1155,7 @@
       </object>
     </child>
     <child>
-      <object id="student_vote_fourth_choice_cmbobx" class="ttk.Combobox">
+      <object class="ttk.Combobox" id="student_vote_fourth_choice_cmbobx">
         <property name="state">disabled</property>
         <property name="width">50</property>
         <layout>
@@ -1159,7 +1166,7 @@
       </object>
     </child>
     <child>
-      <object id="student_vote_fourth_choice_btn" class="ttk.Button">
+      <object class="ttk.Button" id="student_vote_fourth_choice_btn">
         <property name="command">fourth_choice_confirm</property>
         <property name="state">disabled</property>
         <property name="text" translatable="yes">Confirm</property>
@@ -1172,7 +1179,7 @@
       </object>
     </child>
     <child>
-      <object id="return_to_student_btn_1" class="ttk.Button">
+      <object class="ttk.Button" id="return_to_student_btn_1">
         <property name="command">return_to_student</property>
         <property name="text" translatable="yes">Cancel</property>
         <property name="width">102</property>
@@ -1186,7 +1193,7 @@
       </object>
     </child>
     <child>
-      <object id="student_vote_error_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="student_vote_error_lbl">
         <property name="foreground">#ff0000</property>
         <layout>
           <property name="column">0</property>
@@ -1197,7 +1204,7 @@
       </object>
     </child>
   </object>
-  <object id="backend_create_candidate_application_frame" class="ttk.Frame">
+  <object class="ttk.Frame" id="backend_create_candidate_application_frame">
     <property name="height">275</property>
     <property name="padding">50</property>
     <property name="width">730</property>
@@ -1207,7 +1214,7 @@
       <property name="row">0</property>
     </layout>
     <child>
-      <object id="candidate_application_title_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="candidate_application_title_lbl">
         <property name="font">{Montserrat SemiBold} 12 {}</property>
         <property name="text" translatable="yes">Candidate Application</property>
         <layout>
@@ -1219,7 +1226,7 @@
       </object>
     </child>
     <child>
-      <object id="candidate_application_select_election_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="candidate_application_select_election_lbl">
         <property name="text" translatable="yes">Select Election</property>
         <layout>
           <property name="column">0</property>
@@ -1231,7 +1238,7 @@
       </object>
     </child>
     <child>
-      <object id="candidate_application_election_cmbobx" class="ttk.Combobox">
+      <object class="ttk.Combobox" id="candidate_application_election_cmbobx">
         <property name="values">test</property>
         <property name="width">100</property>
         <layout>
@@ -1243,7 +1250,7 @@
       </object>
     </child>
     <child>
-      <object id="candidate_application_select_candidate_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="candidate_application_select_candidate_lbl">
         <property name="text" translatable="yes">Select Candidate</property>
         <layout>
           <property name="column">0</property>
@@ -1255,7 +1262,7 @@
       </object>
     </child>
     <child>
-      <object id="candidate_application_candidate_cmbobx" class="ttk.Combobox">
+      <object class="ttk.Combobox" id="candidate_application_candidate_cmbobx">
         <property name="width">100</property>
         <layout>
           <property name="column">0</property>
@@ -1266,7 +1273,7 @@
       </object>
     </child>
     <child>
-      <object id="candidate_application_select_position_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="candidate_application_select_position_lbl">
         <property name="text" translatable="yes">Select Position</property>
         <layout>
           <property name="column">0</property>
@@ -1278,7 +1285,7 @@
       </object>
     </child>
     <child>
-      <object id="candidate_application_create_btn" class="ttk.Button">
+      <object class="ttk.Button" id="candidate_application_create_btn">
         <property name="command">create_application</property>
         <property name="text" translatable="yes">Submit</property>
         <property name="width">50</property>
@@ -1291,7 +1298,7 @@
       </object>
     </child>
     <child>
-      <object id="candidate_application_position_cmbobx" class="ttk.Combobox">
+      <object class="ttk.Combobox" id="candidate_application_position_cmbobx">
         <property name="width">100</property>
         <layout>
           <property name="column">0</property>
@@ -1302,7 +1309,7 @@
       </object>
     </child>
     <child>
-      <object id="return_to_backend_btn_3" class="ttk.Button">
+      <object class="ttk.Button" id="return_to_backend_btn_3">
         <property name="command">return_to_backend</property>
         <property name="text" translatable="yes">Cancel</property>
         <property name="width">50</property>
@@ -1315,7 +1322,7 @@
       </object>
     </child>
   </object>
-  <object id="student_vote_position_select_frame" class="ttk.Frame">
+  <object class="ttk.Frame" id="student_vote_position_select_frame">
     <property name="height">250</property>
     <property name="padding">50</property>
     <property name="width">730</property>
@@ -1325,7 +1332,7 @@
       <property name="row">0</property>
     </layout>
     <child>
-      <object id="student_vote_select_position_title_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="student_vote_select_position_title_lbl">
         <property name="font">{Montserrat SemiBold} 12 {}</property>
         <property name="text" translatable="yes">Select Position</property>
         <layout>
@@ -1337,7 +1344,7 @@
       </object>
     </child>
     <child>
-      <object id="student_vote_select_election_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="student_vote_select_election_lbl">
         <property name="text" translatable="yes">Select Election</property>
         <layout>
           <property name="column">0</property>
@@ -1349,7 +1356,7 @@
       </object>
     </child>
     <child>
-      <object id="student_vote_confirm_election_cmbobx" class="ttk.Combobox">
+      <object class="ttk.Combobox" id="student_vote_confirm_election_cmbobx">
         <property name="width">100</property>
         <layout>
           <property name="column">0</property>
@@ -1360,7 +1367,7 @@
       </object>
     </child>
     <child>
-      <object id="student_vote_position_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="student_vote_position_lbl">
         <property name="text" translatable="yes">Select Position</property>
         <layout>
           <property name="column">0</property>
@@ -1372,7 +1379,7 @@
       </object>
     </child>
     <child>
-      <object id="student_vote_position_cmbobx" class="ttk.Combobox">
+      <object class="ttk.Combobox" id="student_vote_position_cmbobx">
         <property name="width">100</property>
         <layout>
           <property name="column">0</property>
@@ -1383,7 +1390,7 @@
       </object>
     </child>
     <child>
-      <object id="student_vote_confirm_position_btn" class="ttk.Button">
+      <object class="ttk.Button" id="student_vote_confirm_position_btn">
         <property name="command">vote_select_position</property>
         <property name="text" translatable="yes">Submit</property>
         <property name="width">50</property>
@@ -1396,7 +1403,7 @@
       </object>
     </child>
     <child>
-      <object id="return_to_student_menu_btn" class="ttk.Button">
+      <object class="ttk.Button" id="return_to_student_menu_btn">
         <property name="command">return_to_student</property>
         <property name="text" translatable="yes">Cancel</property>
         <property name="width">50</property>
@@ -1409,7 +1416,7 @@
       </object>
     </child>
     <child>
-      <object id="student_vote_position_error_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="student_vote_position_error_lbl">
         <property name="foreground">#ff0000</property>
         <layout>
           <property name="column">0</property>
@@ -1420,7 +1427,7 @@
       </object>
     </child>
     <child>
-      <object id="view_results_btn" class="ttk.Button">
+      <object class="ttk.Button" id="view_results_btn">
         <property name="command">visualise_results</property>
         <property name="text" translatable="yes">View Results</property>
         <property name="width">102</property>
@@ -1433,7 +1440,7 @@
       </object>
     </child>
   </object>
-  <object id="backend_select_results_position_frame" class="ttk.Frame">
+  <object class="ttk.Frame" id="backend_select_results_position_frame">
     <property name="height">230</property>
     <property name="padding">50</property>
     <property name="width">730</property>
@@ -1443,7 +1450,7 @@
       <property name="row">0</property>
     </layout>
     <child>
-      <object id="backend_select_position_title_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="backend_select_position_title_lbl">
         <property name="font">{Montserrat SemiBold} 12 {}</property>
         <property name="text" translatable="yes">Select Position</property>
         <layout>
@@ -1455,7 +1462,7 @@
       </object>
     </child>
     <child>
-      <object id="backend_select_election_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="backend_select_election_lbl">
         <property name="text" translatable="yes">Select Election</property>
         <layout>
           <property name="column">0</property>
@@ -1467,7 +1474,7 @@
       </object>
     </child>
     <child>
-      <object id="backend_confirm_election_cmbobx" class="ttk.Combobox">
+      <object class="ttk.Combobox" id="backend_confirm_election_cmbobx">
         <property name="width">100</property>
         <layout>
           <property name="column">0</property>
@@ -1478,7 +1485,7 @@
       </object>
     </child>
     <child>
-      <object id="backend_position_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="backend_position_lbl">
         <property name="text" translatable="yes">Select Position</property>
         <layout>
           <property name="column">0</property>
@@ -1490,7 +1497,7 @@
       </object>
     </child>
     <child>
-      <object id="backend_position_cmbobx" class="ttk.Combobox">
+      <object class="ttk.Combobox" id="backend_position_cmbobx">
         <property name="width">100</property>
         <layout>
           <property name="column">0</property>
@@ -1501,7 +1508,7 @@
       </object>
     </child>
     <child>
-      <object id="backend_confirm_position_btn" class="ttk.Button">
+      <object class="ttk.Button" id="backend_confirm_position_btn">
         <property name="command">results_view_select_position</property>
         <property name="text" translatable="yes">Submit</property>
         <property name="width">50</property>
@@ -1514,7 +1521,7 @@
       </object>
     </child>
     <child>
-      <object id="return_to_backend_menu_btn" class="ttk.Button">
+      <object class="ttk.Button" id="return_to_backend_menu_btn">
         <property name="command">return_to_backend</property>
         <property name="text" translatable="yes">Cancel</property>
         <property name="width">50</property>
@@ -1527,7 +1534,7 @@
       </object>
     </child>
     <child>
-      <object id="backend_position_error_lbl" class="ttk.Label">
+      <object class="ttk.Label" id="backend_position_error_lbl">
         <property name="foreground">#ff0000</property>
         <layout>
           <property name="column">0</property>

@@ -305,9 +305,16 @@ class Position:
         
         
     # Return list of positions available formatted for a combobox.
-    def list_all_positions_formatted(self):
+    def list_all_available_positions_formatted(self):
         available_positions = []
         for position in self.get_available_positions():
+            available_positions.append(str(position[0]) + " - " + position[1])
+            
+        return available_positions
+        
+    def list_all_positions_formatted(self):
+        available_positions = []
+        for position in self.list_all_positions():
             available_positions.append(str(position[0]) + " - " + position[1])
             
         return available_positions
@@ -404,27 +411,68 @@ class Results:
         # Get candidate name
         candidate = Candidate(id=candidate)
         
+        
         return [candidate.get_candidate_name(), first_preference, second_preference, third_preference, fourth_preference]
         
     # Return list of the final results.
     def get_election_results(self, position_id):
+        election = Election()
+        election_id = election.get_current_election()
+        election_id = election_id[0][0]
+        
         # Select results for the position provided.
-        mysql_cursor.execute("SELECT `firstVoteCandidateID_FK`, `secondVoteCandidateID_FK`, `thirdVoteCandidateID_FK`, `fourthVoteCandidateID_FK` FROM `gsuElectionVotes` WHERE `electionID` = %s AND `positionID` = %s", [self.election_id, self.position_id])
+        mysql_cursor.execute("SELECT `firstVoteCandidateID_FK`, `secondVoteCandidateID_FK`, `thirdVoteCandidateID_FK`, `fourthVoteCandidateID_FK` FROM `gsuElectionVotes` WHERE `electionID` = %s AND `positionID` = %s", [election_id, position_id])
                 
         # Store query_result as all values returned.
         query_result = mysql_cursor.fetchall()
         
         # Get list of candidates applied for position.
         positions = Position()
-        candidates = positions.list_candidates_for_position()
+        candidates = positions.list_candidates_for_position(position_id)
         
         first = self.get_count(candidates[0][1], query_result)
-        second = self.get_count(candidates[2][1], query_result)
+        second = self.get_count(candidates[1][1], query_result)
         third = self.get_count(candidates[2][1], query_result)
-        fourth = self.get_count(candidates[2][1], query_result)
+        fourth = self.get_count(candidates[3][1], query_result)
+        winner = ""
+        totalvotesforwinner = 0
+        totalpositionvotes = 0
         
-        return [first, second, third, fourth]
         
+        
+        ##################################################################
+        #                                                                #
+        #        Calculating the output for the final vote screen        #
+        #                                                                #
+        ##################################################################
+        
+        
+        for x in range(1,5):
+            if first[x] != second[x] and first[x] != third[x] and first[x] != fourth[x] and second[x] != third[x] and second[x] != fourth[x] and third[x] != fourth[x]:
+                pass  #Check whether two candidates have the same number of votes, if they do it will go to the next level of votes
+            else:
+                if first[x] > second[x] and first[x] > third[x] and first[x] > fourth[x]:
+                    winner = first[0]
+                    totalvotesforwinner = first[1] + first[2] + first[3] + first[4]
+                    break #Find the winner and the total votes for that person
+                elif second[x] > first[x] and second[x] > third[x] and second[x] > fourth[x]:
+                    winner = second[0]
+                    totalvotesforwinner = second[1] + second[2] + second[3] + second[4]
+                    break
+                elif third[x] > first[x] and thrid[x] > second[x] and third[x] > fourth[x]:
+                    winner = third[0]
+                    totalvotesforwinner = third[1] + third[2] + third[3] + third[4]
+                    break
+                elif fourth[x] > first[x] and fourth[x] > second[x] and fourth[x] > third[x]:
+                    winner = fourth[0]
+                    totalvotesforwinner = fourth[1] + fourth[2] + fourth[3] + fourth[4]
+                    break
+            
+        totalpositionvotes = first[1] + second[1] + third[1] + fourth[1] + first[2] + second[2] + third[2] + fourth[2] + first[3] + second[3] + third[3] + fourth[3] + first[4] + second[4] + third[4] + fourth[4]
+        
+        return [first, second, third, fourth, winner, str(totalvotesforwinner),str(totalpositionvotes)]
+
+    
         
     # Return list of the final results & formatting data for per-position results.
     def get_position_results(self, position_id):

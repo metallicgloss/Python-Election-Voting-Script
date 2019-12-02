@@ -155,7 +155,7 @@ class voting_application(pygubu.TkApplication):
         # Executing code after change frame is as close as possible to an onLoad event as far as I can find
         # Create position instance, append to list the remaining available positions
         positions = classDesign.Position()
-        available_positions = positions.list_all_positions_formatted()
+        available_positions = positions.list_all_available_positions_formatted()
             
         # Create election instance, append to list the election times
         elections = classDesign.Election()
@@ -308,12 +308,23 @@ class voting_application(pygubu.TkApplication):
             # If input fields on the page are not empty.
             self.change_frame('backend_view_results_frame')
             
-            results = Results()
+            results = classDesign.Results()
             results_array = results.get_election_results(self.voting_position)
+
+            #self.ui_builder.get_object('view_results_candidate_one_name_lbl').configure(text=results_array[0][0])
             
-            self.ui_builder.get_object('view_results_position_title_lbl').configure(text=candidate_formatted)
+            #self.ui_builder.get_object('view_results_position_title_lbl').configure(text=candidate_formatted)
             
-            self.display_results("view_results_candidate_one")
+            self.display_results("view_results_candidate_one", results_array[0][0],results_array[0][1],results_array[0][2],results_array[0][3],results_array[0][4])
+            self.display_results("view_results_candidate_two", results_array[1][0],results_array[1][1],results_array[1][2],results_array[1][3],results_array[1][4])
+            self.display_results("view_results_candidate_three", results_array[2][0],results_array[2][1],results_array[2][2],results_array[2][3],results_array[2][4])
+            self.display_results("view_results_candidate_four", results_array[3][0],results_array[3][1],results_array[3][2],results_array[3][3],results_array[3][4])
+            
+            
+            # Final labels for the winner and total votes
+            self.ui_builder.get_object('view_results_winner_name_lbl').configure(text="Winner: " + results_array[4])
+            self.ui_builder.get_object('view_results_winner_votes_lbl').configure(text="Winner Total Votes: " + results_array[5])
+            self.ui_builder.get_object('view_results_total_votes_lbl').configure(text="Position total votes: " + results_array[6])
             
             
         else:
