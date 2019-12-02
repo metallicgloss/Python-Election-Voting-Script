@@ -382,46 +382,48 @@ class Results:
         # Define class variables.
         self.election_id = election_id
         self.position_id = position_id
-        self._first_candidate = ""
-        self._second_candidate = ""
-        self._third_candidate = ""
-        self._fourth_candidate = ""
-        
-        
-        self._first_candidate_count = 0
-        self._second_candidate_count = 0
-        self._third_candidate_count = 0
-        self._fourth_candidate_count = 0
-     
      
     # Return array for counted votes
     def get_count(self, candidate, votes):
+        # Initialise function specific variables.
+        first_preference = 0
+        second_preference = 0
+        third_preference = 0
+        fourth_preference = 0
         
+        for vote in votes:
+            if(candidate == vote[0]):
+                first_preference += 1
+            elif(candidate == vote[1]):
+                second_preference += 1
+            elif(candidate == vote[2]):
+                third_preference += 1
+            elif(candidate == vote[3]):
+                fourth_preference += 1
+                
+        # Get candidate name
+        candidate = Candidate(id=candidate)
+        
+        return [candidate.get_candidate_name(), first_preference, second_preference, third_preference, fourth_preference]
         
     # Return list of the final results.
     def get_election_results(self, position_id):
         # Select results for the position provided.
         mysql_cursor.execute("SELECT `firstVoteCandidateID_FK`, `secondVoteCandidateID_FK`, `thirdVoteCandidateID_FK`, `fourthVoteCandidateID_FK` FROM `gsuElectionVotes` WHERE `electionID` = %s AND `positionID` = %s", [self.election_id, self.position_id])
+                
+        # Store query_result as all values returned.
+        query_result = mysql_cursor.fetchall()
         
-        Candidate Name
-        Count 1St
-        Count 2nd
-        Cound 3rd
-        Count 4th
+        # Get list of candidates applied for position.
+        positions = Position()
+        candidates = positions.list_candidates_for_position()
         
-    def calculate_result_score(self, candidate, votes):
-        count = 0
-        for vote in votes:
-            if(candidate == vote[0]):
-                count += 4
-            elif(candidate == vote[1]):
-                count += 3
-            elif(candidate == vote[2]):
-                count += 2
-            elif(candidate == vote[3]):
-                count += 1
+        first = self.get_count(candidates[0][1], query_result)
+        second = self.get_count(candidates[2][1], query_result)
+        third = self.get_count(candidates[2][1], query_result)
+        fourth = self.get_count(candidates[2][1], query_result)
         
-        return [candidate, count,]
+        return [first, second, third, fourth]
         
         
     # Return list of the final results & formatting data for per-position results.
