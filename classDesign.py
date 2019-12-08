@@ -497,8 +497,7 @@ class Results:
         data = [20, 15, 10, 7, 5, 4, 3, 2, 1, 1, 0]
 
         root = tk.Tk()
-        root.title("Bar Graph")
-
+        root.title("Voting results")
         c_width = 800  # Define it's width
         c_height = 700  # Define it's height
         c = tk.Canvas(root, width=c_width, height=c_height, bg='white')
@@ -512,7 +511,7 @@ class Results:
         x_gap = 70  # The gap between left canvas edge and y axis
 
         # A quick for loop to calculate the rectangle
-        for x, y in enumerate(data):
+        for x, y in enumerate(candidates_list):
 
             # coordinates of each bar
 
