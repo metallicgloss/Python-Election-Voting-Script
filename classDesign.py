@@ -414,8 +414,8 @@ class Results:
         
         return [candidate.get_candidate_name(), first_preference, second_preference, third_preference, fourth_preference]
         
-    # Return list of the final results.
-    def get_election_results(self, position_id):
+    # Return list of the final results for given position.
+    def get_position_total_results(self, position_id):
         election = Election()
         election_id = election.get_current_election()
         election_id = election_id[0][0]
@@ -472,21 +472,7 @@ class Results:
         
         return [first, second, third, fourth, winner, str(totalvotesforwinner), str(totalpositionvotes)]
 
-    
-        
-    # Return list of the final results & formatting data for per-position results.
-    def get_position_results(self, position_id):
-        # Select results for the position provided.
-        mysql_cursor.execute("SELECT `firstVoteCandidateID_FK`, `secondVoteCandidateID_FK`, `thirdVoteCandidateID_FK`, `fourthVoteCandidateID_FK` FROM `gsuElectionVotes` WHERE `electionID` = %s AND `positionID` = %s", [self.election_id, self.position_id])
-        
-        # Store query_result as all values returned.
-        query_result = mysql_cursor.fetchall()
-        
-        positions = Position()
-        candidates_list = positions.list_candidates_for_position()
-        
-        self.calculate_result_score(candidates_list[0][1], query_result)
-        
+
         
     # Return list to user interface to allow the user to visualise the results for positions they've already voted. 
     def show_visualised_results(self):

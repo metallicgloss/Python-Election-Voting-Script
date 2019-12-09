@@ -310,7 +310,7 @@ class voting_application(pygubu.TkApplication):
             self.change_frame('backend_view_results_frame')
             
             results = classDesign.Results()
-            results_array = results.get_election_results(self.voting_position)
+            results_array = results.get_position_total_results(self.voting_position)
 
             #self.ui_builder.get_object('view_results_candidate_one_name_lbl').configure(text=results_array[0][0])
             
