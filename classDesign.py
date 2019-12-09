@@ -437,57 +437,111 @@ class Results:
         election_id = election.get_current_election()
         election_id = election_id[0][0]
         
+        position = Position()
+        candidate_list = position.list_candidates_for_position(position_id)
+        
+        
         # Select results for the position provided.
-        mysql_cursor.execute("SELECT `firstVoteCandidateID_FK`, `secondVoteCandidateID_FK`, `thirdVoteCandidateID_FK`, `fourthVoteCandidateID_FK` FROM `gsuElectionVotes` WHERE `electionID` = %s AND `positionID` = %s", [election_id, position_id])
+        mysql_cursor.execute("SELECT `firstVoteCandidateID_FK` FROM `gsuElectionVotes` WHERE `electionID` = %s AND `positionID` = %s", [election_id, position_id])
                 
         # Store query_result as all values returned.
-        query_result = mysql_cursor.fetchall()
+        first_preference_votes = mysql_cursor.fetchall()
         
-        # Get list of candidates applied for position.
-        positions = Position()
-        candidates = positions.list_candidates_for_position(position_id)
+        highest_first_preference = self.generate_vote_count(first_preference_votes, candidate_list)
         
-        first = self.get_count(candidates[0][1], query_result)
-        second = self.get_count(candidates[1][1], query_result)
-        third = self.get_count(candidates[2][1], query_result)
-        fourth = self.get_count(candidates[3][1], query_result)
-        winner = ""
-        totalvotesforwinner = 0
-        totalpositionvotes = 0
-        
-        
-        
-        ##################################################################
-        #                                                                #
-        #        Calculating the output for the final vote screen        #
-        #                                                                #
-        ##################################################################
-        
-        
-        for x in range(1,5):
-            if first[x] != second[x] and first[x] != third[x] and first[x] != fourth[x] and second[x] != third[x] and second[x] != fourth[x] and third[x] != fourth[x]:
-                pass  #Check whether two candidates have the same number of votes, if they do it will go to the next level of votes
-            else:
-                if first[x] > second[x] and first[x] > third[x] and first[x] > fourth[x]:
-                    winner = first[0]
-                    totalvotesforwinner = first[1] + first[2] + first[3] + first[4]
-                    break #Find the winner and the total votes for that person
-                elif second[x] > first[x] and second[x] > third[x] and second[x] > fourth[x]:
-                    winner = second[0]
-                    totalvotesforwinner = second[1] + second[2] + second[3] + second[4]
-                    break
-                elif third[x] > first[x] and third[x] > second[x] and third[x] > fourth[x]:
-                    winner = third[0]
-                    totalvotesforwinner = third[1] + third[2] + third[3] + third[4]
-                    break
-                elif fourth[x] > first[x] and fourth[x] > second[x] and fourth[x] > third[x]:
-                    winner = fourth[0]
-                    totalvotesforwinner = fourth[1] + fourth[2] + fourth[3] + fourth[4]
-                    break
+        if len(highest_first_preference) > 1:
+            mysql_format_list = ','.join(['%d'] * len(highest_first_preference))
+            # Select results for the position provided.
+            print(election_id, position_id, mysql_format_list, tuple(highest_first_preference))
+            mysql_cursor.execute("SELECT `secondVoteCandidateID_FK` FROM `gsuElectionVotes` WHERE `electionID` = %d AND `positionID` = %d AND IN %s" % (election_id, position_id, mysql_format_list, tuple(highest_first_preference)))
+                
+                
+                
+            # Store query_result as all values returned.
+            second_preference_votes = mysql_cursor.fetchall()
             
-        totalpositionvotes = first[1] + second[1] + third[1] + fourth[1] + first[2] + second[2] + third[2] + fourth[2] + first[3] + second[3] + third[3] + fourth[3] + first[4] + second[4] + third[4] + fourth[4]
-        
-        return [first, second, third, fourth, winner, str(totalvotesforwinner), str(totalpositionvotes)]
-
-
+            highest_second_preference = self.generate_vote_count(second_preference_votes, candidate_list)
+            
+            if len(highest_second_preference) > 1:
+                # Select results for the position provided.
+                mysql_cursor.execute("SELECT `thirdVoteCandidateID_FK` FROM `gsuElectionVotes` WHERE `electionID` = %s AND `positionID` = %s AND IN %s", [election_id, position_id, highest_first_preference[::2]])
+                    
+                # Store query_result as all values returned.
+                third_preference_votes = mysql_cursor.fetchall()
+                
+                highest_third_preference = self.generate_vote_count(third_preference_votes, candidate_list)
+                if len(highest_third_preference) > 1:
+                    # Select results for the position provided.
+                    mysql_cursor.execute("SELECT `fourthVoteCandidateID_FK` FROM `gsuElectionVotes` WHERE `electionID` = %s AND `positionID` = %s AND IN %s", [election_id, position_id, highest_first_preference[::2]])
+                        
+                    # Store query_result as all values returned.
+                    fourth_preference_votes = mysql_cursor.fetchall()
+                    
+                    highest_fourth_preference = self.generate_vote_count(fourth_preference_votes, candidate_list)
+                    winner = highest_fourth_preference
+                else:
+                    winner = highest_third_preference
+            else:
+                winner = highest_second_preference
+        else:
+            winner = highest_first_preference
+            
+        print(winner)        
+    def generate_vote_count(self, votes, candidates):
     
+        candidate_one_count = 0
+        candidate_two_count = 0
+        candidate_three_count = 0
+        candidate_four_count = 0
+        
+        results = {}
+        
+        for i in range(len(votes)):
+            if candidates[0][0] == votes[i][0]:
+                candidate_one_count += 1
+               
+            if len(candidates) > 1:
+                if candidates[1][0] == votes[i][0]:
+                    candidate_two_count += 1
+                    
+            if len(candidates) > 2:
+                if candidates[2][0] == votes[i][0]:
+                    candidate_three_count += 1
+                
+            if len(candidates) > 3:
+                if candidates[3][0] == votes[i][0]:
+                    candidate_four_count += 1
+                
+
+
+        if len(candidates) > 0:
+            results[candidates[0][0]] = candidate_one_count
+        
+        if len(candidates) > 1:
+            results[candidates[1][0]] = candidate_two_count
+        
+        if len(candidates) > 2:
+            results[candidates[2][0]] = candidate_three_count
+            
+        if len(candidates) > 3:
+            results[candidates[3][0]] = candidate_four_count
+
+        highest = max(results.values())
+           
+        highest_values = [i for i, candidate in results.items() if candidate == highest]         
+        print(results)
+        print(highest_values)
+        print(highest)
+        
+        return(highest_values)
+
+            
+    
+    
+        
+    
+        
+        
+        
+        
+      
