@@ -470,7 +470,7 @@ class Results:
             
         totalpositionvotes = first[1] + second[1] + third[1] + fourth[1] + first[2] + second[2] + third[2] + fourth[2] + first[3] + second[3] + third[3] + fourth[3] + first[4] + second[4] + third[4] + fourth[4]
         
-        return [first, second, third, fourth, winner, str(totalvotesforwinner),str(totalpositionvotes)]
+        return [first, second, third, fourth, winner, str(totalvotesforwinner), str(totalpositionvotes)]
 
     
         
@@ -490,14 +490,9 @@ class Results:
         
     # Return list to user interface to allow the user to visualise the results for positions they've already voted. 
     def show_visualised_results(self):
-       import tkinter as tk
-
-
         # Define the data points
         data = [20, 15, 10, 7, 5, 4, 3, 2, 1, 1, 0]
 
-        root = tk.Tk()
-        root.title("Voting results")
         c_width = 800  # Define it's width
         c_height = 700  # Define it's height
         c = tk.Canvas(root, width=c_width, height=c_height, bg='white')
@@ -532,8 +527,6 @@ class Results:
 
             # Put the y value above the bar
             c.create_text(x0 + 2, y0, anchor=tk.SW, text=str(y))
-
-        root.mainloop()
 
 
 
