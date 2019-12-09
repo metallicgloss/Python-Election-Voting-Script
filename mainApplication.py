@@ -328,6 +328,7 @@ class voting_application(pygubu.TkApplication):
             self.ui_builder.get_object('view_results_total_votes_lbl').configure(text="Position total votes: " + results_array[6])
             
             
+            
         else:
             # Else change label text to error message.
             self.ui_builder.get_object('student_vote_position_error_lbl').configure(text="Please ensure you've selected values for both fields.")
@@ -342,6 +343,78 @@ class voting_application(pygubu.TkApplication):
         self.ui_builder.get_object(element_name + '_fourth_lbl').configure(text=fourth)
         pass
     
+    
+    ###Graph
+    
+    def display_graph(self):
+        #self.change_frame('student_view_results_graph_frame')
+        results = classDesign.Results()
+        results_array = results.get_position_total_results(self.voting_position)
+        
+        root = tk.Tk()
+        root.title("First votes bar graph")
+        
+        # Return list to user interface to allow the user to visualise the results for positions they've already voted. 
+    #def show_visualised_results(self):
+        # Define the data points
+        
+        data = [results_array[0][1],results_array[1][1],results_array[2][1],results_array[3][1]]
+        print(data)
+
+        graph_width = 500  
+        graph_height = 300  
+        graph = tk.Canvas(root, width=graph_width, height=graph_height, bg='white')
+        graph.pack()
+
+        #To get the size of the graoh
+        y_stretch = 15 
+        y_gap = 70  
+        x_stretch = 10  
+        x_width = 50  
+        x_gap = 70  
+
+        # A quick for loop to calculate the rectangle
+        for x, y in enumerate(data):
+
+            # coordinates of each bar
+
+            # Bottom left coordinate
+            x0 = x * x_stretch + x * x_width + x_gap
+
+            # Top left coordinates
+            y0 = graph_height - (y * y_stretch + y_gap)
+
+            # Bottom right coordinates
+            x1 = x * x_stretch + x * x_width + x_width + x_gap
+
+            # Top right coordinates
+            y1 = graph_height - y_gap
+
+            # Draw the bar
+            graph.create_rectangle(x0, y0, x1, y1, fill="red")
+
+            # Put the y value above the bar
+            graph.create_text(x0 + 2, y0, anchor=tk.SW, text=str(y))
+
+        
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     #-----------------------------------------------------------------------------------------------------#
     #                                     2.5 Frontent Menu Functions                                     #
     #                                                                                                     #
@@ -351,6 +424,8 @@ class voting_application(pygubu.TkApplication):
     # Exit page within student menu, return to login.
     def return_to_student(self):
         self.change_frame('student_login_frame')
+        
+        
         
         
     #-----------------------------------------------------------------------------------------------------#
