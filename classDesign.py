@@ -411,9 +411,26 @@ class Results:
         # Get candidate name
         candidate = Candidate(id=candidate)
         
-        
         return [candidate.get_candidate_name(), first_preference, second_preference, third_preference, fourth_preference]
         
+        
+    def get_election_results(self):
+        # Get list of all positions.
+        positions = classDesign.Position()
+        position_list = positions.list_all_positions()
+        
+        output_data = ""
+        
+        for position in position_list:
+            try:
+                totals = self.get_position_total_results(position[0])
+                output_data += position[1] + " - " + totals[4] + "\n"
+            except IndexError:
+                break
+            
+        return output_data
+        
+    
     # Return list of the final results for given position.
     def get_position_total_results(self, position_id):
         election = Election()

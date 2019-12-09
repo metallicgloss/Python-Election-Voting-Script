@@ -605,14 +605,26 @@ class voting_application(pygubu.TkApplication):
     # Change page to allow student to view election results.
     def student_view_election_results(self):
         self.change_frame('student_view_election_results_frame')
-        election = (self.ui_builder.get_object('student_results_confirm_election_cmbobx').get()).split()[0]
         
+        results = classDesign.Results()
+        
+        self.ui_builder.get_object('election_results_data_lbl').configure(text=results.get_election_results())
+        
+    def export_election_results(self):
+        results = classDesign.Results()
+        file = open("election_results.txt", "w")
+        file.write(results.get_election_results())
+        file.close()
     
     # Change page to allow student to view per position results.
     def student_view_position_results(self):
         self.change_frame('student_view_position_results_frame')
-        election = (self.ui_builder.get_object('student_results_confirm_election_cmbobx').get()).split()[0]
-        positionz = (self.ui_builder.get_object('student_results_position_cmbobx').get()).split()[0]
+        position = (self.ui_builder.get_object('student_results_position_cmbobx').get()).split()[0]
+        
+        if position != "":
+            results = classDesign.Results()
+            results.get_position_total_results(position)
+        
         
              
 
