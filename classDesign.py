@@ -459,7 +459,7 @@ class Results:
                     winner = second[0]
                     totalvotesforwinner = second[1] + second[2] + second[3] + second[4]
                     break
-                elif third[x] > first[x] and thrid[x] > second[x] and third[x] > fourth[x]:
+                elif third[x] > first[x] and third[x] > second[x] and third[x] > fourth[x]:
                     winner = third[0]
                     totalvotesforwinner = third[1] + third[2] + third[3] + third[4]
                     break
@@ -473,47 +473,4 @@ class Results:
         return [first, second, third, fourth, winner, str(totalvotesforwinner), str(totalpositionvotes)]
 
 
-        
-    # Return list to user interface to allow the user to visualise the results for positions they've already voted. 
-    def show_visualised_results(self):
-        # Define the data points
-        data = [20, 15, 10, 7, 5, 4, 3, 2, 1, 1, 0]
-
-        c_width = 800  # Define it's width
-        c_height = 700  # Define it's height
-        c = tk.Canvas(root, width=c_width, height=c_height, bg='white')
-        c.pack()
-
-        # The variables below size the bar graph
-        y_stretch = 15  # The highest y = max_data_value * y_stretch
-        y_gap = 70  # The gap between lower canvas edge and x axis
-        x_stretch = 10  # Stretch x wide enough to fit the variables
-        x_width = 50  # The width of the x-axis
-        x_gap = 70  # The gap between left canvas edge and y axis
-
-        # A quick for loop to calculate the rectangle
-        for x, y in enumerate(candidates_list):
-
-            # coordinates of each bar
-
-            # Bottom left coordinate
-            x0 = x * x_stretch + x * x_width + x_gap
-
-            # Top left coordinates
-            y0 = c_height - (y * y_stretch + y_gap)
-
-            # Bottom right coordinates
-            x1 = x * x_stretch + x * x_width + x_width + x_gap
-
-            # Top right coordinates
-            y1 = c_height - y_gap
-
-            # Draw the bar
-            c.create_rectangle(x0, y0, x1, y1, fill="red")
-
-            # Put the y value above the bar
-            c.create_text(x0 + 2, y0, anchor=tk.SW, text=str(y))
-
-
-
-
+    
