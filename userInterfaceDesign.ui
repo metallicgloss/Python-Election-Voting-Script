@@ -1239,7 +1239,7 @@
         </child>
     </object>
     <object id="student_view_results_graph_frame" class="ttk.Frame">
-        <property name="height">200</property>
+        <property name="height">530</property>
         <property name="padding">50</property>
         <property name="relief">flat</property>
         <property name="width">730</property>
@@ -1249,8 +1249,10 @@
             <property name="row">0</property>
         </layout>
         <child>
-            <object id="Label_32" class="ttk.Label">
-                <property name="text" translatable="yes">Label_32</property>
+            <object id="position_results_graph_title&#xA;" class="ttk.Label">
+                <property name="font">{Montserrat SemiBold} 12 {}</property>
+                <property name="padding">30</property>
+                <property name="text" translatable="yes">Position Result Graph</property>
                 <layout>
                     <property name="column">0</property>
                     <property name="propagate">True</property>
@@ -1259,7 +1261,7 @@
             </object>
         </child>
         <child>
-            <object id="Canvas_1" class="tk.Canvas">
+            <object id="position_results_graph_cnvs" class="tk.Canvas">
                 <layout>
                     <property name="column">0</property>
                     <property name="propagate">True</property>
@@ -1268,8 +1270,7 @@
             </object>
         </child>
         <child>
-            <object id="Label_33" class="ttk.Label">
-                <property name="text" translatable="yes">Label_33</property>
+            <object id="position_results_graph_winner_name_lbl" class="ttk.Label">
                 <layout>
                     <property name="column">0</property>
                     <property name="propagate">True</property>
@@ -1278,8 +1279,7 @@
             </object>
         </child>
         <child>
-            <object id="Label_34" class="ttk.Label">
-                <property name="text" translatable="yes">Label_34</property>
+            <object id="position_results_graph_winner_votes_lbl" class="ttk.Label">
                 <layout>
                     <property name="column">0</property>
                     <property name="propagate">True</property>
@@ -1288,8 +1288,7 @@
             </object>
         </child>
         <child>
-            <object id="Label_35" class="ttk.Label">
-                <property name="text" translatable="yes">Label_35</property>
+            <object id="position_results_graph_winner_percentage_lbl" class="ttk.Label">
                 <layout>
                     <property name="column">0</property>
                     <property name="propagate">True</property>
@@ -1298,8 +1297,9 @@
             </object>
         </child>
         <child>
-            <object id="Button_7" class="ttk.Button">
-                <property name="text" translatable="yes">Button_7</property>
+            <object id="return_to_student_menu_btn_1" class="ttk.Button">
+                <property name="text" translatable="yes">Return to Login</property>
+                <property name="width">100</property>
                 <layout>
                     <property name="column">0</property>
                     <property name="propagate">True</property>
@@ -1404,8 +1404,7 @@
             </object>
         </child>
         <child>
-            <object id="Label_26" class="ttk.Label">
-                <property name="text" translatable="yes">Label_26</property>
+            <object id="position_results_winner_name_lbl" class="ttk.Label">
                 <layout>
                     <property name="column">0</property>
                     <property name="propagate">True</property>
@@ -1414,8 +1413,7 @@
             </object>
         </child>
         <child>
-            <object id="Label_27" class="ttk.Label">
-                <property name="text" translatable="yes">Label_27</property>
+            <object id="position_results_winner_votes_lbl" class="ttk.Label">
                 <layout>
                     <property name="column">0</property>
                     <property name="propagate">True</property>
@@ -1424,8 +1422,7 @@
             </object>
         </child>
         <child>
-            <object id="Label_28" class="ttk.Label">
-                <property name="text" translatable="yes">Label_28</property>
+            <object id="position_results_winner_percentage_lbl" class="ttk.Label">
                 <layout>
                     <property name="column">0</property>
                     <property name="propagate">True</property>
@@ -1457,8 +1454,10 @@
             <property name="row">0</property>
         </layout>
         <child>
-            <object id="Label_29" class="ttk.Label">
-                <property name="text" translatable="yes">Label_29</property>
+            <object id="election_results_title_lbl" class="ttk.Label">
+                <property name="font">{Montserrat SemiBold} 12 {}</property>
+                <property name="padding">30</property>
+                <property name="text" translatable="yes">Election Results</property>
                 <layout>
                     <property name="column">0</property>
                     <property name="propagate">True</property>
@@ -1467,8 +1466,7 @@
             </object>
         </child>
         <child>
-            <object id="Label_30" class="ttk.Label">
-                <property name="text" translatable="yes">Label_30</property>
+            <object id="election_results_data_lbl" class="ttk.Label">
                 <layout>
                     <property name="column">0</property>
                     <property name="propagate">True</property>
@@ -1477,18 +1475,20 @@
             </object>
         </child>
         <child>
-            <object id="Label_31" class="ttk.Label">
-                <property name="text" translatable="yes">Label_31</property>
+            <object id="return_to_student_btn_3&#xA;" class="ttk.Button">
+                <property name="text" translatable="yes">Back to Login</property>
+                <property name="width">100</property>
                 <layout>
                     <property name="column">0</property>
                     <property name="propagate">True</property>
-                    <property name="row">2</property>
+                    <property name="row">4</property>
                 </layout>
             </object>
         </child>
         <child>
-            <object id="Button_6" class="ttk.Button">
-                <property name="text" translatable="yes">Button_6</property>
+            <object id="export_to_file_btn" class="ttk.Button">
+                <property name="text" translatable="yes">Export Results to File</property>
+                <property name="width">100</property>
                 <layout>
                     <property name="column">0</property>
                     <property name="propagate">True</property>
