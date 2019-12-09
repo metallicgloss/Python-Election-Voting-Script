@@ -1,5 +1,5 @@
 # Import required modules for program.
-import os, mysql.connector, datetime, connectionString, pygubu, hashlib, binascii, classDesign
+import os, sys, mysql.connector, datetime, connectionString, pygubu, hashlib, binascii, classDesign
 from mysql.connector import Error
 from dateutil.parser import parse
 import tkinter as tk
@@ -31,6 +31,7 @@ try:
     mysql_cursor = database_connection.cursor()
 except Error as e:
     print(e)
+    sys.exit()
 
     
     
@@ -345,17 +346,11 @@ class voting_application(pygubu.TkApplication):
     #                                     2.5 Frontent Menu Functions                                     #
     #                                                                                                     #
     #                      return_to_student - Changes frame to `student_login_frame`                     #
-    #                visualise_results - Changes frame to `student_visualise_results_frame`               #
     #-----------------------------------------------------------------------------------------------------#
     
     # Exit page within student menu, return to login.
     def return_to_student(self):
         self.change_frame('student_login_frame')
-
-        
-    def visualise_results(self):
-        self.change_frame('student_visualise_results_frame')
-        
         
         
     #-----------------------------------------------------------------------------------------------------#
@@ -513,10 +508,41 @@ class voting_application(pygubu.TkApplication):
             messagebox.showinfo('Success', 'Votes submitted.')
             self.return_to_student()
             
+
+    # Change page to the results selection page, fill page with data.
+    def select_results_details(self):
+        self.change_frame('student_results_select_frame')
         
+        # Create election instance, append to list the election times
+        elections = classDesign.Election()
+        current_election = elections.return_formatted_elections()
+        
+        # Create combo box of positions currently available to vote.
+        positions = classDesign.Position()
+        position_list = positions.list_all_positions_formatted()
+        
+        
+        # Set choices in combo boxes to lists created.
+        self.ui_builder.get_object('student_results_confirm_election_cmbobx').configure(values=current_election)
+        self.ui_builder.get_object('student_results_position_cmbobx').configure(values=position_list)
+        
+    
+    # Change page to allow student to view election results.
+    def student_view_election_results(self):
+        self.change_frame('student_view_election_results_frame')
+        election = (self.ui_builder.get_object('student_results_confirm_election_cmbobx').get()).split()[0]
+        
+    
+    # Change page to allow student to view per position results.
+    def student_view_position_results(self):
+        self.change_frame('student_view_position_results_frame')
+        election = (self.ui_builder.get_object('student_results_confirm_election_cmbobx').get()).split()[0]
+        positionz = (self.ui_builder.get_object('student_results_position_cmbobx').get()).split()[0]
+        
+             
 
 #-----------------------------------------------------------------------------------------------------#
-#                                         3. Main Program init                                        #
+#                                         3. Main Proigram init                                        #
 #-----------------------------------------------------------------------------------------------------#   
 
 if __name__ == '__main__':

@@ -1,1791 +1,1809 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <interface>
-    <object id="backend_create_candidate_application_frame" class="ttk.Frame">
-        <property name="height">275</property>
-        <property name="padding">50</property>
-        <property name="width">730</property>
+  <object id="backend_create_candidate_application_frame" class="ttk.Frame">
+    <property name="height">275</property>
+    <property name="padding">50</property>
+    <property name="width">730</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">False</property>
+      <property name="row">0</property>
+    </layout>
+    <child>
+      <object id="candidate_application_title_lbl" class="ttk.Label">
+        <property name="font">{Montserrat SemiBold} 12 {}</property>
+        <property name="text" translatable="yes">Candidate Application</property>
         <layout>
-            <property name="column">0</property>
-            <property name="propagate">False</property>
-            <property name="row">0</property>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
         </layout>
-        <child>
-            <object id="candidate_application_title_lbl" class="ttk.Label">
-                <property name="font">{Montserrat SemiBold} 12 {}</property>
-                <property name="text" translatable="yes">Candidate Application</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">0</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="candidate_application_select_election_lbl" class="ttk.Label">
-                <property name="text" translatable="yes">Select Election</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">1</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="candidate_application_election_cmbobx" class="ttk.Combobox">
-                <property name="values">test</property>
-                <property name="width">100</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">2</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="candidate_application_select_candidate_lbl" class="ttk.Label">
-                <property name="text" translatable="yes">Select Candidate</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">3</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="candidate_application_candidate_cmbobx" class="ttk.Combobox">
-                <property name="width">100</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">4</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="candidate_application_select_position_lbl" class="ttk.Label">
-                <property name="text" translatable="yes">Select Position</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">5</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="candidate_application_create_btn" class="ttk.Button">
-                <property name="command">create_application</property>
-                <property name="text" translatable="yes">Submit</property>
-                <property name="width">50</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="pady">10</property>
-                    <property name="propagate">True</property>
-                    <property name="row">7</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="candidate_application_position_cmbobx" class="ttk.Combobox">
-                <property name="width">100</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">6</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="return_to_backend_btn_3" class="ttk.Button">
-                <property name="command">return_to_backend</property>
-                <property name="text" translatable="yes">Cancel</property>
-                <property name="width">50</property>
-                <layout>
-                    <property name="column">1</property>
-                    <property name="pady">10</property>
-                    <property name="propagate">True</property>
-                    <property name="row">7</property>
-                </layout>
-            </object>
-        </child>
-    </object>
-    <object id="backend_create_candidate_frame" class="ttk.Frame">
-        <property name="height">250</property>
-        <property name="padding">50</property>
-        <property name="relief">flat</property>
-        <property name="width">730</property>
+      </object>
+    </child>
+    <child>
+      <object id="candidate_application_select_election_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Select Election</property>
         <layout>
-            <property name="column">0</property>
-            <property name="propagate">False</property>
-            <property name="row">0</property>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+          <property name="sticky">w</property>
         </layout>
-        <child>
-            <object id="create_candidate_title_lbl" class="ttk.Label">
-                <property name="font">{Montserrat SemiBold} 12 {}</property>
-                <property name="text" translatable="yes">Create Candidate</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">0</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="candidate_name_lbl" class="ttk.Label">
-                <property name="text" translatable="yes">Candidate Name</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">1</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="candidate_name_txtbx" class="ttk.Entry">
-                <property name="width">102</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">2</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="candidate_email_lbl" class="ttk.Label">
-                <property name="text" translatable="yes">Candidate Email</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">3</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="candidate_email_txtbx" class="ttk.Entry">
-                <property name="width">102</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">4</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="create_candidate_btn" class="ttk.Button">
-                <property name="command">create_candidate</property>
-                <property name="cursor">hand2</property>
-                <property name="text" translatable="yes">Submit</property>
-                <property name="width">50</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="pady">10</property>
-                    <property name="propagate">True</property>
-                    <property name="row">5</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="return_to_backend_btn_2" class="ttk.Button">
-                <property name="command">return_to_backend</property>
-                <property name="cursor">hand2</property>
-                <property name="text" translatable="yes">Cancel</property>
-                <property name="width">50</property>
-                <layout>
-                    <property name="column">1</property>
-                    <property name="propagate">True</property>
-                    <property name="row">5</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="create_candidate_error_lbl" class="ttk.Label">
-                <property name="foreground">#ff0000</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">7</property>
-                </layout>
-            </object>
-        </child>
-    </object>
-    <object id="backend_create_election_frame" class="ttk.Frame">
-        <property name="height">250</property>
-        <property name="padding">50</property>
-        <property name="relief">flat</property>
-        <property name="width">730</property>
+      </object>
+    </child>
+    <child>
+      <object id="candidate_application_election_cmbobx" class="ttk.Combobox">
+        <property name="values">test</property>
+        <property name="width">100</property>
         <layout>
-            <property name="column">0</property>
-            <property name="propagate">False</property>
-            <property name="row">0</property>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
         </layout>
-        <child>
-            <object id="create_election_title_lbl" class="ttk.Label">
-                <property name="font">{Montserrat SemiBold} 12 {}</property>
-                <property name="text" translatable="yes">Create Election</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">0</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="election_start_time_lbl" class="ttk.Label">
-                <property name="text" translatable="yes">Start Date/Time (HH:MM dd/mm/yyyy)</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">1</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="election_start_time_txtbx" class="ttk.Entry">
-                <property name="width">102</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">2</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="election_end_time_lbl" class="ttk.Label">
-                <property name="text" translatable="yes">End Date/Time (HH:MM dd/mm/yyyy)</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">3</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="election_end_time_txtbx" class="ttk.Entry">
-                <property name="width">102</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">4</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="create_election_btn" class="ttk.Button">
-                <property name="command">create_election</property>
-                <property name="cursor">hand2</property>
-                <property name="text" translatable="yes">Submit</property>
-                <property name="width">50</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="pady">10</property>
-                    <property name="propagate">True</property>
-                    <property name="row">5</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="return_to_backend_btn" class="ttk.Button">
-                <property name="command">return_to_backend</property>
-                <property name="cursor">hand2</property>
-                <property name="text" translatable="yes">Cancel</property>
-                <property name="width">50</property>
-                <layout>
-                    <property name="column">1</property>
-                    <property name="pady">10</property>
-                    <property name="propagate">True</property>
-                    <property name="row">5</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="create_election_error_lbl" class="ttk.Label">
-                <property name="font">{Montserrat SemiBold} 12 {}</property>
-                <property name="foreground">#ff0000</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">7</property>
-                </layout>
-            </object>
-        </child>
-    </object>
-    <object id="backend_create_student_frame" class="ttk.Frame">
-        <property name="height">250</property>
-        <property name="padding">50</property>
-        <property name="relief">flat</property>
-        <property name="width">730</property>
+      </object>
+    </child>
+    <child>
+      <object id="candidate_application_select_candidate_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Select Candidate</property>
         <layout>
-            <property name="column">0</property>
-            <property name="propagate">False</property>
-            <property name="row">0</property>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+          <property name="sticky">w</property>
         </layout>
-        <child>
-            <object id="create_student_title_lbl" class="ttk.Label">
-                <property name="font">{Montserrat SemiBold} 12 {}</property>
-                <property name="text" translatable="yes">Create Student</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">0</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_username_lbl" class="ttk.Label">
-                <property name="text" translatable="yes">Username</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">1</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_userame_txtbx" class="ttk.Entry">
-                <property name="takefocus">true</property>
-                <property name="width">102</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">2</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_password_lbl" class="ttk.Label">
-                <property name="text" translatable="yes">Password</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">3</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_password_txtbx" class="ttk.Entry">
-                <property name="show">•</property>
-                <property name="width">102</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">4</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="create_student_btn" class="ttk.Button">
-                <property name="command">create_student</property>
-                <property name="cursor">hand2</property>
-                <property name="text" translatable="yes">Submit</property>
-                <property name="width">50</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="pady">10</property>
-                    <property name="propagate">True</property>
-                    <property name="row">5</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="return_to_backend_btn_1" class="ttk.Button">
-                <property name="command">return_to_backend</property>
-                <property name="cursor">hand2</property>
-                <property name="text" translatable="yes">Cancel</property>
-                <property name="width">50</property>
-                <layout>
-                    <property name="column">1</property>
-                    <property name="propagate">True</property>
-                    <property name="row">5</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="create_student_error_lbl" class="ttk.Label">
-                <property name="font">{Montserrat SemiBold} 12 {}</property>
-                <property name="foreground">#ff0000</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">7</property>
-                </layout>
-            </object>
-        </child>
-    </object>
-    <object id="backend_menu_frame" class="ttk.Frame">
-        <property name="height">375</property>
-        <property name="padding">50</property>
-        <property name="relief">flat</property>
-        <property name="width">730</property>
+      </object>
+    </child>
+    <child>
+      <object id="candidate_application_candidate_cmbobx" class="ttk.Combobox">
+        <property name="width">100</property>
         <layout>
-            <property name="column">0</property>
-            <property name="propagate">False</property>
-            <property name="row">0</property>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
         </layout>
-        <child>
-            <object id="backend_menu_title_lbl" class="ttk.Label">
-                <property name="font">{Montserrat SemiBold} 20 {}</property>
-                <property name="padding">30</property>
-                <property name="text" translatable="yes">Backend Menu</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">0</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="backend_menu_create_student_btn" class="ttk.Button">
-                <property name="command">menu_create_student_voter</property>
-                <property name="cursor">hand2</property>
-                <property name="text" translatable="yes">Create Student Voter</property>
-                <property name="width">100</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">1</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="backend_menu_create_candidate_btn" class="ttk.Button">
-                <property name="command">menu_create_candidate</property>
-                <property name="cursor">hand2</property>
-                <property name="text" translatable="yes">Create Candidate</property>
-                <property name="width">100</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">2</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="backend_menu_create_election_btn" class="ttk.Button">
-                <property name="command">menu_create_election</property>
-                <property name="cursor">hand2</property>
-                <property name="text" translatable="yes">Create Election</property>
-                <property name="width">100</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">3</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="backend_menu_return_btn" class="ttk.Button">
-                <property name="command">return_to_startup</property>
-                <property name="cursor">hand2</property>
-                <property name="text" translatable="yes">Main Menu</property>
-                <property name="width">100</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">7</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="backend_menu_view_results_btn" class="ttk.Button">
-                <property name="command">menu_view_results</property>
-                <property name="cursor">hand2</property>
-                <property name="text" translatable="yes">View Results</property>
-                <property name="width">100</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">5</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="backend_menu_create_application_btn" class="ttk.Button">
-                <property name="command">menu_create_application</property>
-                <property name="text" translatable="yes">Create Candidate Application</property>
-                <property name="width">100</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">4</property>
-                </layout>
-            </object>
-        </child>
-    </object>
-    <object id="backend_select_results_position_frame" class="ttk.Frame">
-        <property name="height">230</property>
-        <property name="padding">50</property>
-        <property name="width">730</property>
+      </object>
+    </child>
+    <child>
+      <object id="candidate_application_select_position_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Select Position</property>
         <layout>
-            <property name="column">0</property>
-            <property name="propagate">False</property>
-            <property name="row">0</property>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+          <property name="sticky">w</property>
         </layout>
-        <child>
-            <object id="backend_select_position_title_lbl" class="ttk.Label">
-                <property name="font">{Montserrat SemiBold} 12 {}</property>
-                <property name="text" translatable="yes">Select Position</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">0</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="backend_select_election_lbl" class="ttk.Label">
-                <property name="text" translatable="yes">Select Election</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">1</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="backend_confirm_election_cmbobx" class="ttk.Combobox">
-                <property name="width">100</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">2</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="backend_position_lbl" class="ttk.Label">
-                <property name="text" translatable="yes">Select Position</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">3</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="backend_position_cmbobx" class="ttk.Combobox">
-                <property name="width">100</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">4</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="backend_confirm_position_btn" class="ttk.Button">
-                <property name="command">results_view_select_position</property>
-                <property name="text" translatable="yes">Submit</property>
-                <property name="width">50</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="pady">10</property>
-                    <property name="propagate">True</property>
-                    <property name="row">5</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="return_to_backend_menu_btn" class="ttk.Button">
-                <property name="command">return_to_backend</property>
-                <property name="text" translatable="yes">Cancel</property>
-                <property name="width">50</property>
-                <layout>
-                    <property name="column">1</property>
-                    <property name="pady">10</property>
-                    <property name="propagate">True</property>
-                    <property name="row">5</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="backend_position_error_lbl" class="ttk.Label">
-                <property name="foreground">#ff0000</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">7</property>
-                </layout>
-            </object>
-        </child>
-    </object>
-    <object id="backend_view_results_frame" class="ttk.Frame">
-        <property name="height">330</property>
-        <property name="padding">50</property>
-        <property name="relief">flat</property>
-        <property name="width">750</property>
+      </object>
+    </child>
+    <child>
+      <object id="candidate_application_create_btn" class="ttk.Button">
+        <property name="command">create_application</property>
+        <property name="text" translatable="yes">Submit</property>
+        <property name="width">50</property>
         <layout>
-            <property name="column">0</property>
-            <property name="propagate">False</property>
-            <property name="row">0</property>
+          <property name="column">0</property>
+          <property name="pady">10</property>
+          <property name="propagate">True</property>
+          <property name="row">7</property>
         </layout>
-        <child>
-            <object id="view_results_title_lbl" class="ttk.Label">
-                <property name="font">{Montserrat SemiBold} 12 {}</property>
-                <property name="text" translatable="yes">View Results</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">5</property>
-                    <property name="propagate">True</property>
-                    <property name="row">0</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="return_to_backend_3" class="ttk.Button">
-                <property name="command">return_to_backend</property>
-                <property name="text" translatable="yes">Back</property>
-                <property name="width">100</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">5</property>
-                    <property name="pady">20</property>
-                    <property name="propagate">True</property>
-                    <property name="row">11</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_candidate_title_lbl" class="ttk.Label">
-                <property name="text" translatable="yes">Candidate</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">2</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_first_title_lbl" class="ttk.Label">
-                <property name="text" translatable="yes">1st Preference</property>
-                <layout>
-                    <property name="column">1</property>
-                    <property name="propagate">True</property>
-                    <property name="row">2</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_second_title_lbl" class="ttk.Label">
-                <property name="text" translatable="yes">2nd Preference</property>
-                <layout>
-                    <property name="column">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">2</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_third_title_lbl" class="ttk.Label">
-                <property name="text" translatable="yes">3rd Preference</property>
-                <layout>
-                    <property name="column">3</property>
-                    <property name="propagate">True</property>
-                    <property name="row">2</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_fourth_lbl" class="ttk.Label">
-                <property name="text" translatable="yes">4th Preference</property>
-                <layout>
-                    <property name="column">4</property>
-                    <property name="propagate">True</property>
-                    <property name="row">2</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_candidate_one_name_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">3</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_candidate_one_first_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">1</property>
-                    <property name="propagate">True</property>
-                    <property name="row">3</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_candidate_one_second_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">3</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_candidate_one_third_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">3</property>
-                    <property name="propagate">True</property>
-                    <property name="row">3</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_candidate_one_fourth_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">4</property>
-                    <property name="propagate">True</property>
-                    <property name="row">3</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_candidate_two_name_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">4</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_candidate_two_first_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">1</property>
-                    <property name="propagate">True</property>
-                    <property name="row">4</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_candidate_two_second_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">4</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_candidate_two_third_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">3</property>
-                    <property name="propagate">True</property>
-                    <property name="row">4</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_candidate_two_fourth_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">4</property>
-                    <property name="propagate">True</property>
-                    <property name="row">4</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_candidate_three_name_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">5</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_candidate_three_first_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">1</property>
-                    <property name="propagate">True</property>
-                    <property name="row">5</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_candidate_three_second_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">5</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_candidate_three_third_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">3</property>
-                    <property name="propagate">True</property>
-                    <property name="row">5</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_candidate_three_fourth_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">4</property>
-                    <property name="propagate">True</property>
-                    <property name="row">5</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_candidate_four_name_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">6</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_candidate_four_first_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">1</property>
-                    <property name="propagate">True</property>
-                    <property name="row">6</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_candidate_four_second_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">6</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_candidate_four_third_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">3</property>
-                    <property name="propagate">True</property>
-                    <property name="row">6</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_candidate_four_fourth_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">4</property>
-                    <property name="propagate">True</property>
-                    <property name="row">6</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_winner_name_lbl" class="ttk.Label">
-                <property name="anchor">center</property>
-                <property name="relief">flat</property>
-                <property name="takefocus">false</property>
-                <property name="text" translatable="yes">Winner:</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">8</property>
-                    <property name="sticky">nw</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_winner_votes_lbl" class="ttk.Label">
-                <property name="compound">top</property>
-                <property name="justify">left</property>
-                <property name="takefocus">false</property>
-                <property name="text" translatable="yes">Winner Total Votes:</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">9</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="view_results_total_votes_lbl" class="ttk.Label">
-                <property name="text" translatable="yes">Position Total Votes:</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">10</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-    </object>
-    <object id="startup_menu_frame" class="ttk.Frame">
-        <property name="height">280</property>
-        <property name="padding">50</property>
-        <property name="relief">flat</property>
+      </object>
+    </child>
+    <child>
+      <object id="candidate_application_position_cmbobx" class="ttk.Combobox">
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">6</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="return_to_backend_btn_3" class="ttk.Button">
+        <property name="command">return_to_backend</property>
+        <property name="text" translatable="yes">Cancel</property>
+        <property name="width">50</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="pady">10</property>
+          <property name="propagate">True</property>
+          <property name="row">7</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+  <object id="backend_create_candidate_frame" class="ttk.Frame">
+    <property name="height">250</property>
+    <property name="padding">50</property>
+    <property name="relief">flat</property>
+    <property name="width">730</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">False</property>
+      <property name="row">0</property>
+    </layout>
+    <child>
+      <object id="create_candidate_title_lbl" class="ttk.Label">
+        <property name="font">{Montserrat SemiBold} 12 {}</property>
+        <property name="text" translatable="yes">Create Candidate</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="candidate_name_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Candidate Name</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="candidate_name_txtbx" class="ttk.Entry">
+        <property name="width">102</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="candidate_email_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Candidate Email</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="candidate_email_txtbx" class="ttk.Entry">
+        <property name="width">102</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="create_candidate_btn" class="ttk.Button">
+        <property name="command">create_candidate</property>
+        <property name="cursor">hand2</property>
+        <property name="text" translatable="yes">Submit</property>
+        <property name="width">50</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="pady">10</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="return_to_backend_btn_2" class="ttk.Button">
+        <property name="command">return_to_backend</property>
+        <property name="cursor">hand2</property>
+        <property name="text" translatable="yes">Cancel</property>
+        <property name="width">50</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="create_candidate_error_lbl" class="ttk.Label">
+        <property name="foreground">#ff0000</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">7</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+  <object id="backend_create_election_frame" class="ttk.Frame">
+    <property name="height">250</property>
+    <property name="padding">50</property>
+    <property name="relief">flat</property>
+    <property name="width">730</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">False</property>
+      <property name="row">0</property>
+    </layout>
+    <child>
+      <object id="create_election_title_lbl" class="ttk.Label">
+        <property name="font">{Montserrat SemiBold} 12 {}</property>
+        <property name="text" translatable="yes">Create Election</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="election_start_time_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Start Date/Time (HH:MM dd/mm/yyyy)</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="election_start_time_txtbx" class="ttk.Entry">
+        <property name="width">102</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="election_end_time_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">End Date/Time (HH:MM dd/mm/yyyy)</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="election_end_time_txtbx" class="ttk.Entry">
+        <property name="width">102</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="create_election_btn" class="ttk.Button">
+        <property name="command">create_election</property>
+        <property name="cursor">hand2</property>
+        <property name="text" translatable="yes">Submit</property>
+        <property name="width">50</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="pady">10</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="return_to_backend_btn" class="ttk.Button">
+        <property name="command">return_to_backend</property>
+        <property name="cursor">hand2</property>
+        <property name="text" translatable="yes">Cancel</property>
+        <property name="width">50</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="pady">10</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="create_election_error_lbl" class="ttk.Label">
+        <property name="font">{Montserrat SemiBold} 12 {}</property>
+        <property name="foreground">#ff0000</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">7</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+  <object id="backend_create_student_frame" class="ttk.Frame">
+    <property name="height">250</property>
+    <property name="padding">50</property>
+    <property name="relief">flat</property>
+    <property name="width">730</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">False</property>
+      <property name="row">0</property>
+    </layout>
+    <child>
+      <object id="create_student_title_lbl" class="ttk.Label">
+        <property name="font">{Montserrat SemiBold} 12 {}</property>
+        <property name="text" translatable="yes">Create Student</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_username_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Username</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_userame_txtbx" class="ttk.Entry">
         <property name="takefocus">true</property>
-        <property name="width">730</property>
+        <property name="width">102</property>
         <layout>
-            <property name="column">0</property>
-            <property name="propagate">False</property>
-            <property name="row">0</property>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
         </layout>
-        <child>
-            <object id="startup_menu_title_lbl" class="ttk.Label">
-                <property name="font">{Montserrat SemiBold} 16 {}</property>
-                <property name="padding">30</property>
-                <property name="text" translatable="yes">Welcome to the GSU Voting Application</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">0</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="startup_admin_mode_btn" class="ttk.Button">
-                <property name="command">startup_select_backend</property>
-                <property name="cursor">hand2</property>
-                <property name="text" translatable="yes">Administration Mode</property>
-                <property name="width">100</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">1</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="startup_standard_mode_btn" class="ttk.Button">
-                <property name="command">startup_select_student</property>
-                <property name="cursor">hand2</property>
-                <property name="text" translatable="yes">Standard Mode</property>
-                <property name="width">100</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">2</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="startup_quit_btn" class="ttk.Button">
-                <property name="command">exit_application</property>
-                <property name="cursor">hand2</property>
-                <property name="text" translatable="yes">Quit Application</property>
-                <property name="width">100</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">3</property>
-                </layout>
-            </object>
-        </child>
-    </object>
-    <object id="student_login_frame" class="ttk.Frame">
-        <property name="height">330</property>
-        <property name="padding">50</property>
+      </object>
+    </child>
+    <child>
+      <object id="student_password_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Password</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_password_txtbx" class="ttk.Entry">
+        <property name="show">•</property>
+        <property name="width">102</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="create_student_btn" class="ttk.Button">
+        <property name="command">create_student</property>
+        <property name="cursor">hand2</property>
+        <property name="text" translatable="yes">Submit</property>
+        <property name="width">50</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="pady">10</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="return_to_backend_btn_1" class="ttk.Button">
+        <property name="command">return_to_backend</property>
+        <property name="cursor">hand2</property>
+        <property name="text" translatable="yes">Cancel</property>
+        <property name="width">50</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="create_student_error_lbl" class="ttk.Label">
+        <property name="font">{Montserrat SemiBold} 12 {}</property>
+        <property name="foreground">#ff0000</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">7</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+  <object id="backend_menu_frame" class="ttk.Frame">
+    <property name="height">375</property>
+    <property name="padding">50</property>
+    <property name="relief">flat</property>
+    <property name="width">730</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">False</property>
+      <property name="row">0</property>
+    </layout>
+    <child>
+      <object id="backend_menu_title_lbl" class="ttk.Label">
+        <property name="font">{Montserrat SemiBold} 20 {}</property>
+        <property name="padding">30</property>
+        <property name="text" translatable="yes">Backend Menu</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="backend_menu_create_student_btn" class="ttk.Button">
+        <property name="command">menu_create_student_voter</property>
+        <property name="cursor">hand2</property>
+        <property name="text" translatable="yes">Create Student Voter</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="backend_menu_create_candidate_btn" class="ttk.Button">
+        <property name="command">menu_create_candidate</property>
+        <property name="cursor">hand2</property>
+        <property name="text" translatable="yes">Create Candidate</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="backend_menu_create_election_btn" class="ttk.Button">
+        <property name="command">menu_create_election</property>
+        <property name="cursor">hand2</property>
+        <property name="text" translatable="yes">Create Election</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="backend_menu_return_btn" class="ttk.Button">
+        <property name="command">return_to_startup</property>
+        <property name="cursor">hand2</property>
+        <property name="text" translatable="yes">Main Menu</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">7</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="backend_menu_view_results_btn" class="ttk.Button">
+        <property name="command">menu_view_results</property>
+        <property name="cursor">hand2</property>
+        <property name="text" translatable="yes">View Results</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="backend_menu_create_application_btn" class="ttk.Button">
+        <property name="command">menu_create_application</property>
+        <property name="text" translatable="yes">Create Candidate Application</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+  <object id="backend_select_results_position_frame" class="ttk.Frame">
+    <property name="height">230</property>
+    <property name="padding">50</property>
+    <property name="width">730</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">False</property>
+      <property name="row">0</property>
+    </layout>
+    <child>
+      <object id="backend_select_position_title_lbl" class="ttk.Label">
+        <property name="font">{Montserrat SemiBold} 12 {}</property>
+        <property name="text" translatable="yes">Select Position</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="backend_select_election_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Select Election</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="backend_confirm_election_cmbobx" class="ttk.Combobox">
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="backend_position_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Select Position</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="backend_position_cmbobx" class="ttk.Combobox">
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="backend_confirm_position_btn" class="ttk.Button">
+        <property name="command">results_view_select_position</property>
+        <property name="text" translatable="yes">Submit</property>
+        <property name="width">50</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="pady">10</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="return_to_backend_menu_btn" class="ttk.Button">
+        <property name="command">return_to_backend</property>
+        <property name="text" translatable="yes">Cancel</property>
+        <property name="width">50</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="pady">10</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="backend_position_error_lbl" class="ttk.Label">
+        <property name="foreground">#ff0000</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">7</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+  <object id="backend_view_results_frame" class="ttk.Frame">
+    <property name="height">330</property>
+    <property name="padding">50</property>
+    <property name="relief">flat</property>
+    <property name="width">750</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">False</property>
+      <property name="row">0</property>
+    </layout>
+    <child>
+      <object id="view_results_title_lbl" class="ttk.Label">
+        <property name="font">{Montserrat SemiBold} 12 {}</property>
+        <property name="text" translatable="yes">View Results</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">5</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="return_to_backend_3" class="ttk.Button">
+        <property name="command">return_to_backend</property>
+        <property name="text" translatable="yes">Back</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">5</property>
+          <property name="pady">20</property>
+          <property name="propagate">True</property>
+          <property name="row">11</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_title_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Candidate</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_first_title_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">1st Preference</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_second_title_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">2nd Preference</property>
+        <layout>
+          <property name="column">2</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_third_title_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">3rd Preference</property>
+        <layout>
+          <property name="column">3</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_fourth_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">4th Preference</property>
+        <layout>
+          <property name="column">4</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_one_name_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_one_first_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_one_second_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">2</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_one_third_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">3</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_one_fourth_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">4</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_two_name_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_two_first_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_two_second_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">2</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_two_third_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">3</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_two_fourth_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">4</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_three_name_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_three_first_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_three_second_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">2</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_three_third_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">3</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_three_fourth_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">4</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_four_name_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">6</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_four_first_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">6</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_four_second_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">2</property>
+          <property name="propagate">True</property>
+          <property name="row">6</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_four_third_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">3</property>
+          <property name="propagate">True</property>
+          <property name="row">6</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_candidate_four_fourth_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">4</property>
+          <property name="propagate">True</property>
+          <property name="row">6</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_winner_name_lbl" class="ttk.Label">
+        <property name="anchor">center</property>
         <property name="relief">flat</property>
-        <property name="width">730</property>
+        <property name="takefocus">false</property>
+        <property name="text" translatable="yes">Winner:</property>
         <layout>
-            <property name="column">0</property>
-            <property name="propagate">False</property>
-            <property name="row">0</property>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">8</property>
+          <property name="sticky">nw</property>
         </layout>
-        <child>
-            <object id="student_login_title_lbl" class="ttk.Label">
-                <property name="font">{Montserrat SemiBold} 20 {}</property>
-                <property name="padding">30</property>
-                <property name="text" translatable="yes">Student Login</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">0</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_login_username_txtbx" class="ttk.Entry">
-                <property name="takefocus">true</property>
-                <property name="width">100</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">2</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_login_password_txtbx" class="ttk.Entry">
-                <property name="show">•</property>
-                <property name="width">100</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">4</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_login_btn" class="ttk.Button">
-                <property name="command">student_login</property>
-                <property name="cursor">hand2</property>
-                <property name="text" translatable="yes">Login</property>
-                <property name="width">100</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="pady">20</property>
-                    <property name="propagate">True</property>
-                    <property name="row">5</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_login_username_lbl" class="ttk.Label">
-                <property name="text" translatable="yes">Username</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">1</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_login_Password_lbl" class="ttk.Label">
-                <property name="text" translatable="yes">Password</property>
-                <property name="width">100</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">3</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_login_error_lbl" class="ttk.Label">
-                <property name="foreground">#ff0000</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">6</property>
-                </layout>
-            </object>
-        </child>
-    </object>
-    <object id="student_results_select_frame" class="ttk.Frame">
-        <property name="height">250</property>
-        <property name="padding">50</property>
-        <property name="relief">flat</property>
-        <property name="width">730</property>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_winner_votes_lbl" class="ttk.Label">
+        <property name="compound">top</property>
+        <property name="justify">left</property>
+        <property name="takefocus">false</property>
+        <property name="text" translatable="yes">Winner Total Votes:</property>
         <layout>
-            <property name="column">0</property>
-            <property name="propagate">False</property>
-            <property name="row">0</property>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">9</property>
+          <property name="sticky">w</property>
         </layout>
-        <child>
-            <object id="student_results_select_title_lbl" class="ttk.Label">
-                <property name="font">{Montserrat SemiBold} 12 {}</property>
-                <property name="text" translatable="yes">Results View</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">0</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_results_select_election_lbl" class="ttk.Label">
-                <property name="text" translatable="yes">Select Election</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">1</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_results_confirm_election_cmbobx" class="ttk.Combobox">
-                <property name="width">50</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">2</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_results_position_lbl" class="ttk.Label">
-                <property name="text" translatable="yes">Select Position</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">3</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_results_position_cmbobx" class="ttk.Combobox">
-                <property name="width">50</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">4</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="return_to_student_menu_btn" class="ttk.Button">
-                <property name="command">return_to_student</property>
-                <property name="text" translatable="yes">Cancel</property>
-                <property name="width">104</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="pady">10</property>
-                    <property name="propagate">True</property>
-                    <property name="row">5</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_view_election_results_btn" class="ttk.Button">
-                <property name="text" translatable="yes">View Election Results</property>
-                <property name="width">50</property>
-                <layout>
-                    <property name="column">1</property>
-                    <property name="propagate">True</property>
-                    <property name="row">2</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_view_position_results_btn" class="ttk.Button">
-                <property name="text" translatable="yes">View Position Results</property>
-                <property name="width">50</property>
-                <layout>
-                    <property name="column">1</property>
-                    <property name="propagate">True</property>
-                    <property name="row">4</property>
-                </layout>
-            </object>
-        </child>
-    </object>
-    <object id="student_view_results_graph_frame" class="ttk.Frame">
-        <property name="height">530</property>
-        <property name="padding">50</property>
-        <property name="relief">flat</property>
-        <property name="width">730</property>
+      </object>
+    </child>
+    <child>
+      <object id="view_results_total_votes_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Position Total Votes:</property>
         <layout>
-            <property name="column">0</property>
-            <property name="propagate">False</property>
-            <property name="row">0</property>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">10</property>
+          <property name="sticky">w</property>
         </layout>
-        <child>
-            <object id="position_results_graph_title&#xA;" class="ttk.Label">
-                <property name="font">{Montserrat SemiBold} 12 {}</property>
-                <property name="padding">30</property>
-                <property name="text" translatable="yes">Position Result Graph</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">0</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="position_results_graph_cnvs" class="tk.Canvas">
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">1</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="position_results_graph_winner_name_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">2</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="position_results_graph_winner_votes_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">3</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="position_results_graph_winner_percentage_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">4</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="return_to_student_menu_btn_1" class="ttk.Button">
-                <property name="text" translatable="yes">Return to Login</property>
-                <property name="width">100</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">5</property>
-                </layout>
-            </object>
-        </child>
-    </object>
-    <object id="student_view_position_results_frame" class="ttk.Frame">
-        <property name="height">340</property>
-        <property name="padding">50</property>
-        <property name="relief">flat</property>
-        <property name="width">730</property>
+      </object>
+    </child>
+  </object>
+  <object id="startup_menu_frame" class="ttk.Frame">
+    <property name="height">280</property>
+    <property name="padding">50</property>
+    <property name="relief">flat</property>
+    <property name="takefocus">true</property>
+    <property name="width">730</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">False</property>
+      <property name="row">0</property>
+    </layout>
+    <child>
+      <object id="startup_menu_title_lbl" class="ttk.Label">
+        <property name="font">{Montserrat SemiBold} 16 {}</property>
+        <property name="padding">30</property>
+        <property name="text" translatable="yes">Welcome to the GSU Voting Application</property>
         <layout>
-            <property name="column">0</property>
-            <property name="propagate">False</property>
-            <property name="row">0</property>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
         </layout>
-        <child>
-            <object id="position_results_title_lbl" class="ttk.Label">
-                <property name="font">{Montserrat Bold} 12 {}</property>
-                <property name="padding">30</property>
-                <property name="text" translatable="yes">Position Results</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">0</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="position_results_first_place_name_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">1</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="position_results_first_place_total_votes_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">1</property>
-                    <property name="propagate">True</property>
-                    <property name="row">1</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="position_results_second_place_name_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">2</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="position_results_second_place_total_votes_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">1</property>
-                    <property name="propagate">True</property>
-                    <property name="row">2</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="position_results_third_place_name_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">3</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="position_results_third_place_total_votes_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">1</property>
-                    <property name="propagate">True</property>
-                    <property name="row">3</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="position_results_fourth_place_name_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">4</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="position_results_fourth_place_total_votes_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">1</property>
-                    <property name="propagate">True</property>
-                    <property name="row">4</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="position_results_winner_name_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">5</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="position_results_winner_votes_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">6</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="position_results_winner_percentage_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">7</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="return_to_student_btn_2" class="ttk.Button">
-                <property name="text" translatable="yes">Back to Login</property>
-                <property name="width">100</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="pady">10</property>
-                    <property name="propagate">True</property>
-                    <property name="row">8</property>
-                </layout>
-            </object>
-        </child>
-    </object>
-    <object id="student_view_election_results_frame" class="ttk.Frame">
-        <property name="height">800</property>
-        <property name="padding">50</property>
-        <property name="relief">flat</property>
-        <property name="width">730</property>
+      </object>
+    </child>
+    <child>
+      <object id="startup_admin_mode_btn" class="ttk.Button">
+        <property name="command">startup_select_backend</property>
+        <property name="cursor">hand2</property>
+        <property name="text" translatable="yes">Administration Mode</property>
+        <property name="width">100</property>
         <layout>
-            <property name="column">0</property>
-            <property name="propagate">False</property>
-            <property name="row">0</property>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
         </layout>
-        <child>
-            <object id="election_results_title_lbl" class="ttk.Label">
-                <property name="font">{Montserrat SemiBold} 12 {}</property>
-                <property name="padding">30</property>
-                <property name="text" translatable="yes">Election Results</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">0</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="election_results_data_lbl" class="ttk.Label">
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">1</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="return_to_student_btn_3&#xA;" class="ttk.Button">
-                <property name="text" translatable="yes">Back to Login</property>
-                <property name="width">100</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">4</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="export_to_file_btn" class="ttk.Button">
-                <property name="text" translatable="yes">Export Results to File</property>
-                <property name="width">100</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">3</property>
-                </layout>
-            </object>
-        </child>
-    </object>
-    <object id="student_vote_frame" class="ttk.Frame">
-        <property name="height">290</property>
-        <property name="padding">40</property>
-        <property name="width">730</property>
+      </object>
+    </child>
+    <child>
+      <object id="startup_standard_mode_btn" class="ttk.Button">
+        <property name="command">startup_select_student</property>
+        <property name="cursor">hand2</property>
+        <property name="text" translatable="yes">Standard Mode</property>
+        <property name="width">100</property>
         <layout>
-            <property name="column">0</property>
-            <property name="propagate">False</property>
-            <property name="row">0</property>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
         </layout>
-        <child>
-            <object id="student_vote_title_lbl" class="ttk.Label">
-                <property name="font">{Montserrat SemiBold} 12 {}</property>
-                <property name="padding">30</property>
-                <property name="text" translatable="yes">Voting</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">3</property>
-                    <property name="propagate">True</property>
-                    <property name="row">0</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_vote_first_choice_lbl" class="ttk.Label">
-                <property name="text" translatable="yes">1st Choice:</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">1</property>
-                    <property name="sticky">e</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_vote_first_choice_cmbobx" class="ttk.Combobox">
-                <property name="width">50</property>
-                <layout>
-                    <property name="column">1</property>
-                    <property name="propagate">True</property>
-                    <property name="row">1</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_vote_first_choice_btn" class="ttk.Button">
-                <property name="command">first_choice_confirm</property>
-                <property name="text" translatable="yes">Confirm</property>
-                <property name="width">40</property>
-                <layout>
-                    <property name="column">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">1</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_vote_second_choice_lbl" class="ttk.Label">
-                <property name="text" translatable="yes">2nd Choice:</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">2</property>
-                    <property name="sticky">e</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_vote_second_choice_cmbobx" class="ttk.Combobox">
-                <property name="state">disabled</property>
-                <property name="width">50</property>
-                <layout>
-                    <property name="column">1</property>
-                    <property name="propagate">True</property>
-                    <property name="row">2</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_vote_second_choice_btn" class="ttk.Button">
-                <property name="command">second_choice_confirm</property>
-                <property name="state">disabled</property>
-                <property name="text" translatable="yes">Confirm</property>
-                <property name="width">40</property>
-                <layout>
-                    <property name="column">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">2</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_vote_third_choice_lbl" class="ttk.Label">
-                <property name="text" translatable="yes">3rd Choice:</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">3</property>
-                    <property name="sticky">e</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_vote_third_choice_cmbobx" class="ttk.Combobox">
-                <property name="state">disabled</property>
-                <property name="width">50</property>
-                <layout>
-                    <property name="column">1</property>
-                    <property name="propagate">True</property>
-                    <property name="row">3</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_vote_third_choice_btn" class="ttk.Button">
-                <property name="command">third_choice_confirm</property>
-                <property name="state">disabled</property>
-                <property name="text" translatable="yes">Confirm</property>
-                <property name="width">40</property>
-                <layout>
-                    <property name="column">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">3</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_vote_forth_choice_lbl" class="ttk.Label">
-                <property name="text" translatable="yes">4th Choice:</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="propagate">True</property>
-                    <property name="row">4</property>
-                    <property name="sticky">e</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_vote_fourth_choice_cmbobx" class="ttk.Combobox">
-                <property name="state">disabled</property>
-                <property name="width">50</property>
-                <layout>
-                    <property name="column">1</property>
-                    <property name="propagate">True</property>
-                    <property name="row">4</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_vote_fourth_choice_btn" class="ttk.Button">
-                <property name="command">fourth_choice_confirm</property>
-                <property name="state">disabled</property>
-                <property name="text" translatable="yes">Confirm</property>
-                <property name="width">40</property>
-                <layout>
-                    <property name="column">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">4</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="return_to_student_btn_1" class="ttk.Button">
-                <property name="command">return_to_student</property>
-                <property name="text" translatable="yes">Cancel</property>
-                <property name="width">102</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">3</property>
-                    <property name="pady">10</property>
-                    <property name="propagate">True</property>
-                    <property name="row">16</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_vote_error_lbl" class="ttk.Label">
-                <property name="foreground">#ff0000</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">17</property>
-                </layout>
-            </object>
-        </child>
-    </object>
-    <object id="student_vote_position_select_frame" class="ttk.Frame">
-        <property name="height">220</property>
-        <property name="padding">50</property>
-        <property name="width">730</property>
+      </object>
+    </child>
+    <child>
+      <object id="startup_quit_btn" class="ttk.Button">
+        <property name="command">exit_application</property>
+        <property name="cursor">hand2</property>
+        <property name="text" translatable="yes">Quit Application</property>
+        <property name="width">100</property>
         <layout>
-            <property name="column">0</property>
-            <property name="propagate">False</property>
-            <property name="row">0</property>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
         </layout>
-        <child>
-            <object id="student_vote_select_position_title_lbl_1" class="ttk.Label">
-                <property name="font">{Montserrat SemiBold} 12 {}</property>
-                <property name="text" translatable="yes">Select Position</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">0</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_vote_select_election_lbl_2" class="ttk.Label">
-                <property name="text" translatable="yes">Select Election</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">1</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_vote_confirm_election_cmbobx_1" class="ttk.Combobox">
-                <property name="width">100</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">2</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_vote_position_lbl_3" class="ttk.Label">
-                <property name="text" translatable="yes">Select Position</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">3</property>
-                    <property name="sticky">w</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_vote_position_cmbobx_2" class="ttk.Combobox">
-                <property name="width">100</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">4</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_vote_confirm_position_btn_1" class="ttk.Button">
-                <property name="command">vote_select_position</property>
-                <property name="text" translatable="yes">Submit</property>
-                <property name="width">50</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="pady">10</property>
-                    <property name="propagate">True</property>
-                    <property name="row">5</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="return_to_student_menu_btn_2" class="ttk.Button">
-                <property name="command">return_to_student</property>
-                <property name="text" translatable="yes">Cancel</property>
-                <property name="width">50</property>
-                <layout>
-                    <property name="column">1</property>
-                    <property name="pady">10</property>
-                    <property name="propagate">True</property>
-                    <property name="row">5</property>
-                </layout>
-            </object>
-        </child>
-        <child>
-            <object id="student_vote_position_error_lbl_4" class="ttk.Label">
-                <property name="foreground">#ff0000</property>
-                <layout>
-                    <property name="column">0</property>
-                    <property name="columnspan">2</property>
-                    <property name="propagate">True</property>
-                    <property name="row">7</property>
-                </layout>
-            </object>
-        </child>
-    </object>
+      </object>
+    </child>
+  </object>
+  <object id="student_login_frame" class="ttk.Frame">
+    <property name="height">330</property>
+    <property name="padding">50</property>
+    <property name="relief">flat</property>
+    <property name="width">730</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">False</property>
+      <property name="row">0</property>
+    </layout>
+    <child>
+      <object id="student_login_title_lbl" class="ttk.Label">
+        <property name="font">{Montserrat SemiBold} 20 {}</property>
+        <property name="padding">30</property>
+        <property name="text" translatable="yes">Student Login</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_login_username_txtbx" class="ttk.Entry">
+        <property name="takefocus">true</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_login_password_txtbx" class="ttk.Entry">
+        <property name="show">•</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_login_btn" class="ttk.Button">
+        <property name="command">student_login</property>
+        <property name="cursor">hand2</property>
+        <property name="text" translatable="yes">Login</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="pady">20</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_login_username_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Username</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_login_Password_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Password</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_login_error_lbl" class="ttk.Label">
+        <property name="foreground">#ff0000</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">6</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+  <object id="student_results_select_frame" class="ttk.Frame">
+    <property name="height">250</property>
+    <property name="padding">50</property>
+    <property name="relief">flat</property>
+    <property name="width">730</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">False</property>
+      <property name="row">0</property>
+    </layout>
+    <child>
+      <object id="student_results_select_title_lbl" class="ttk.Label">
+        <property name="font">{Montserrat SemiBold} 12 {}</property>
+        <property name="text" translatable="yes">Results View</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_results_select_election_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Select Election</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_results_confirm_election_cmbobx" class="ttk.Combobox">
+        <property name="width">50</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_results_position_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Select Position</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_results_position_cmbobx" class="ttk.Combobox">
+        <property name="width">50</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="return_to_student_menu_btn" class="ttk.Button">
+        <property name="command">return_to_student</property>
+        <property name="text" translatable="yes">Cancel</property>
+        <property name="width">104</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="pady">10</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_view_election_results_btn" class="ttk.Button">
+        <property name="command">student_view_election_results</property>
+        <property name="text" translatable="yes">View Election Results</property>
+        <property name="width">50</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_view_position_results_btn" class="ttk.Button">
+        <property name="command">student_view_position_results</property>
+        <property name="text" translatable="yes">View Position Results</property>
+        <property name="width">50</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+  <object id="student_view_results_graph_frame" class="ttk.Frame">
+    <property name="height">530</property>
+    <property name="padding">50</property>
+    <property name="relief">flat</property>
+    <property name="width">730</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">False</property>
+      <property name="row">0</property>
+    </layout>
+    <child>
+      <object id="position_results_graph_title_lbl" class="ttk.Label">
+        <property name="font">{Montserrat SemiBold} 12 {}</property>
+        <property name="padding">30</property>
+        <property name="text" translatable="yes">Position Result Graph</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="position_results_graph_cnvs" class="tk.Canvas">
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="position_results_graph_winner_name_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="position_results_graph_winner_votes_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="position_results_graph_winner_percentage_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="return_to_student_menu_btn_1" class="ttk.Button">
+        <property name="command">return_to_student</property>
+        <property name="text" translatable="yes">Return to Login</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+  <object id="student_view_position_results_frame" class="ttk.Frame">
+    <property name="height">340</property>
+    <property name="padding">50</property>
+    <property name="relief">flat</property>
+    <property name="width">730</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">False</property>
+      <property name="row">0</property>
+    </layout>
+    <child>
+      <object id="position_results_title_lbl" class="ttk.Label">
+        <property name="font">{Montserrat Bold} 12 {}</property>
+        <property name="padding">30</property>
+        <property name="text" translatable="yes">Position Results</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="position_results_first_place_name_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="position_results_first_place_total_votes_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="position_results_second_place_name_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="position_results_second_place_total_votes_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="position_results_third_place_name_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="position_results_third_place_total_votes_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="position_results_fourth_place_name_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="position_results_fourth_place_total_votes_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="position_results_winner_name_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="position_results_winner_votes_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">6</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="position_results_winner_percentage_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">7</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="return_to_student_btn_2" class="ttk.Button">
+        <property name="command">return_to_student</property>
+        <property name="text" translatable="yes">Back to Login</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="pady">10</property>
+          <property name="propagate">True</property>
+          <property name="row">8</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+  <object id="student_view_election_results_frame" class="ttk.Frame">
+    <property name="height">800</property>
+    <property name="padding">50</property>
+    <property name="relief">flat</property>
+    <property name="width">730</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">False</property>
+      <property name="row">0</property>
+    </layout>
+    <child>
+      <object id="election_results_title_lbl" class="ttk.Label">
+        <property name="font">{Montserrat SemiBold} 12 {}</property>
+        <property name="padding">30</property>
+        <property name="text" translatable="yes">Election Results</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="election_results_data_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="return_to_student_btn_3" class="ttk.Button">
+        <property name="text" translatable="yes">Back to Login</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="export_to_file_btn" class="ttk.Button">
+        <property name="text" translatable="yes">Export Results to File</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+  <object id="student_vote_frame" class="ttk.Frame">
+    <property name="height">290</property>
+    <property name="padding">40</property>
+    <property name="width">730</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">False</property>
+      <property name="row">0</property>
+    </layout>
+    <child>
+      <object id="student_vote_title_lbl" class="ttk.Label">
+        <property name="font">{Montserrat SemiBold} 12 {}</property>
+        <property name="padding">30</property>
+        <property name="text" translatable="yes">Voting</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">3</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_vote_first_choice_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">1st Choice:</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+          <property name="sticky">e</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_vote_first_choice_cmbobx" class="ttk.Combobox">
+        <property name="width">50</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_vote_first_choice_btn" class="ttk.Button">
+        <property name="command">first_choice_confirm</property>
+        <property name="text" translatable="yes">Confirm</property>
+        <property name="width">40</property>
+        <layout>
+          <property name="column">2</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_vote_second_choice_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">2nd Choice:</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+          <property name="sticky">e</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_vote_second_choice_cmbobx" class="ttk.Combobox">
+        <property name="state">disabled</property>
+        <property name="width">50</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_vote_second_choice_btn" class="ttk.Button">
+        <property name="command">second_choice_confirm</property>
+        <property name="state">disabled</property>
+        <property name="text" translatable="yes">Confirm</property>
+        <property name="width">40</property>
+        <layout>
+          <property name="column">2</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_vote_third_choice_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">3rd Choice:</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+          <property name="sticky">e</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_vote_third_choice_cmbobx" class="ttk.Combobox">
+        <property name="state">disabled</property>
+        <property name="width">50</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_vote_third_choice_btn" class="ttk.Button">
+        <property name="command">third_choice_confirm</property>
+        <property name="state">disabled</property>
+        <property name="text" translatable="yes">Confirm</property>
+        <property name="width">40</property>
+        <layout>
+          <property name="column">2</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_vote_forth_choice_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">4th Choice:</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+          <property name="sticky">e</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_vote_fourth_choice_cmbobx" class="ttk.Combobox">
+        <property name="state">disabled</property>
+        <property name="width">50</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_vote_fourth_choice_btn" class="ttk.Button">
+        <property name="command">fourth_choice_confirm</property>
+        <property name="state">disabled</property>
+        <property name="text" translatable="yes">Confirm</property>
+        <property name="width">40</property>
+        <layout>
+          <property name="column">2</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="return_to_student_btn_1" class="ttk.Button">
+        <property name="command">return_to_student</property>
+        <property name="text" translatable="yes">Cancel</property>
+        <property name="width">102</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">3</property>
+          <property name="pady">10</property>
+          <property name="propagate">True</property>
+          <property name="row">16</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_vote_error_lbl" class="ttk.Label">
+        <property name="foreground">#ff0000</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">17</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+  <object id="student_vote_position_select_frame" class="ttk.Frame">
+    <property name="height">270</property>
+    <property name="padding">50</property>
+    <property name="width">730</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">False</property>
+      <property name="row">0</property>
+    </layout>
+    <child>
+      <object id="student_vote_select_position_title_lbl" class="ttk.Label">
+        <property name="font">{Montserrat SemiBold} 12 {}</property>
+        <property name="text" translatable="yes">Select Position</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_vote_select_election_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Select Election</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_vote_confirm_election_cmbobx" class="ttk.Combobox">
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_vote_position_lbl" class="ttk.Label">
+        <property name="text" translatable="yes">Select Position</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+          <property name="sticky">w</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_vote_position_cmbobx" class="ttk.Combobox">
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_vote_confirm_position_btn" class="ttk.Button">
+        <property name="command">vote_select_position</property>
+        <property name="text" translatable="yes">Submit</property>
+        <property name="width">50</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="pady">10</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="return_to_student_menu_btn_2" class="ttk.Button">
+        <property name="command">return_to_student</property>
+        <property name="text" translatable="yes">Cancel</property>
+        <property name="width">50</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="pady">10</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_vote_position_error_lbl" class="ttk.Label">
+        <property name="foreground">#ff0000</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">7</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="student_select_results_btn" class="ttk.Button">
+        <property name="command">select_results_details</property>
+        <property name="cursor">hand2</property>
+        <property name="text" translatable="yes">View Results</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">8</property>
+        </layout>
+      </object>
+    </child>
+  </object>
 </interface>
