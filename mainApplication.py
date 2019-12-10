@@ -5,6 +5,9 @@ from dateutil.parser import parse
 import tkinter as tk
 from tkinter import messagebox
 
+import numpy as np
+import matplotlib.pyplot as plt
+
 
 #-----------------------------------------------------------------------------------------------------#
 #                                               CONTENTS                                              #
@@ -351,67 +354,41 @@ class voting_application(pygubu.TkApplication):
         results = classDesign.Results()
         results_array = results.get_position_total_results(self.voting_position)
         
-        root = tk.Tk()
-        root.title("First votes bar graph")
         
-        # Return list to user interface to allow the user to visualise the results for positions they've already voted. 
-    #def show_visualised_results(self):
-        # Define the data points
         
-        data = [results_array[0][1],results_array[1][1],results_array[2][1],results_array[3][1]]
-        print(data)
-
-        graph_width = 500  
-        graph_height = 300  
-        graph = tk.Canvas(root, width=graph_width, height=graph_height, bg='white')
-        graph.pack()
-
-        #To get the size of the graoh
-        y_stretch = 15 
-        y_gap = 70  
-        x_stretch = 10  
-        x_width = 50  
-        x_gap = 70  
-
-        # A quick for loop to calculate the rectangle
-        for x, y in enumerate(data):
-
-            # coordinates of each bar
-
-            # Bottom left coordinate
-            x0 = x * x_stretch + x * x_width + x_gap
-
-            # Top left coordinates
-            y0 = graph_height - (y * y_stretch + y_gap)
-
-            # Bottom right coordinates
-            x1 = x * x_stretch + x * x_width + x_width + x_gap
-
-            # Top right coordinates
-            y1 = graph_height - y_gap
-
-            # Draw the bar
-            graph.create_rectangle(x0, y0, x1, y1, fill="red")
-
-            # Put the y value above the bar
-            graph.create_text(x0 + 2, y0, anchor=tk.SW, text=str(y))
-
+        #Getting the data for each bar on the graph (below)
+        
+        candidate_one = tuple([results_array[0][1],results_array[0][2],results_array[0][3],results_array[0][4]])
+        print(candidate_one)
+        candidate_two = [results_array[1][1],results_array[1][2],results_array[1][3],results_array[1][4]]
+        candidate_three = [results_array[2][1],results_array[2][2],results_array[2][3],results_array[2][4]]
+        candidate_four = [results_array[3][1],results_array[3][2],results_array[3][3],results_array[3][4]]
+        #filler = [6,7,8,9]
+        
+        candidate_names = [results_array[0][0],results_array[1][0],results_array[2][0],results_array[3][0]]
+        barWidth = 0.25        
+        
+        r1 = np.arange(len(candidate_one))  ##Used to calculate where to place the bars
+        r2 = [x + barWidth for x in r1]
+        r3 = [x + barWidth for x in r2]
+        r4 = [x + barWidth for x in r3]
+        
+        
+        plt.bar(r1, candidate_one, color ='blue', width=barWidth, edgecolor='white', label='Candidate1')
+        plt.bar(r2, candidate_two, color ='green', width=barWidth, edgecolor='white', label='Candidate2')
+        plt.bar(r3, candidate_three, color ='black', width=barWidth, edgecolor='white', label='Candidate3')
+        plt.bar(r4, candidate_four, color ='red', width=barWidth, edgecolor='white', label='Candidate4')
+        
+        #Using plt to actually create the bars with labels and colour coded so you can tell which is which
+        
+        
+        plt.xlabel('First, Second, Third and Fourth votes', fontweight='bold') # Bottom title
+        plt.xticks([r + barWidth for r in range(len(candidate_one))], ['First', 'Second', 'Third', 'Fourth'])
+        
+        plt.legend()
+        plt.show()
         
 
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         
         
