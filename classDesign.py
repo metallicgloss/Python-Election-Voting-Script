@@ -415,6 +415,8 @@ class Results:
         
         return [candidate.get_candidate_name(), first_preference, second_preference, third_preference, fourth_preference, total_votes]
         
+    def generate_invalid_count(self):
+        return ["Invalid Vote", 0, 0, 0, 0, 0]
         
     def get_election_results(self):
         # Get list of all positions.
@@ -449,6 +451,8 @@ class Results:
         candidates = positions.list_candidates_for_position(position_id)
         
         winner = self.get_position_winner(position_id)
+        if(((winner[0]) and (winner[1])) == 0):
+            return [self.generate_invalid_count(), self.generate_invalid_count(), self.generate_invalid_count(), self.generate_invalid_count(), "Invalid Vote", "Invalid Vote", "Invalid Vote"]
         winer_count = self.get_count(winner[0], query_result)
         first = self.get_count(candidates[0][1], query_result)
         second = self.get_count(candidates[1][1], query_result)
@@ -473,14 +477,31 @@ class Results:
         mysql_cursor.execute("SELECT `firstVoteCandidateID_FK` FROM `gsuElectionVotes` WHERE `electionID` = %s AND `positionID` = %s", [election_id, position_id])
         highest_first_preference = self.calculate_highest_votes(mysql_cursor.fetchall(), candidate_list)
         if len(highest_first_preference[0]) > 1:
-            highest_second_preference = self.calculate_highest_votes(self.generate_preference_data(highest_first_preference[0], "secondVoteCandidateID_FK", election_id, position_id, candidate_list), candidate_list)
-
+        
+            candidates_tied = self.generate_preference_data(highest_first_preference[0], "secondVoteCandidateID_FK", election_id, position_id, candidate_list)
+           
+            highest_second_preference = self.calculate_highest_votes(candidates_tied, candidate_list)
+            
             if len(highest_second_preference[0]) > 1:
-                highest_third_preference = self.calculate_highest_votes(self.generate_preference_data(highest_second_preference[0], "thirdVoteCandidateID_FK", election_id, position_id, candidate_list), candidate_list)
+                candidates_tied_second = self.generate_preference_data(highest_second_preference[0], "thirdVoteCandidateID_FK", election_id, position_id, candidate_list)
+            
+                if (candidates_tied_second == []):
+                    candidates_tied_second = candidates_tied
+                    
+                highest_third_preference = self.calculate_highest_votes(candidates_tied_second, candidate_list)
                 
                 if len(highest_third_preference[0]) > 1:
-                    highest_fourth_preference = self.calculate_highest_votes(self.generate_preference_data(highest_third_preference[0], "fourthVoteCandidateID_FK", election_id, position_id, candidate_list), candidate_list)
-                    winner = highest_fourth_preference
+                    candidates_tied_third = self.generate_preference_data(highest_third_preference[0], "fourthVoteCandidateID_FK", election_id, position_id, candidate_list)
+            
+                    if (candidates_tied_third == []):
+                        candidates_tied_third = candidates_tied_second
+                        
+                    highest_fourth_preference = self.calculate_highest_votes(candidates_tied_third, candidate_list)
+                    
+                    if len(highest_fourth_preference[0]) > 1:
+                        return [0, 0, "Revote Required"]
+                    else:
+                        winner = highest_fourth_preference
                 else:
                     winner = highest_third_preference
             else:
@@ -495,11 +516,9 @@ class Results:
     def generate_preference_data(self, remaining_candidates, search_preference, election_id, position_id, candidate_list):
         mysql_format_list = ', '.join(['%s'] * len(remaining_candidates))
         mysql_command_creation = "SELECT `" + search_preference + "` FROM `gsuElectionVotes` WHERE `electionID` = %s AND `positionID` = %s AND `" + search_preference + "` IN (" + mysql_format_list + ")"
-        print(mysql_command_creation)
         mysql_data_creation = [election_id, position_id]
         for i in range(len(remaining_candidates)):
             mysql_data_creation.extend([candidate_list[remaining_candidates[i] - 1][1]])
-        print(mysql_data_creation)
         mysql_cursor.execute(mysql_command_creation, mysql_data_creation)
         query_result = mysql_cursor.fetchall()
         
@@ -526,13 +545,13 @@ class Results:
         if len(candidates) > 0:
             results[candidates[0][0]] = candidate_one_count
         
-        if len(candidates) > 1:
+        if (len(candidates) > 1) and (candidate_two_count != 0):
             results[candidates[1][0]] = candidate_two_count
         
-        if len(candidates) > 2:
+        if (len(candidates) > 2) and (candidate_three_count != 0):
             results[candidates[2][0]] = candidate_three_count
             
-        if len(candidates) > 3:
+        if (len(candidates) > 3) and (candidate_four_count != 0):
             results[candidates[3][0]] = candidate_four_count
 
         highest_values = [i for i, candidate in results.items() if candidate ==  max(results.values())]
