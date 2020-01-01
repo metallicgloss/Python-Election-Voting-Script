@@ -184,11 +184,11 @@ class voting_application(pygubu.TkApplication):
 
         # Create election instance, append to list the election times
         elections = classDesign.Election()
-        current_election = elections.return_formatted_elections()
+        current_election = elections.list_formatted()
 
         # Create candidate instance, append to list the candidate names
         candidates = classDesign.Candidate()
-        available_candidates = candidates.return_formatted_candidate_list()
+        available_candidates = candidates.list_formatted()
 
         # Set choices in combo boxes to lists created.
         self.ui_builder.get_object('candidate_application_election_cmbobx') \
@@ -204,7 +204,7 @@ class voting_application(pygubu.TkApplication):
 
         # Create election instance, append to list the election times
         elections = classDesign.Election()
-        current_election = elections.return_formatted_elections()
+        current_election = elections.list_formatted()
 
         # Create combo box of positions currently available to vote.
         positions = classDesign.Position()
@@ -257,7 +257,7 @@ class voting_application(pygubu.TkApplication):
             if(new_student.verify_unique_username()):
                 # Verify that the username hasn't been used before.
                 # If unique, insert student.
-                new_student.insert_new_student()
+                new_student.insert_new()
 
                 # Inform user of successful creation.
                 messagebox.showinfo('Success', 'Created successfully.')
@@ -284,7 +284,7 @@ class voting_application(pygubu.TkApplication):
             if(new_candidate.verify_unique_name()):
                 # Check there isn't already a candidate with same name.
                 # If unique, insert.
-                new_candidate.insert_new_candidate()
+                new_candidate.insert_new()
 
                 self.return_to_backend()
             else:
@@ -588,16 +588,16 @@ class voting_application(pygubu.TkApplication):
                 self.change_frame('student_vote_position_select_frame')
 
                 # Set 'global' class variable for student login.
-                self.logged_in_student = student_login.get_student_id()
+                self.logged_in_student = student_login.get_id()
 
                 # Create election instance, append to list the election times
                 elections = classDesign.Election()
-                current_election = elections.return_formatted_elections()
+                current_election = elections.list_formatted()
 
                 # Create combo box of positions currently available to vote.
                 positions = classDesign.Position()
                 position_list = []
-                for position in positions.list_available_voting_positions(student_login.get_student_id()):
+                for position in positions.list_available_voting_positions(student_login.get_id()):
                     position_list.append(
                         str(position[0])
                         + " - "
@@ -636,7 +636,7 @@ class voting_application(pygubu.TkApplication):
 
             # Get list of candidates that have an application for the position.
             position = classDesign.Position()
-            candidate_data = position.list_candidates_for_position(
+            candidate_data = position.list_for_position(
                 self.voting_position
             )
 
@@ -781,7 +781,7 @@ class voting_application(pygubu.TkApplication):
 
         # Create election instance, append to list the election times
         elections = classDesign.Election()
-        current_election = elections.return_formatted_elections()
+        current_election = elections.list_formatted()
 
         # Create combo box of positions currently available to vote.
         positions = classDesign.Position()
