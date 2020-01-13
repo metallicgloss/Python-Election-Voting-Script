@@ -519,7 +519,8 @@ class Position:
 
 # Define results class.
 class Results:
-    #
+
+    # Initialise results class.
     def __init__(self, election_id="", position_id=""):
         # Define class variables.
         self.election_id = election_id
