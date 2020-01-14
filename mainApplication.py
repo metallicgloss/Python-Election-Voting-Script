@@ -623,46 +623,48 @@ class voting_application(pygubu.TkApplication):
 
     # Execute vote for the selected positions on the screen.
     def vote_select_position(self):
-        election = (self.ui_builder.get_object(
-            'student_vote_confirm_election_cmbobx'
-        ).get()).split()[0]
-        self.voting_position = (self.ui_builder.get_object(
-            'student_vote_position_cmbobx'
-        ).get()).split()[0]
-
-        if None not in (self.voting_position, election):
-            # If input fields on the page are not empty.
-            self.change_frame('student_vote_frame')
-
-            # Get list of candidates that have an application for the position.
-            position = classDesign.Position()
-            candidate_data = position.list_for_position(
-                self.voting_position
-            )
-
-            if not candidate_data:
-                # List returned empty, no candidates.
-                self.ui_builder.get_object('student_vote_error_lbl') \
-                    .configure(text="Error: No candidates.")
-            else:
-                candidate_formatted = []
-                for candidate in candidate_data:
-                    candidate_temp = classDesign.Candidate(id=candidate[1])
-                    candidate_formatted.append(
-                        str(candidate[1])
-                        + " - "
-                        + str(candidate_temp.get_candidate_name())
-                    )
-
-            # Write formatted list to the combobox.
-            self.ui_builder.get_object('student_vote_first_choice_cmbobx') \
-                .configure(values=candidate_formatted)
-
-            self.candidate_list = candidate_formatted
-        else:
-            # Else change label text to error message.
+        try:
+            election = (self.ui_builder.get_object(
+                'student_vote_confirm_election_cmbobx'
+            ).get()).split()[0]
+            self.voting_position = (self.ui_builder.get_object(
+                'student_vote_position_cmbobx'
+            ).get()).split()[0]
+        except IndexError:
+            # If error (none selected) change label text to error message.
             self.ui_builder.get_object('student_vote_position_error_lbl') \
                 .configure(text="Please enter data for all fields.")
+        else:
+            # If not except, continue.
+            if None not in (self.voting_position, election):
+                # If input fields on the page are not empty.
+                self.change_frame('student_vote_frame')
+
+                # Get list of candidates that have an application for the position.
+                position = classDesign.Position()
+                candidate_data = position.list_for_position(
+                    self.voting_position
+                )
+
+                if not candidate_data:
+                    # List returned empty, no candidates.
+                    self.ui_builder.get_object('student_vote_error_lbl') \
+                        .configure(text="Error: No candidates.")
+                else:
+                    candidate_formatted = []
+                    for candidate in candidate_data:
+                        candidate_temp = classDesign.Candidate(id=candidate[1])
+                        candidate_formatted.append(
+                            str(candidate[1])
+                            + " - "
+                            + str(candidate_temp.get_candidate_name())
+                        )
+
+                    # Write formatted list to the combobox.
+                    self.ui_builder.get_object('student_vote_first_choice_cmbobx') \
+                        .configure(values=candidate_formatted)
+
+                    self.candidate_list = candidate_formatted
 
     # Toggle availability of boxes and buttons on the vote page after confirm
     def toggle_vote_box(self, start_element, end_element):
@@ -705,6 +707,7 @@ class voting_application(pygubu.TkApplication):
                 self.fourth_choice_confirm()
             else:
                 self.candidate_list.remove(selected_value)
+                self.candidate_list.remove("N/A")
 
             # Toggle box availability to next preference
             self.toggle_vote_box(

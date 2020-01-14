@@ -475,16 +475,26 @@ class Position:
         election_id = election.get_current_election()
         election_id = election_id[0][0]
 
-        # Select all positions where not in election votes from current student
+        # Select all positions that the user hasn't voted for,
+        # and the position has 4 candidates.
         mysql_cursor.execute(
             "SELECT * \
             FROM `gsuPositions` \
             WHERE `positionID` NOT IN \
-            (SELECT `positionID` FROM `gsuElectionVotes` \
-            WHERE `electionID` = %s AND `studentID` = %s)",
+            (SELECT `positionID` \
+            FROM `gsuElectionVotes` \
+            WHERE `electionID` = %s \
+            AND `studentID` = %s) \
+            AND `positionID` IN \
+            (SELECT `positionID` \
+            FROM `gsuCandidateApplication` \
+            WHERE `electionID` = %s\
+            GROUP BY `positionID`\
+            HAVING COUNT(*) = 4)",
             [
                 election_id,
-                student_id
+                student_id,
+                election_id
             ]
         )
 
@@ -505,7 +515,7 @@ class Position:
             FROM `gsuCandidateApplication` \
             WHERE `positionID` =  %s \
             AND `electionID` = %s",
-            [election_id, voting_position]
+            [voting_position, election_id]
         )
 
         # Store query_result as all values returned.
