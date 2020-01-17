@@ -40,10 +40,12 @@ from tkinter import messagebox
 # Open MySQL connection using connection query data, initialise cursor.
 try:
     # Define database connection variable.
-    db_connect = mysql.connector.connect(host=connectionString.dbHost,
-                                         database=connectionString.dbDatabase,
-                                         user=connectionString.dbUsername,
-                                         password=connectionString.dbPassword)
+    db_connect = mysql.connector.connect(
+        host=connectionString.dbHost,
+        database=connectionString.dbDatabase,
+        user=connectionString.dbUsername,
+        password=connectionString.dbPassword
+    )
     mysql_cursor = db_connect.cursor()
 
 except Error as e:
@@ -191,12 +193,15 @@ class voting_application(pygubu.TkApplication):
         available_candidates = candidates.list_formatted()
 
         # Set choices in combo boxes to lists created.
-        self.ui_builder.get_object('candidate_application_election_cmbobx') \
-            .configure(values=current_election)
-        self.ui_builder.get_object('candidate_application_candidate_cmbobx') \
-            .configure(values=available_candidates)
-        self.ui_builder.get_object('candidate_application_position_cmbobx') \
-            .configure(values=available_positions)
+        self.ui_builder.get_object(
+            'candidate_application_election_cmbobx'
+        ).configure(values=current_election)
+        self.ui_builder.get_object(
+            'candidate_application_candidate_cmbobx'
+        ).configure(values=available_candidates)
+        self.ui_builder.get_object(
+            'candidate_application_position_cmbobx'
+        ).configure(values=available_positions)
 
     # Navigate to view results page.
     def menu_view_results(self):
@@ -211,10 +216,12 @@ class voting_application(pygubu.TkApplication):
         position_list = positions.list_all_positions_formatted()
 
         # Set choices in combo boxes to lists created.
-        self.ui_builder.get_object('backend_confirm_election_cmbobx') \
-            .configure(values=current_election)
-        self.ui_builder.get_object('backend_position_cmbobx') \
-            .configure(values=position_list)
+        self.ui_builder.get_object(
+            'backend_confirm_election_cmbobx'
+        ).configure(values=current_election)
+        self.ui_builder.get_object(
+            'backend_position_cmbobx'
+        ).configure(values=position_list)
 
     # ----------------------------------------------------------------------- #
     #                       2.4 Backend Extra Functions                       #
@@ -264,12 +271,14 @@ class voting_application(pygubu.TkApplication):
                 self.return_to_backend()
             else:
                 # If not unique, alert user.
-                self.ui_builder.get_object('create_student_error_lbl') \
-                    .configure(text="Error: Username is not unique.")
+                self.ui_builder.get_object(
+                    'create_student_error_lbl'
+                ).configure(text="Error: Username is not unique.")
         else:
             # Else change label text to error message.
-            self.ui_builder.get_object('create_student_error_lbl') \
-                .configure(text="Error: Missing Entry")
+            self.ui_builder.get_object(
+                'create_student_error_lbl'
+            ).configure(text="Error: Missing Entry")
 
     # Create new candidate that can make applications.
     def create_candidate(self):
@@ -289,12 +298,14 @@ class voting_application(pygubu.TkApplication):
                 self.return_to_backend()
             else:
                 # If not unique, inform user to add custom tag to surname
-                self.ui_builder.get_object('create_candidate_error_lbl') \
-                    .configure(text="Uh Oh! You've got a common name, please add a unique addition to your surname to help voters!")
+                self.ui_builder.get_object(
+                    'create_candidate_error_lbl'
+                ).configure(text="Uh Oh! You've got a common name, please add a unique addition to your surname to help voters!")
         else:
             # Else change label text to error message.
-            self.ui_builder.get_object('create_candidate_error_lbl') \
-                .configure(text="Error: Missing data from input fields.")
+            self.ui_builder.get_object(
+                'create_candidate_error_lbl'
+            ).configure(text="Error: Missing data from input fields.")
 
     # Create new election period on the system.
     def create_election(self):
@@ -319,12 +330,14 @@ class voting_application(pygubu.TkApplication):
                 self.return_to_startup()
             else:
                 # If not valid, alert user.
-                self.ui_builder.get_object('create_election_error_lbl') \
-                    .configure(text="Error: Invalid end date.")
+                self.ui_builder.get_object(
+                    'create_election_error_lbl'
+                ).configure(text="Error: Invalid end date.")
         else:
             # Else change label text to error message.
-            self.ui_builder.get_object('create_election_error_lbl') \
-                .configure(text="Error: Missing data from input fields.")
+            self.ui_builder.get_object(
+                'create_election_error_lbl'
+            ).configure(text="Error: Missing data from input fields.")
 
     # Submit application for candidate to current available election.
     def create_application(self):
@@ -352,12 +365,14 @@ class voting_application(pygubu.TkApplication):
                 self.return_to_backend()
             else:
                 # Else change label text to error message.
-                self.ui_builder.get_object('candidate_application_error_lbl') \
-                    .configure(text="Error: Select one value for all options.")
+                self.ui_builder.get_object(
+                    'candidate_application_error_lbl'
+                ).configure(text="Error: Select one value for all options.")
         else:
             # Else change label text to error message.
-            self.ui_builder.get_object('candidate_application_error_lbl') \
-                .configure(text="Election not selected. Unable to apply.")
+            self.ui_builder.get_object(
+                'candidate_application_error_lbl'
+            ).configure(text="Election not selected. Unable to apply.")
 
     # Retrieve list of results.
     # Then format them to display them on the user interface.
@@ -412,30 +427,42 @@ class voting_application(pygubu.TkApplication):
             )
 
             # Final labels for the winner and total votes
-            self.ui_builder.get_object('view_results_winner_name_lbl') \
-                .configure(text="Winner: " + results_array[4])
-            self.ui_builder.get_object('view_results_winner_votes_lbl') \
-                .configure(text="Winner Total Votes: " + results_array[5])
-            self.ui_builder.get_object('view_results_total_votes_lbl') \
-                .configure(text="Position total votes: " + results_array[6])
+            self.ui_builder.get_object(
+                'view_results_winner_name_lbl'
+            ).configure(text="Winner: " + results_array[4])
+            self.ui_builder.get_object(
+                'view_results_winner_votes_lbl'
+            ).configure(text="Winner Total Votes: " + results_array[5])
+            self.ui_builder.get_object(
+                'view_results_total_votes_lbl'
+            ).configure(text="Position total votes: " + results_array[6])
 
         else:
             # Else change label text to error message.
-            self.ui_builder.get_object('student_vote_position_error_lbl') \
-                .configure(text="Error: Enter data for both fields.")
+            self.ui_builder.get_object('student_vote_position_error_lbl'
+).configure(text="Error: Enter data for both fields.")
 
     # Sets results page labels, helps to avoid massive amounts of duplication.
     def display_results(self, element, name, first, second, third, fourth):
-        self.ui_builder.get_object(element + '_name_lbl') \
-            .configure(text=name)
-        self.ui_builder.get_object(element + '_first_lbl') \
-            .configure(text=first)
-        self.ui_builder.get_object(element + '_second_lbl') \
-            .configure(text=second)
-        self.ui_builder.get_object(element + '_third_lbl') \
-            .configure(text=third)
-        self.ui_builder.get_object(element + '_fourth_lbl') \
-            .configure(text=fourth)
+        self.ui_builder.get_object(
+            element + '_name_lbl'
+        ).configure(text=name)
+        
+        self.ui_builder.get_object(
+            element + '_first_lbl'
+        ).configure(text=first)
+        
+        self.ui_builder.get_object(
+            element + '_second_lbl'
+        ).configure(text=second)
+        
+        self.ui_builder.get_object(
+            element + '_third_lbl'
+        ).configure(text=third)
+        
+        self.ui_builder.get_object(
+            element + '_fourth_lbl'
+        ).configure(text=fourth)
         pass
 
     # Generates a graph based on the results for the position.
@@ -613,13 +640,15 @@ class voting_application(pygubu.TkApplication):
                 ).configure(values=position_list)
             else:
                 # If not unique, inform user to add custom tag to surname.
-                self.ui_builder.get_object('student_login_error_lbl') \
-                    .configure(text="Wrong password / ineligible to vote.")
+                self.ui_builder.get_object(
+                    'student_login_error_lbl'
+                ).configure(text="Wrong password / ineligible to vote.")
 
         else:
             # Else change label text to error message.
-            self.ui_builder.get_object('student_login_error_lbl') \
-                .configure(text="Error: Missing data from input fields.")
+            self.ui_builder.get_object(
+                'student_login_error_lbl'
+            ).configure(text="Error: Missing data from input fields.")
 
     # Execute vote for the selected positions on the screen.
     def vote_select_position(self):
@@ -632,8 +661,9 @@ class voting_application(pygubu.TkApplication):
             ).get()).split()[0]
         except IndexError:
             # If error (none selected) change label text to error message.
-            self.ui_builder.get_object('student_vote_position_error_lbl') \
-                .configure(text="Please enter data for all fields.")
+            self.ui_builder.get_object(
+                'student_vote_position_error_lbl'
+            ).configure(text="Please enter data for all fields.")
         else:
             # If not except, continue.
             if None not in (self.voting_position, election):
@@ -648,8 +678,9 @@ class voting_application(pygubu.TkApplication):
 
                 if not candidate_data:
                     # List returned empty, no candidates.
-                    self.ui_builder.get_object('student_vote_error_lbl') \
-                        .configure(text="Error: No candidates.")
+                    self.ui_builder.get_object(
+                        'student_vote_error_lbl'
+                    ).configure(text="Error: No candidates.")
                 else:
                     candidate_formatted = []
                     for candidate in candidate_data:
@@ -661,21 +692,29 @@ class voting_application(pygubu.TkApplication):
                         )
 
                     # Write formatted list to the combobox.
-                    self.ui_builder.get_object('student_vote_first_choice_cmbobx') \
-                        .configure(values=candidate_formatted)
+                    self.ui_builder.get_object(
+                        'student_vote_first_choice_cmbobx'
+                    ).configure(values=candidate_formatted)
 
                     self.candidate_list = candidate_formatted
 
     # Toggle availability of boxes and buttons on the vote page after confirm
     def toggle_vote_box(self, start_element, end_element):
-        self.ui_builder.get_object(start_element + '_btn') \
-            .configure(state="disabled")
-        self.ui_builder.get_object(start_element + '_cmbobx') \
-            .configure(state="disabled")
-        self.ui_builder.get_object(end_element + '_btn') \
-            .configure(state="normal")
-        self.ui_builder.get_object(end_element + '_cmbobx') \
-            .configure(state="normal", values=self.candidate_list)
+        self.ui_builder.get_object(
+            start_element + '_btn'
+        ).configure(state="disabled")
+        
+        self.ui_builder.get_object(
+            start_element + '_cmbobx'
+        ).configure(state="disabled")
+        
+        self.ui_builder.get_object(
+            end_element + '_btn'
+        ).configure(state="normal")
+        
+        self.ui_builder.get_object(
+            end_element + '_cmbobx'
+        ).configure(state="normal", values=self.candidate_list)
 
     def first_choice_confirm(self):
         # Get the user input value for first choice.
@@ -788,13 +827,15 @@ class voting_application(pygubu.TkApplication):
 
         # Create combo box of positions currently available to vote.
         positions = classDesign.Position()
-        position_list = positions.list_all_positions_formatted()
+        position_list = positions.list_election_positions_formatted()
 
         # Set choices in combo boxes to lists created.
-        self.ui_builder.get_object('student_results_confirm_election_cmbobx') \
-            .configure(values=current_election)
-        self.ui_builder.get_object('student_results_position_cmbobx') \
-            .configure(values=position_list)
+        self.ui_builder.get_object(
+            'student_results_confirm_election_cmbobx'
+        ).configure(values=current_election)
+        self.ui_builder.get_object(
+            'student_results_position_cmbobx'
+        ).configure(values=position_list)
 
     # Change page to allow student to view election results.
     def student_view_election_results(self):
@@ -802,8 +843,9 @@ class voting_application(pygubu.TkApplication):
 
         results = classDesign.Results()
 
-        self.ui_builder.get_object('election_results_data_lbl') \
-            .configure(text=results.get_election_results())
+        self.ui_builder.get_object(
+            'election_results_data_lbl'
+        ).configure(text=results.get_election_results())
 
     def export_election_results(self):
         results = classDesign.Results()

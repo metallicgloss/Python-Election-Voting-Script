@@ -204,7 +204,7 @@ class Student(Control):
 # --------------------------------------------------------------------------- #
 
 # Define candidate class.
-class Candidate:
+class Candidate(Control):
     
     # Initialise candidate class.
     def __init__(self, name="", email="", id=""):
@@ -419,6 +419,14 @@ class Position:
         self.end_time = end_time
         self._id = ""
 
+    # Return list of positions that are running in an election.
+    def list_election_positions_formatted(self):
+        available_positions = []
+        for position in self.list_election_positions():
+            available_positions.append(str(position[0]) + " - " + position[1])
+
+        return available_positions
+        
     # Return list of positions available formatted for a combobox.
     def list_all_available_positions_formatted(self):
         available_positions = []
@@ -426,24 +434,23 @@ class Position:
             available_positions.append(str(position[0]) + " - " + position[1])
 
         return available_positions
+        
+    # Return list for all positions that have applicants formatted.
+    def list_all_available_voting_positions_formatted(self):
+        available_positions = []
+        for position in self.list_available_voting_positions():
+            available_positions.append(str(position[0]) + " - " + position[1])
 
+        return available_positions
+
+    # Return list of positions formatted for a combobox.
     def list_all_positions_formatted(self):
         available_positions = []
         for position in self.list_all_positions():
             available_positions.append(str(position[0]) + " - " + position[1])
 
         return available_positions
-
-    # List all positions currently in the GSU.
-    def list_all_positions(self):
-        # Execute MySQL Query to get all positions
-        mysql_cursor.execute("SELECT * FROM `gsuPositions`")
-
-        # Store query_result as all values returned.
-        query_result = mysql_cursor.fetchall()
-
-        return query_result
-
+        
     # List all available positions to apply for.
     def get_available_positions(self):
         # Execute MySQL Query
@@ -463,6 +470,16 @@ class Position:
             GROUP BY `positionID` HAVING COUNT(*) = 4)",
             [election_id]
         )
+
+        # Store query_result as all values returned.
+        query_result = mysql_cursor.fetchall()
+
+        return query_result
+
+    # List all positions currently in the GSU.
+    def list_all_positions(self):
+        # Execute MySQL Query to get all positions
+        mysql_cursor.execute("SELECT * FROM `gsuPositions`")
 
         # Store query_result as all values returned.
         query_result = mysql_cursor.fetchall()
@@ -494,6 +511,33 @@ class Position:
             [
                 election_id,
                 student_id,
+                election_id
+            ]
+        )
+
+        # Store query_result as all values returned.
+        query_result = mysql_cursor.fetchall()
+
+        return query_result
+        
+    # List all available positions to apply for.
+    def list_election_positions(self):
+        election = Election()
+        election_id = election.get_current_election()
+        election_id = election_id[0][0]
+
+        # Select all positions that the user hasn't voted for,
+        # and the position has 4 candidates.
+        mysql_cursor.execute(
+            "SELECT * \
+            FROM `gsuPositions` \
+            WHERE `positionID` IN \
+            (SELECT `positionID` \
+            FROM `gsuCandidateApplication` \
+            WHERE `electionID` = %s\
+            GROUP BY `positionID`\
+            HAVING COUNT(*) = 4)",
+            [
                 election_id
             ]
         )
