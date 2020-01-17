@@ -131,7 +131,7 @@
       <property name="row">0</property>
     </layout>
     <child>
-      <object id="bkend_create_cand_title_lbl" class="ttk.Label">
+      <object id="bkend_create_cand_title_lbl_1" class="ttk.Label">
         <property name="font">{Montserrat SemiBold} 12 {}</property>
         <property name="text" translatable="yes">Create Candidate</property>
         <layout>
@@ -203,7 +203,7 @@
       </object>
     </child>
     <child>
-      <object id="bkend_create_cand_return_btn" class="ttk.Button">
+      <object id="bkend_create_cand_return_btn_1" class="ttk.Button">
         <property name="command">return_to_backend</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Cancel</property>
@@ -1753,8 +1753,8 @@
     <child>
       <object id="stdnt_vote_second_choice_btn" class="ttk.Button">
         <property name="command">second_choice_confirm</property>
-        <property name="state">disabled</property>
         <property name="cursor">hand2</property>
+        <property name="state">disabled</property>
         <property name="text" translatable="yes">Confirm</property>
         <property name="width">40</property>
         <layout>
@@ -1789,8 +1789,8 @@
     <child>
       <object id="stdnt_vote_third_choice_btn" class="ttk.Button">
         <property name="command">third_choice_confirm</property>
-        <property name="state">disabled</property>
         <property name="cursor">hand2</property>
+        <property name="state">disabled</property>
         <property name="text" translatable="yes">Confirm</property>
         <property name="width">40</property>
         <layout>
@@ -1825,8 +1825,8 @@
     <child>
       <object id="stdnt_vote_fourth_choice_btn" class="ttk.Button">
         <property name="command">fourth_choice_confirm</property>
-        <property name="state">disabled</property>
         <property name="cursor">hand2</property>
+        <property name="state">disabled</property>
         <property name="text" translatable="yes">Confirm</property>
         <property name="width">40</property>
         <layout>
@@ -1881,29 +1881,6 @@
           <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">0</property>
-        </layout>
-      </object>
-    </child>
-    <child>
-      <object id="stdnt_vote_pos_sel_election_lbl" class="ttk.Label">
-        <property name="text" translatable="yes">Select Election</property>
-        <layout>
-          <property name="column">0</property>
-          <property name="columnspan">2</property>
-          <property name="propagate">True</property>
-          <property name="row">1</property>
-          <property name="sticky">w</property>
-        </layout>
-      </object>
-    </child>
-    <child>
-      <object id="stdnt_vote_pos_election_cmbobx" class="ttk.Combobox">
-        <property name="width">100</property>
-        <layout>
-          <property name="column">0</property>
-          <property name="columnspan">2</property>
-          <property name="propagate">True</property>
-          <property name="row">2</property>
         </layout>
       </object>
     </child>
@@ -1980,6 +1957,16 @@
           <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">8</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="stdnt_vote_pos_election_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
         </layout>
       </object>
     </child>
