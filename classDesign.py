@@ -132,16 +132,21 @@ class Student(Control):
         # Store self._select_query_output as all values returned.
         self._select_query_output = mysql_cursor.fetchall()
 
-        # Set salt to match the salt value returned in the database.
-        self._salt = str(self._select_query_output[0][1])
+        try:
+            # Set salt to match the salt value returned in the database.
+            self._salt = str(self._select_query_output[0][1])
+            
+            # Re-gen hash using passed given to see it matches the stored DB value.
+            self.get_hashed_password()
 
-        # Re-gen hash using passed given to see it matches the stored DB value.
-        self.get_hashed_password()
-
-        # If passwords match, return true, else, false.
-        if(self._hashed_password == self._select_query_output[0][0]):
-            return True
-        else:
+            # If passwords match, return true, else, false.
+            if(self._hashed_password == self._select_query_output[0][0]):
+                return True
+            else:
+                return False
+        except IndexError:
+            # Query returned index error when attempting to select user.
+            # Username not known.
             return False
 
     # Verify username does not already exist.

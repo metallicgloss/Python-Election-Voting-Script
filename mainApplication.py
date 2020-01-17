@@ -115,7 +115,7 @@ class voting_application(pygubu.TkApplication):
     #                   Changes frame to `stdnt_login_frm`                    #
     #                                                                         #
     #                          startup_select_backend                         #
-    #                   Changes frame to `bkend_menu_frame`                   #
+    #                    Changes frame to `bkend_menu_frm`                    #
     #                                                                         #
     #                             exit_application                            #
     #            Destroys mainloop, gracefully closes application.            #
@@ -127,7 +127,7 @@ class voting_application(pygubu.TkApplication):
 
     # Navigate to backend menu.
     def startup_select_backend(self):
-        self.change_frame('bkend_menu_frame')
+        self.change_frame('bkend_menu_frm')
 
     # Gracefully closes the application.
     def exit_application(self):
@@ -140,22 +140,22 @@ class voting_application(pygubu.TkApplication):
     #                        2.3 Backend Menu Functions                       #
     #                                                                         #
     #                            return_to_startup                            #
-    #                      Changes `startup_menu_frm`                       #
+    #                       Changes `startup_menu_frm`                        #
     #                                                                         #
     #                            return_to_backend                            #
-    #                       Changes `bkend_menu_frame`                      #
+    #                         Changes `bkend_menu_frm`                        #
     #                                                                         #
     #                        menu_create_student_voter                        #
-    #                  Changes `bkend_create_stdnt_fm`                 #
+    #                     Changes `bkend_create_stdnt_frm`                    #
     #                                                                         #
     #                          menu_create_candidate                          #
-    #                 Changes `bkend_create_cand_frame`                #
+    #                      Changes `bkend_create_cand_frm`                    #
     #                                                                         #
     #                           menu_create_election                          #
-    #                 Changes `bkend_create_election_frame`                 #
+    #                   Changes `bkend_create_election_frm`                   #
     #                                                                         #
     #                         menu_create_application                         #
-    # Changes frame and loads positions, elections and candidates to screen.  #
+    #  Changes frame and loads positions, elections and candidates to screen. #
     #                                                                         #
     #                            menu_view_results                            #
     #        Changes frame and loads positions and elections to screen.       #
@@ -167,23 +167,23 @@ class voting_application(pygubu.TkApplication):
 
     # On sub-page access through the backend menu, provide a back button.
     def return_to_backend(self):
-        self.change_frame('bkend_menu_frame')
+        self.change_frame('bkend_menu_frm')
 
     # Navigate to create student voter.
     def menu_create_student_voter(self):
-        self.change_frame('bkend_create_stdnt_fm')
+        self.change_frame('bkend_create_stdnt_frm')
 
     # Navigate to create candidate.
     def menu_create_candidate(self):
-        self.change_frame('bkend_create_cand_frame')
+        self.change_frame('bkend_create_cand_frm')
 
     # Navigate to create election.
     def menu_create_election(self):
-        self.change_frame('bkend_create_election_frame')
+        self.change_frame('bkend_create_election_frm')
 
     # Navigate to create candidate application.
     def menu_create_application(self):
-        self.change_frame('bkend_create_cand_application_frame')
+        self.change_frame('bkend_create_cand_app_frm')
 
         # Create position, append to list the remaining available
         positions = classDesign.Position()
@@ -260,10 +260,10 @@ class voting_application(pygubu.TkApplication):
     def create_student(self):
         # Get user input from the page.
         username = self.ui_builder.get_object(
-            'stdnt_userame_txtbx'
+            'bkend_create_stdnt_username_txtbx'
         ).get()
         password = self.ui_builder.get_object(
-            'stdnt_password_txtbx'
+            'bkend_create_stdnt_passwd_txbx'
         ).get()
 
         if None not in (username, password):
@@ -284,12 +284,12 @@ class voting_application(pygubu.TkApplication):
             else:
                 # If not unique, alert user.
                 self.ui_builder.get_object(
-                    'create_stdnt_error_lbl'
+                    'bkend_create_stdnt_error_lbl'
                 ).configure(text="Error: Username is not unique.")
         else:
             # Else change label text to error message.
             self.ui_builder.get_object(
-                'create_stdnt_error_lbl'
+                'bkend_create_stdnt_error_lbl'
             ).configure(text="Error: Missing Entry")
 
     # Create new candidate that can make applications.
@@ -588,10 +588,10 @@ class voting_application(pygubu.TkApplication):
         plt.show() 
 
     # ----------------------------------------------------------------------- #
-    #                       2.5 Frontent Menu Functions                       #
+    #                       2.5 Frontend Menu Functions                       #
     #                                                                         #
     #                            return_to_student                            #
-    #                  Changes frame to `stdnt_login_frm`                 #
+    #                    Changes frame to `stdnt_login_frm`                   #
     # ----------------------------------------------------------------------- #
 
     # Exit page within student menu, return to login.
