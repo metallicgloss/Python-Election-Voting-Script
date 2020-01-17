@@ -72,8 +72,14 @@ class voting_application(pygubu.TkApplication):
     #                               get_cmbo_id                               #
     #         Gets and returns the ID of the element in the combo box.        #
     #                                                                         #
-    #                              display_results                            #
-    #          Set the labels on screen to match the results values.          #
+    #                        display_candidate_results                        #
+    #        Displays the results for a single candidate to the screen.       #
+    #                                                                         #
+    #                        display_position_results                         #
+    #        Displays the results for a single position to the screen.        #
+    #                                                                         #
+    #                             format_for_combo                            #
+    #           Formats array input to list with - for combo boxes.           #
     # ----------------------------------------------------------------------- #
 
     # Initialise voting application interface.
@@ -114,7 +120,8 @@ class voting_application(pygubu.TkApplication):
         return (self.ui_builder.get_object(element_id).get()).split()[0]
 
     # Sets results page labels, helps to avoid massive amounts of duplication.
-    def display_candidate_results(self, element, name, first, second, third, fourth):
+    def display_candidate_results(
+            self, element, name, first, second, third, fourth):
         self.ui_builder.get_object(
             element + '_name_lbl'
         ).configure(text=name)
@@ -183,7 +190,7 @@ class voting_application(pygubu.TkApplication):
             page + "_total_votes_lbl"
         ).configure(text="Position total votes: " + results[6])
 
-        if(percentage == True):
+        if(percentage is True):
             percent = str(
                 "%.2f" % ((int(results[5]) / int(results[6])) * 100)
             )
@@ -278,7 +285,9 @@ class voting_application(pygubu.TkApplication):
 
         # Create position, append to list the remaining available
         positions = classDesign.Position()
-        available_positions = format_for_combo(positions.list_positions_open_for_apps())
+        available_positions = self.format_for_combo(
+            positions.list_positions_open_for_apps()
+        )
 
         # Create election instance, append to list the election times
         elections = classDesign.Election()
@@ -286,7 +295,7 @@ class voting_application(pygubu.TkApplication):
 
         # Create candidate instance, append to list the candidate names
         candidates = classDesign.Candidate()
-        available_candidates = format_for_combo(candidates.list())
+        available_candidates = self.format_for_combo(candidates.list())
 
         # Set choices in combo boxes to lists created.
         self.ui_builder.get_object(
@@ -311,7 +320,7 @@ class voting_application(pygubu.TkApplication):
 
         # Create combo box of positions currently available to vote.
         positions = classDesign.Position()
-        position_list = format_for_combo(positions.list_all_positions())
+        position_list = self.format_for_combo(positions.list_all_positions())
 
         # Set choices in combo boxes to lists created.
         self.ui_builder.get_object(
@@ -482,7 +491,9 @@ class voting_application(pygubu.TkApplication):
     # Then format them to display them on the user interface.
     def results_view_select_position(self):
         # Get input from the interface.
-        self.voting_position = self.get_cmbo_id('bkend_sel_results_pos_pos_cmbobx')
+        self.voting_position = self.get_cmbo_id(
+            'bkend_sel_results_pos_pos_cmbobx'
+        )
 
         election = self.get_cmbo_id('bkend_sel_results_pos_election_cmbobx')
 
@@ -504,8 +515,6 @@ class voting_application(pygubu.TkApplication):
             self.ui_builder.get_object(
                 'bkend_sel_results_pos_error_lbl'
             ).configure(text="Error: Enter data for both fields.")
-
-
 
     # Generates a graph based on the results for the position.
     def display_graph(self):
@@ -687,12 +696,17 @@ class voting_application(pygubu.TkApplication):
 
                 # Create combo box of positions currently available to vote.
                 positions = classDesign.Position()
-                position_list = format_for_combo(positions.list_available_voting_positions(student_login.get_id()))
+                
+                position_list = self.format_for_combo(
+                    positions.list_available_voting_positions(
+                        student_login.get_id()
+                    )
+                )
 
                 # Set choices in combo boxes to lists created.
                 self.ui_builder.get_object(
-                    'stdnt_vote_pos_election_cmbobx'
-                ).configure(values=current_election)
+                    'stdnt_vote_pos_election_lbl'
+                ).configure(text=current_election[0])
 
                 self.ui_builder.get_object(
                     'stdnt_vote_pos_pos_cmbobx'
@@ -712,9 +726,14 @@ class voting_application(pygubu.TkApplication):
     # Execute vote for the selected positions on the screen.
     def vote_select_position(self):
         try:
-            election = self.get_cmbo_id('stdnt_vote_pos_election_cmbobx')
+            
+            # Create election instance, append to list the election times
+            elections = classDesign.Election()
+            current_election = elections.get_current_election()[0][0]
 
-            self.voting_position = self.get_cmbo_id('stdnt_vote_pos_pos_cmbobx')
+            self.voting_position = self.get_cmbo_id(
+                'stdnt_vote_pos_pos_cmbobx'
+            )
         except IndexError:
             # If error (none selected) change label text to error message.
             self.ui_builder.get_object(
@@ -722,11 +741,11 @@ class voting_application(pygubu.TkApplication):
             ).configure(text="Please enter data for all fields.")
         else:
             # If not except, continue.
-            if None not in (self.voting_position, election):
+            if None not in (self.voting_position, current_election):
                 # If input fields on the page are not empty.
                 self.change_frame('stdnt_vote_frm')
 
-                # Get list of candidates that have an application for the position.
+                # Get list of candidates that have an application for position.
                 position = classDesign.Position()
                 candidate_data = position.list_for_position(
                     self.voting_position
@@ -849,8 +868,13 @@ class voting_application(pygubu.TkApplication):
                 fourth_choice = None
             else:
                 # Else get values from user input.
-                third_choice = self.get_cmbo_id('stdnt_vote_third_choice_cmbobx')
-                fourth_choice = self.get_cmbo_id('stdnt_vote_fourth_choice_cmbobx')
+                third_choice = self.get_cmbo_id(
+                    'stdnt_vote_third_choice_cmbobx'
+                )
+                
+                fourth_choice = self.get_cmbo_id(
+                    'stdnt_vote_fourth_choice_cmbobx'
+                )
 
             # Submit votes.
             student.cast_votes(
@@ -875,7 +899,7 @@ class voting_application(pygubu.TkApplication):
 
         # Create combo box of positions currently available to vote.
         positions = classDesign.Position()
-        position_list = format_for_combo(positions.list_election_positions())
+        position_list = self.format_for_combo(positions.list_election_positions())
 
         # Set choices in combo boxes to lists created.
         self.ui_builder.get_object(
