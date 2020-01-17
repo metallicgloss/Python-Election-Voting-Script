@@ -444,6 +444,7 @@ class voting_application(pygubu.TkApplication):
         results_array = results.get_position_total_results(self.voting_position)
 
         # Getting the data for each bar on the graph (below)
+        #Goruping votes to different candidates
         candidate_one = tuple([
             results_array[0][1],
             results_array[0][2],
@@ -480,19 +481,19 @@ class voting_application(pygubu.TkApplication):
         barWidth = 0.25
 
         # Used to calculate where to place the bars
-        r1 = np.arange(len(candidate_one))
+        r1 = np.arange(len(candidate_one)) # Creates evenly spaced values depending on the legth of candidate_one
 
-        r2 = [x + barWidth for x in r1]
+        r2 = [x + barWidth for x in r1] #Used to create the different bars at specific width 
         r3 = [x + barWidth for x in r2]
         r4 = [x + barWidth for x in r3]
 
         plt.bar(
-            r1,
-            candidate_one,
-            color='blue',
-            width=barWidth,
-            edgecolor='white',
-            label='Candidate1'
+            r1, #Used for locating where the bar should be
+            candidate_one, #candidate ones votes, 1st, 2nd, 3rd and 4th
+            color='blue', #colour of the bar
+            width=barWidth, #The bar width as stated earlier
+            edgecolor='white', #Line colour for bar
+            label='Candidate1' #The label which is shown on the graph so you can identify 
         )
         plt.bar(
             r2,
@@ -529,8 +530,8 @@ class voting_application(pygubu.TkApplication):
             ['First', 'Second', 'Third', 'Fourth']
         )
 
-        plt.legend()
-        plt.show()
+        plt.legend() #automatically creates a legend for any labeled plot elements:
+        plt.show() # show the bar chart
 
     # ----------------------------------------------------------------------- #
     #                       2.5 Frontent Menu Functions                       #
