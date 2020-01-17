@@ -3,7 +3,6 @@ import os
 import sys
 import pygubu
 import hashlib
-import datetime
 import binascii
 import classDesign
 import mysql.connector
@@ -11,6 +10,7 @@ import connectionString
 
 import numpy as np
 import tkinter as tk
+from datetime import datetime
 import matplotlib.pyplot as plt
 
 from mysql.connector import Error
@@ -142,7 +142,7 @@ class voting_application(pygubu.TkApplication):
             element + '_fourth_lbl'
         ).configure(text=fourth)
 
-    def display_position_results(results, page, percentage):
+    def display_position_results(self, results, page, percentage):
         self.display_candidate_results(
             page + "_cand_one",
             results[0][0],
@@ -196,7 +196,7 @@ class voting_application(pygubu.TkApplication):
             )
 
             self.ui_builder.get_object(
-                'stdnt_bkend_view_results_winner_percentage_lbl'
+                page + "_winner_percentage_lbl"
             ).configure(text="Winner Total Percentage: " + percent + "%")
 
     def format_for_combo(self, data):
@@ -428,12 +428,12 @@ class voting_application(pygubu.TkApplication):
     def create_election(self):
         # Get user input from the page, parse input as best as possible using
         # library into standard datetime format.
-        start_date_time = parse(self.ui_builder.get_object(
+        start_date_time = datetime.strptime((self.ui_builder.get_object(
             'bkend_create_election_start_txtbx'
-        ).get())
-        end_date_time = parse(self.ui_builder.get_object(
+        ).get()), "%H:%M %d/%m/%Y")
+        end_date_time = datetime.strptime((self.ui_builder.get_object(
             'bkend_create_election_end_txbx'
-        ).get())
+        ).get()), "%H:%M %d/%m/%Y")
 
         if None not in (start_date_time, end_date_time):
             # If input fields on the page are not empty.
@@ -448,12 +448,12 @@ class voting_application(pygubu.TkApplication):
             else:
                 # If not valid, alert user.
                 self.ui_builder.get_object(
-                    'bkend_bkend_create_election_error_lbl'
+                    'bkend_create_election_error_lbl'
                 ).configure(text="Error: Invalid end date.")
         else:
             # Else change label text to error message.
             self.ui_builder.get_object(
-                'bkend_bkend_create_election_error_lbl'
+                'bkend_create_election_error_lbl'
             ).configure(text="Error: Missing data from input fields.")
 
     # Submit application for candidate to current available election.
@@ -941,7 +941,7 @@ class voting_application(pygubu.TkApplication):
             # Include percentage calculation.
             self.display_position_results(
                 results.get_pos_total_results(position),
-                "stdnt_bkend_view_results",
+                "stdnt_pos_results",
                 True
             )
 
