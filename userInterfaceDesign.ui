@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <interface>
-  <object id="bkend_create_cand_application_frame" class="ttk.Frame">
+  <object id="bkend_create_cand_app_frm" class="ttk.Frame">
     <property name="height">275</property>
     <property name="padding">50</property>
     <property name="width">730</property>
@@ -118,7 +118,7 @@
       </object>
     </child>
   </object>
-  <object id="bkend_create_cand_frame" class="ttk.Frame">
+  <object id="bkend_create_cand_frm" class="ttk.Frame">
     <property name="height">250</property>
     <property name="padding">50</property>
     <property name="relief">flat</property>
@@ -225,7 +225,7 @@
       </object>
     </child>
   </object>
-  <object id="bkend_create_election_frame" class="ttk.Frame">
+  <object id="bkend_create_election_frm" class="ttk.Frame">
     <property name="height">250</property>
     <property name="padding">50</property>
     <property name="relief">flat</property>
@@ -381,7 +381,7 @@
       </object>
     </child>
     <child>
-      <object id="student_password_lbl" class="ttk.Label">
+      <object id="bkend_create_stdnt_passwd_lbl" class="ttk.Label">
         <property name="text" translatable="yes">Password</property>
         <layout>
           <property name="column">0</property>
@@ -393,7 +393,7 @@
       </object>
     </child>
     <child>
-      <object id="student_password_txtbx" class="ttk.Entry">
+      <object id="bkend_create_stdnt_passwd_txbx" class="ttk.Entry">
         <property name="show">•</property>
         <property name="width">102</property>
         <layout>
@@ -405,7 +405,7 @@
       </object>
     </child>
     <child>
-      <object id="create_student_btn" class="ttk.Button">
+      <object id="bkend_create_stdnt_confirm_btn" class="ttk.Button">
         <property name="command">create_student</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Submit</property>
@@ -419,7 +419,7 @@
       </object>
     </child>
     <child>
-      <object id="return_to_backend_btn_1" class="ttk.Button">
+      <object id="bkend_create_stdnt_return_btn" class="ttk.Button">
         <property name="command">return_to_backend</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Cancel</property>
@@ -432,7 +432,7 @@
       </object>
     </child>
     <child>
-      <object id="create_student_error_lbl" class="ttk.Label">
+      <object id="bkend_create_stdnt_error_lbl" class="ttk.Label">
         <property name="font">{Montserrat SemiBold} 12 {}</property>
         <property name="foreground">#ff0000</property>
         <layout>
@@ -444,7 +444,7 @@
       </object>
     </child>
   </object>
-  <object id="bkend_menu_frame" class="ttk.Frame">
+  <object id="bkend_menu_frm" class="ttk.Frame">
     <property name="height">375</property>
     <property name="padding">50</property>
     <property name="relief">flat</property>
@@ -467,7 +467,7 @@
       </object>
     </child>
     <child>
-      <object id="bkend_menu_create_student_btn" class="ttk.Button">
+      <object id="bkend_menu_bkend_create_stdnt_confirm_btn" class="ttk.Button">
         <property name="command">menu_create_student_voter</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Create Student Voter</property>
