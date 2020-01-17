@@ -355,8 +355,8 @@ class Election:
             WHERE `electionStartTime` < %s \
             AND `electionEndTime` > %s",
             [
-                datetime.datetime.now(),
-                datetime.datetime.now()
+                datetime.now(),
+                datetime.now()
             ]
         )
 
