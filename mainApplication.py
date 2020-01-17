@@ -108,33 +108,33 @@ class voting_application(pygubu.TkApplication):
 
         # Connect buttons to methods.
         self.ui_builder.connect_callbacks(self)
-        
+
     # Function get the ID from a user selected combobox.
     def get_cmbo_id(self, element_id):
         return (self.ui_builder.get_object(element_id).get()).split()[0]
-        
+
     # Sets results page labels, helps to avoid massive amounts of duplication.
     def display_candidate_results(self, element, name, first, second, third, fourth):
         self.ui_builder.get_object(
             element + '_name_lbl'
         ).configure(text=name)
-        
+
         self.ui_builder.get_object(
             element + '_first_lbl'
         ).configure(text=first)
-        
+
         self.ui_builder.get_object(
             element + '_second_lbl'
         ).configure(text=second)
-        
+
         self.ui_builder.get_object(
             element + '_third_lbl'
         ).configure(text=third)
-        
+
         self.ui_builder.get_object(
             element + '_fourth_lbl'
         ).configure(text=fourth)
-        
+
     def display_position_results(results, page, percentage):
         self.display_candidate_results(
             page + "_cand_one",
@@ -174,25 +174,30 @@ class voting_application(pygubu.TkApplication):
         self.ui_builder.get_object(
             page + "_winner_name_lbl"
         ).configure(text="Winner: " + results[4])
-        
+
         self.ui_builder.get_object(
             page + "_winner_votes_lbl"
         ).configure(text="Winner Total Votes: " + results[5])
-        
+
         self.ui_builder.get_object(
             page + "_total_votes_lbl"
         ).configure(text="Position total votes: " + results[6])
-        
+
         if(percentage == True):
             percent = str(
-                "%.2f" % ((int(results[5]) / int(results[6]))*100)
-            ) 
-            
+                "%.2f" % ((int(results[5]) / int(results[6])) * 100)
+            )
+
             self.ui_builder.get_object(
                 'stdnt_bkend_view_results_winner_percentage_lbl'
             ).configure(text="Winner Total Percentage: " + percent + "%")
-            
-        
+
+    def format_for_combo(self, data):
+        list = []
+        for item in data:
+            list.append(str(item[0]) + " - " + item[1])
+
+        return list
 
     # ----------------------------------------------------------------------- #
     #                    2.2 Main Menu Navigation Functions                   #
@@ -273,7 +278,7 @@ class voting_application(pygubu.TkApplication):
 
         # Create position, append to list the remaining available
         positions = classDesign.Position()
-        available_positions = positions.list_all_available_positions_formatted()
+        available_positions = format_for_combo(positions.list_positions_open_for_apps())
 
         # Create election instance, append to list the election times
         elections = classDesign.Election()
@@ -281,17 +286,17 @@ class voting_application(pygubu.TkApplication):
 
         # Create candidate instance, append to list the candidate names
         candidates = classDesign.Candidate()
-        available_candidates = candidates.list_formatted()
+        available_candidates = format_for_combo(candidates.list())
 
         # Set choices in combo boxes to lists created.
         self.ui_builder.get_object(
             'bkend_create_cand_election_cmbobx'
         ).configure(values=current_election)
-        
+
         self.ui_builder.get_object(
             'bkend_create_cand_cand_cmbobx'
         ).configure(values=available_candidates)
-        
+
         self.ui_builder.get_object(
             'bkend_create_cand_pos_cmbobx'
         ).configure(values=available_positions)
@@ -306,13 +311,13 @@ class voting_application(pygubu.TkApplication):
 
         # Create combo box of positions currently available to vote.
         positions = classDesign.Position()
-        position_list = positions.list_all_positions_formatted()
+        position_list = format_for_combo(positions.list_all_positions())
 
         # Set choices in combo boxes to lists created.
         self.ui_builder.get_object(
             'bkend_sel_results_pos_election_cmbobx'
         ).configure(values=current_election)
-        
+
         self.ui_builder.get_object(
             'bkend_sel_results_pos_pos_cmbobx'
         ).configure(values=position_list)
@@ -384,7 +389,7 @@ class voting_application(pygubu.TkApplication):
         name = self.ui_builder.get_object(
             'bkend_create_cand_name_txtbx'
         ).get()
-        
+
         email = self.ui_builder.get_object(
             'bkend_create_cand_email_txtbx'
         ).get()
@@ -447,9 +452,9 @@ class voting_application(pygubu.TkApplication):
         # Get user input from the page
         # Then split on newline and get 1st element to get ID of each.
         election = self.get_cmbo_id('bkend_create_cand_election_cmbobx')
-        
+
         candidate = self.get_cmbo_id('bkend_create_cand_cand_cmbobx')
-        
+
         position = self.get_cmbo_id('bkend_create_cand_pos_cmbobx')
 
         if(election is not None):
@@ -478,7 +483,7 @@ class voting_application(pygubu.TkApplication):
     def results_view_select_position(self):
         # Get input from the interface.
         self.voting_position = self.get_cmbo_id('bkend_sel_results_pos_pos_cmbobx')
-        
+
         election = self.get_cmbo_id('bkend_sel_results_pos_election_cmbobx')
 
         if None not in (self.voting_position, election):
@@ -486,21 +491,21 @@ class voting_application(pygubu.TkApplication):
             self.change_frame('bkend_bkend_view_results_frm')
 
             results = classDesign.Results()
-            
+
             # Call function to output results to the screen.
             self.display_position_results(
                 results.get_pos_total_results(self.voting_position),
                 "bkend_view_results",
                 False
             )
-            
+
         else:
             # Else change label text to error message.
             self.ui_builder.get_object(
                 'bkend_sel_results_pos_error_lbl'
             ).configure(text="Error: Enter data for both fields.")
 
-    
+
 
     # Generates a graph based on the results for the position.
     def display_graph(self):
@@ -546,34 +551,34 @@ class voting_application(pygubu.TkApplication):
 
         # Used to calculate where to place the bars
         # Creates evenly spaced values depending on the length of candidate_one
-        r1 = np.arange(len(candidate_one)) 
+        r1 = np.arange(len(candidate_one))
 
-        # Used to create the different bars at specific width 
-        r2 = [x + barWidth for x in r1] 
+        # Used to create the different bars at specific width
+        r2 = [x + barWidth for x in r1]
         r3 = [x + barWidth for x in r2]
         r4 = [x + barWidth for x in r3]
 
         # Commented example, repeat for all 4 candidates.
         plt.bar(
             # Used for locating where the bar should be
-            r1, 
-            
+            r1,
+
             # candidate ones votes, 1st, 2nd, 3rd and 4th
-            candidate_one, 
-            
+            candidate_one,
+
             # colour of the bar
-            color='blue', 
-            
+            color='blue',
+
             # The bar width as stated earlier
-            width=barWidth, 
-            
+            width=barWidth,
+
             # Line colour for bar
-            edgecolor='white', 
-            
-            # The label which is shown on the graph so you can identify 
-            label='Candidate1' 
+            edgecolor='white',
+
+            # The label which is shown on the graph so you can identify
+            label='Candidate1'
         )
-        
+
         plt.bar(
             r2,
             candidate_two,
@@ -582,7 +587,7 @@ class voting_application(pygubu.TkApplication):
             edgecolor='white',
             label='Candidate2'
         )
-        
+
         plt.bar(
             r3,
             candidate_three,
@@ -591,7 +596,7 @@ class voting_application(pygubu.TkApplication):
             edgecolor='white',
             label='Candidate3'
         )
-        
+
         plt.bar(
             r4,
             candidate_four,
@@ -612,10 +617,10 @@ class voting_application(pygubu.TkApplication):
         )
 
         # Automatically creates a legend for any labelled plot elements:
-        plt.legend() 
-        
+        plt.legend()
+
         # Show the bar chart
-        plt.show() 
+        plt.show()
 
     # ----------------------------------------------------------------------- #
     #                       2.5 Frontend Menu Functions                       #
@@ -659,7 +664,7 @@ class voting_application(pygubu.TkApplication):
         username = self.ui_builder.get_object(
             'stdnt_login_username_txtbx'
         ).get()
-        
+
         password = self.ui_builder.get_object(
             'stdnt_login_passwd_txtbx'
         ).get()
@@ -682,19 +687,13 @@ class voting_application(pygubu.TkApplication):
 
                 # Create combo box of positions currently available to vote.
                 positions = classDesign.Position()
-                position_list = []
-                for position in positions.list_available_voting_positions(student_login.get_id()):
-                    position_list.append(
-                        str(position[0])
-                        + " - "
-                        + position[1]
-                    )
+                position_list = format_for_combo(positions.list_available_voting_positions(student_login.get_id()))
 
                 # Set choices in combo boxes to lists created.
                 self.ui_builder.get_object(
                     'stdnt_vote_pos_election_cmbobx'
                 ).configure(values=current_election)
-                
+
                 self.ui_builder.get_object(
                     'stdnt_vote_pos_pos_cmbobx'
                 ).configure(values=position_list)
@@ -714,7 +713,7 @@ class voting_application(pygubu.TkApplication):
     def vote_select_position(self):
         try:
             election = self.get_cmbo_id('stdnt_vote_pos_election_cmbobx')
-            
+
             self.voting_position = self.get_cmbo_id('stdnt_vote_pos_pos_cmbobx')
         except IndexError:
             # If error (none selected) change label text to error message.
@@ -760,15 +759,15 @@ class voting_application(pygubu.TkApplication):
         self.ui_builder.get_object(
             start_element + '_btn'
         ).configure(state="disabled")
-        
+
         self.ui_builder.get_object(
             start_element + '_cmbobx'
         ).configure(state="disabled")
-        
+
         self.ui_builder.get_object(
             end_element + '_btn'
         ).configure(state="normal")
-        
+
         self.ui_builder.get_object(
             end_element + '_cmbobx'
         ).configure(state="normal", values=self.candidate_list)
@@ -876,13 +875,13 @@ class voting_application(pygubu.TkApplication):
 
         # Create combo box of positions currently available to vote.
         positions = classDesign.Position()
-        position_list = positions.list_election_positions_formatted()
+        position_list = format_for_combo(positions.list_election_positions())
 
         # Set choices in combo boxes to lists created.
         self.ui_builder.get_object(
             'stdnt_results_sel_election_confirm_cmbobx'
         ).configure(values=current_election)
-        
+
         self.ui_builder.get_object(
             'stdnt_results_sel_pos_cmbobx'
         ).configure(values=position_list)
@@ -911,9 +910,9 @@ class voting_application(pygubu.TkApplication):
         if position != "":
             self.change_frame('stdnt_pos_results_frm')
             results = classDesign.Results()
-            
+
             results = classDesign.Results()
-            
+
             # Call function to output results to the screen.
             # Include percentage calculation.
             self.display_position_results(
@@ -921,7 +920,7 @@ class voting_application(pygubu.TkApplication):
                 "stdnt_bkend_view_results",
                 True
             )
-            
+
 
 # --------------------------------------------------------------------------- #
 #                             3. Main Program init                            #

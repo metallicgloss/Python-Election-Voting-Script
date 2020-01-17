@@ -32,21 +32,13 @@ class Control:
     def get_id(self):
         raise NotImplementedError("Subclass must implement abstract method.")
 
-    # List all, not required.
-    def list(self):
-        raise NotImplementedError("Subclass must implement abstract method.")
-
-    # Listing all with ID pre-pended for cmbo box, not required.
-    def list_formatted(self):
-        raise NotImplementedError("Subclass must implement abstract method.")
-
 # --------------------------------------------------------------------------- #
 #                              2. Student Class                               #
 # --------------------------------------------------------------------------- #
 
 # Define student class that inherits from the abstract class Control.
 class Student(Control):
-    
+
     # Initialise student class.
     def __init__(self, username="", password=""):
         # Define class variables.
@@ -135,7 +127,7 @@ class Student(Control):
         try:
             # Set salt to match the salt value returned in the database.
             self._salt = str(self._select_query_output[0][1])
-            
+
             # Re-gen hash using passed given to see it matches the stored DB value.
             self.get_hashed_password()
 
@@ -210,7 +202,7 @@ class Student(Control):
 
 # Define candidate class.
 class Candidate(Control):
-    
+
     # Initialise candidate class.
     def __init__(self, name="", email="", id=""):
         # Define class variables.
@@ -263,17 +255,6 @@ class Candidate(Control):
             # Return array of all candidates running.
             return query_result
 
-    def list_formatted(self):
-        available_candidates = []
-        for candidate in self.list():
-            available_candidates.append(
-                str(candidate[0])
-                + " - "
-                + candidate[1]
-            )
-
-        return available_candidates
-
     # Verify candidate does not have name matching another.
     def verify_unique_name(self):
         # Execute MySQL Query, substitute %s with values with student username.
@@ -311,7 +292,7 @@ class Candidate(Control):
         self.name = query_result[0][0]
 
         return self.name
-        
+
     # Create application for the current election.
     def create_application(self, election_id, position_id):
         self.get_id()
@@ -424,40 +405,18 @@ class Position:
         self.end_time = end_time
         self._id = ""
 
-    # Return list of positions that are running in an election.
-    def list_election_positions_formatted(self):
-        available_positions = []
-        for position in self.list_election_positions():
-            available_positions.append(str(position[0]) + " - " + position[1])
+    # List all positions currently in the GSU.
+    def list_all_positions(self):
+        # Execute MySQL Query to get all positions
+        mysql_cursor.execute("SELECT * FROM `gsuPositions`")
 
-        return available_positions
-        
-    # Return list of positions available formatted for a combobox.
-    def list_all_available_positions_formatted(self):
-        available_positions = []
-        for position in self.get_available_positions():
-            available_positions.append(str(position[0]) + " - " + position[1])
+        # Store query_result as all values returned.
+        query_result = mysql_cursor.fetchall()
 
-        return available_positions
-        
-    # Return list for all positions that have applicants formatted.
-    def list_all_available_voting_positions_formatted(self):
-        available_positions = []
-        for position in self.list_available_voting_positions():
-            available_positions.append(str(position[0]) + " - " + position[1])
+        return query_result
 
-        return available_positions
-
-    # Return list of positions formatted for a combobox.
-    def list_all_positions_formatted(self):
-        available_positions = []
-        for position in self.list_all_positions():
-            available_positions.append(str(position[0]) + " - " + position[1])
-
-        return available_positions
-        
-    # List all available positions to apply for.
-    def get_available_positions(self):
+    # Return list of positions not at max candidates.
+    def list_positions_open_for_apps(self):
         # Execute MySQL Query
 
         election = Election()
@@ -481,17 +440,8 @@ class Position:
 
         return query_result
 
-    # List all positions currently in the GSU.
-    def list_all_positions(self):
-        # Execute MySQL Query to get all positions
-        mysql_cursor.execute("SELECT * FROM `gsuPositions`")
 
-        # Store query_result as all values returned.
-        query_result = mysql_cursor.fetchall()
-
-        return query_result
-
-    # List all available positions to apply for.
+    # Return list of positions for a position that the student hasn't for yet.
     def list_available_voting_positions(self, student_id):
         election = Election()
         election_id = election.get_current_election()
@@ -524,8 +474,8 @@ class Position:
         query_result = mysql_cursor.fetchall()
 
         return query_result
-        
-    # List all available positions to apply for.
+
+    # Return list of positions with candidates in an election.
     def list_election_positions(self):
         election = Election()
         election_id = election.get_current_election()
