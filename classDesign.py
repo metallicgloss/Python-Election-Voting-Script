@@ -36,7 +36,7 @@ class Control:
     def list(self):
         raise NotImplementedError("Subclass must implement abstract method.")
 
-    # Listing all with ID prepended for cmbo box, not required.
+    # Listing all with ID pre-pended for cmbo box, not required.
     def list_formatted(self):
         raise NotImplementedError("Subclass must implement abstract method.")
 
@@ -365,7 +365,7 @@ class Election:
         # Inform user of successful creation.
         messagebox.showinfo('Success', 'Created successfully.')
 
-    # Check status of any election curretly running.
+    # Check status of any election currently running.
     def get_current_election(self):
         # Execute MySQL Query
         mysql_cursor.execute(
@@ -552,7 +552,7 @@ class Position:
 
         return query_result
 
-    # List all candiates for given position in election.
+    # List all candidates for given position in election.
     def list_for_position(self, voting_position):
         election = Election()
         election_id = election.get_current_election()
@@ -630,7 +630,7 @@ class Results:
 
         for position in position_list:
             try:
-                totals = self.get_position_total_results(position[0])
+                totals = self.get_pos_total_results(position[0])
                 output_data += position[1] + " - " + totals[4] + "\n"
             except IndexError:
                 break
@@ -638,7 +638,7 @@ class Results:
         return output_data
 
     # Return list of the final results for given position.
-    def get_position_total_results(self, position_id):
+    def get_pos_total_results(self, position_id):
         election = Election()
         election_id = election.get_current_election()
         election_id = election_id[0][0]
