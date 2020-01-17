@@ -1359,6 +1359,7 @@
           <property name="column">0</property>
           <property name="propagate">True</property>
           <property name="row">1</property>
+          <property name="sticky">w</property>
         </layout>
       </object>
     </child>
@@ -1368,6 +1369,7 @@
           <property name="column">1</property>
           <property name="propagate">True</property>
           <property name="row">1</property>
+          <property name="sticky">w</property>
         </layout>
       </object>
     </child>
@@ -1377,6 +1379,7 @@
           <property name="column">0</property>
           <property name="propagate">True</property>
           <property name="row">2</property>
+          <property name="sticky">w</property>
         </layout>
       </object>
     </child>
@@ -1386,6 +1389,7 @@
           <property name="column">1</property>
           <property name="propagate">True</property>
           <property name="row">2</property>
+          <property name="sticky">w</property>
         </layout>
       </object>
     </child>
@@ -1395,6 +1399,7 @@
           <property name="column">0</property>
           <property name="propagate">True</property>
           <property name="row">3</property>
+          <property name="sticky">w</property>
         </layout>
       </object>
     </child>
@@ -1404,6 +1409,7 @@
           <property name="column">1</property>
           <property name="propagate">True</property>
           <property name="row">3</property>
+          <property name="sticky">w</property>
         </layout>
       </object>
     </child>
@@ -1413,6 +1419,7 @@
           <property name="column">0</property>
           <property name="propagate">True</property>
           <property name="row">4</property>
+          <property name="sticky">w</property>
         </layout>
       </object>
     </child>
@@ -1422,6 +1429,7 @@
           <property name="column">1</property>
           <property name="propagate">True</property>
           <property name="row">4</property>
+          <property name="sticky">w</property>
         </layout>
       </object>
     </child>
@@ -1431,6 +1439,7 @@
           <property name="column">0</property>
           <property name="propagate">True</property>
           <property name="row">5</property>
+          <property name="sticky">w</property>
         </layout>
       </object>
     </child>
@@ -1440,6 +1449,7 @@
           <property name="column">0</property>
           <property name="propagate">True</property>
           <property name="row">6</property>
+          <property name="sticky">w</property>
         </layout>
       </object>
     </child>
@@ -1449,6 +1459,7 @@
           <property name="column">0</property>
           <property name="propagate">True</property>
           <property name="row">7</property>
+          <property name="sticky">w</property>
         </layout>
       </object>
     </child>
@@ -1459,6 +1470,7 @@
         <property name="width">100</property>
         <layout>
           <property name="column">0</property>
+          <property name="columnspan">2</property>
           <property name="pady">10</property>
           <property name="propagate">True</property>
           <property name="row">8</property>
@@ -1468,18 +1480,19 @@
   </object>
   <object id="student_view_election_results_frame" class="ttk.Frame">
     <property name="height">800</property>
-    <property name="padding">50</property>
     <property name="relief">flat</property>
     <property name="width">730</property>
     <layout>
       <property name="column">0</property>
+      <property name="padx">50</property>
       <property name="propagate">False</property>
       <property name="row">0</property>
     </layout>
     <child>
       <object id="election_results_title_lbl" class="ttk.Label">
-        <property name="font">{Montserrat SemiBold} 12 {}</property>
-        <property name="padding">30</property>
+        <property name="font">{Montserrat Medium} 14 {}</property>
+        <property name="justify">center</property>
+        <property name="padding">50</property>
         <property name="text" translatable="yes">Election Results</property>
         <layout>
           <property name="column">0</property>
@@ -1499,6 +1512,7 @@
     </child>
     <child>
       <object id="return_to_student_btn_3" class="ttk.Button">
+        <property name="command">return_to_student</property>
         <property name="text" translatable="yes">Back to Login</property>
         <property name="width">100</property>
         <layout>
