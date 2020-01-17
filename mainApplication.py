@@ -26,8 +26,8 @@ from tkinter import messagebox
 #                            2.2 Main Menu Navigation Functions               #
 #                            2.3 Backend Menu Functions                       #
 #                            2.4 Backend Extra Functions                      #
-#                            2.5 Frontent Menu Functions                      #
-#                            2.6 Frontent Extra Functions                     #
+#                            2.5 Frontend Menu Functions                      #
+#                            2.6 Frontend Extra Functions                     #
 #                            3. Main Program init                             #
 # --------------------------------------------------------------------------- #
 
@@ -68,6 +68,12 @@ class voting_application(pygubu.TkApplication):
     #                                                                         #
     #                               change_frame                              #
     #         Dynamically change between frames and reconnect buttons.        #
+    #                                                                         #
+    #                               get_cmbo_id                               #
+    #         Gets and returns the ID of the element in the combo box.        #
+    #                                                                         #
+    #                              display_results                            #
+    #          Set the labels on screen to match the results values.          #
     # ----------------------------------------------------------------------- #
 
     # Initialise voting application interface.
@@ -106,6 +112,86 @@ class voting_application(pygubu.TkApplication):
     # Function get the ID from a user selected combobox.
     def get_cmbo_id(self, element_id):
         return (self.ui_builder.get_object(element_id).get()).split()[0]
+        
+    # Sets results page labels, helps to avoid massive amounts of duplication.
+    def display_candidate_results(self, element, name, first, second, third, fourth):
+        self.ui_builder.get_object(
+            element + '_name_lbl'
+        ).configure(text=name)
+        
+        self.ui_builder.get_object(
+            element + '_first_lbl'
+        ).configure(text=first)
+        
+        self.ui_builder.get_object(
+            element + '_second_lbl'
+        ).configure(text=second)
+        
+        self.ui_builder.get_object(
+            element + '_third_lbl'
+        ).configure(text=third)
+        
+        self.ui_builder.get_object(
+            element + '_fourth_lbl'
+        ).configure(text=fourth)
+        
+    def display_position_results(results, page, percentage):
+        self.display_candidate_results(
+            page + "_cand_one",
+            results[0][0],
+            results[0][1],
+            results[0][2],
+            results[0][3],
+            results[0][4]
+        )
+
+        self.display_candidate_results(
+            page + "_cand_two",
+            results[1][0],
+            results[1][1],
+            results[1][2],
+            results[1][3],
+            results[1][4]
+        )
+        self.display_candidate_results(
+            page + "_cand_three",
+            results[2][0],
+            results[2][1],
+            results[2][2],
+            results[2][3],
+            results[2][4]
+        )
+        self.display_candidate_results(
+            page + "_cand_four",
+            results[3][0],
+            results[3][1],
+            results[3][2],
+            results[3][3],
+            results[3][4]
+        )
+
+        # Final labels for the winner and total votes
+        self.ui_builder.get_object(
+            page + "_winner_name_lbl"
+        ).configure(text="Winner: " + results[4])
+        
+        self.ui_builder.get_object(
+            page + "_winner_votes_lbl"
+        ).configure(text="Winner Total Votes: " + results[5])
+        
+        self.ui_builder.get_object(
+            page + "_total_votes_lbl"
+        ).configure(text="Position total votes: " + results[6])
+        
+        if(percentage == True):
+            percent = str(
+                "%.2f" % ((int(results[5]) / int(results[6]))*100)
+            ) 
+            
+            self.ui_builder.get_object(
+                'stdnt_bkend_view_results_winner_percentage_lbl'
+            ).configure(text="Winner Total Percentage: " + percent + "%")
+            
         
 
     # ----------------------------------------------------------------------- #
@@ -161,7 +247,7 @@ class voting_application(pygubu.TkApplication):
     #        Changes frame and loads positions and elections to screen.       #
     # ----------------------------------------------------------------------- #
 
-    # Exit backend menu to return to startup.
+    # Exit backend menu to return to start-up.
     def return_to_startup(self):
         self.change_frame('startup_menu_frm')
 
@@ -237,6 +323,9 @@ class voting_application(pygubu.TkApplication):
     #                              create_student                             #
     #      Takes user input, validates it and executes student creation.      #
     #                                                                         #
+    #                              create_student                             #
+    #      Takes user input, validates it and executes student creation.      #
+    #                                                                         #
     #                             create_candidate                            #
     #     Takes user input, validates it and executes candidate creation.     #
     #                                                                         #
@@ -248,9 +337,6 @@ class voting_application(pygubu.TkApplication):
     #                                                                         #
     #                      results_view_select_position                       #
     #                Output the final results for the position.               #
-    #                                                                         #
-    #                              display_results                            #
-    #          Set the labels on screen to match the results values.          #
     #                                                                         #
     #                              display_graph                              #
     # Generate and display a graph to visualise the results for the position. #
@@ -400,126 +486,66 @@ class voting_application(pygubu.TkApplication):
             self.change_frame('bkend_bkend_view_results_frm')
 
             results = classDesign.Results()
-            results_array = results.get_position_total_results(self.voting_position)
-
-            self.display_results(
-                "bkend_view_results_cand_one",
-                results_array[0][0],
-                results_array[0][1],
-                results_array[0][2],
-                results_array[0][3],
-                results_array[0][4]
+            
+            # Call function to output results to the screen.
+            self.display_position_results(
+                results.get_pos_total_results(self.voting_position),
+                "bkend_view_results",
+                False
             )
-
-            self.display_results(
-                "bkend_view_results_cand_two",
-                results_array[1][0],
-                results_array[1][1],
-                results_array[1][2],
-                results_array[1][3],
-                results_array[1][4]
-            )
-            self.display_results(
-                "bkend_view_results_cand_three",
-                results_array[2][0],
-                results_array[2][1],
-                results_array[2][2],
-                results_array[2][3],
-                results_array[2][4]
-            )
-            self.display_results(
-                "bkend_view_results_cand_four",
-                results_array[3][0],
-                results_array[3][1],
-                results_array[3][2],
-                results_array[3][3],
-                results_array[3][4]
-            )
-
-            # Final labels for the winner and total votes
-            self.ui_builder.get_object(
-                'bkend_view_results_winner_name_lbl'
-            ).configure(text="Winner: " + results_array[4])
-            self.ui_builder.get_object(
-                'bkend_view_results_winner_votes_lbl'
-            ).configure(text="Winner Total Votes: " + results_array[5])
-            self.ui_builder.get_object(
-                'bkend_view_results_total_votes_lbl'
-            ).configure(text="Position total votes: " + results_array[6])
-
+            
         else:
             # Else change label text to error message.
             self.ui_builder.get_object(
-                'stdnt_vote_pos_error_lbl'
+                'bkend_sel_results_pos_error_lbl'
             ).configure(text="Error: Enter data for both fields.")
 
-    # Sets results page labels, helps to avoid massive amounts of duplication.
-    def display_results(self, element, name, first, second, third, fourth):
-        self.ui_builder.get_object(
-            element + '_name_lbl'
-        ).configure(text=name)
-        
-        self.ui_builder.get_object(
-            element + '_first_lbl'
-        ).configure(text=first)
-        
-        self.ui_builder.get_object(
-            element + '_second_lbl'
-        ).configure(text=second)
-        
-        self.ui_builder.get_object(
-            element + '_third_lbl'
-        ).configure(text=third)
-        
-        self.ui_builder.get_object(
-            element + '_fourth_lbl'
-        ).configure(text=fourth)
-        pass
+    
 
     # Generates a graph based on the results for the position.
     def display_graph(self):
         results = classDesign.Results()
-        results_array = results.get_position_total_results(self.voting_position)
+        total = results.get_pos_total_results(self.voting_position)
 
         # Getting the data for each bar on the graph (below)
         # Grouping votes to different candidates
         candidate_one = tuple([
-            results_array[0][1],
-            results_array[0][2],
-            results_array[0][3],
-            results_array[0][4]
+            total[0][1],
+            total[0][2],
+            total[0][3],
+            total[0][4]
         ])
 
         candidate_two = [
-            results_array[1][1],
-            results_array[1][2],
-            results_array[1][3],
-            results_array[1][4]
+            total[1][1],
+            total[1][2],
+            total[1][3],
+            total[1][4]
         ]
         candidate_three = [
-            results_array[2][1],
-            results_array[2][2],
-            results_array[2][3],
-            results_array[2][4]
+            total[2][1],
+            total[2][2],
+            total[2][3],
+            total[2][4]
         ]
         candidate_four = [
-            results_array[3][1],
-            results_array[3][2],
-            results_array[3][3],
-            results_array[3][4]
+            total[3][1],
+            total[3][2],
+            total[3][3],
+            total[3][4]
         ]
 
         candidate_names = [
-            results_array[0][0],
-            results_array[1][0],
-            results_array[2][0],
-            results_array[3][0]
+            total[0][0],
+            total[1][0],
+            total[2][0],
+            total[3][0]
         ]
 
         barWidth = 0.25
 
         # Used to calculate where to place the bars
-        # Creates evenly spaced values depending on the legth of candidate_one
+        # Creates evenly spaced values depending on the length of candidate_one
         r1 = np.arange(len(candidate_one)) 
 
         # Used to create the different bars at specific width 
@@ -527,6 +553,7 @@ class voting_application(pygubu.TkApplication):
         r3 = [x + barWidth for x in r2]
         r4 = [x + barWidth for x in r3]
 
+        # Commented example, repeat for all 4 candidates.
         plt.bar(
             # Used for locating where the bar should be
             r1, 
@@ -546,6 +573,7 @@ class voting_application(pygubu.TkApplication):
             # The label which is shown on the graph so you can identify 
             label='Candidate1' 
         )
+        
         plt.bar(
             r2,
             candidate_two,
@@ -554,6 +582,7 @@ class voting_application(pygubu.TkApplication):
             edgecolor='white',
             label='Candidate2'
         )
+        
         plt.bar(
             r3,
             candidate_three,
@@ -562,6 +591,7 @@ class voting_application(pygubu.TkApplication):
             edgecolor='white',
             label='Candidate3'
         )
+        
         plt.bar(
             r4,
             candidate_four,
@@ -581,7 +611,7 @@ class voting_application(pygubu.TkApplication):
             ['First', 'Second', 'Third', 'Fourth']
         )
 
-        # Automatically creates a legend for any labeled plot elements:
+        # Automatically creates a legend for any labelled plot elements:
         plt.legend() 
         
         # Show the bar chart
@@ -599,7 +629,7 @@ class voting_application(pygubu.TkApplication):
         self.change_frame('stdnt_login_frm')
 
     # ----------------------------------------------------------------------- #
-    #                       2.6 Frontent Extra Functions                      #
+    #                       2.6 Frontend Extra Functions                      #
     #                                                                         #
     #                              student_login                              #
     #  Handles password verification, fill comboboxs on position select page. #
@@ -664,6 +694,7 @@ class voting_application(pygubu.TkApplication):
                 self.ui_builder.get_object(
                     'stdnt_vote_pos_election_cmbobx'
                 ).configure(values=current_election)
+                
                 self.ui_builder.get_object(
                     'stdnt_vote_pos_pos_cmbobx'
                 ).configure(values=position_list)
@@ -822,7 +853,7 @@ class voting_application(pygubu.TkApplication):
                 third_choice = self.get_cmbo_id('stdnt_vote_third_choice_cmbobx')
                 fourth_choice = self.get_cmbo_id('stdnt_vote_fourth_choice_cmbobx')
 
-            # Submit votens.
+            # Submit votes.
             student.cast_votes(
                 self.voting_position,
                 self.logged_in_student,
@@ -851,6 +882,7 @@ class voting_application(pygubu.TkApplication):
         self.ui_builder.get_object(
             'stdnt_results_sel_election_confirm_cmbobx'
         ).configure(values=current_election)
+        
         self.ui_builder.get_object(
             'stdnt_results_sel_pos_cmbobx'
         ).configure(values=position_list)
@@ -881,55 +913,14 @@ class voting_application(pygubu.TkApplication):
             results = classDesign.Results()
             
             results = classDesign.Results()
-            results_array = results.get_position_total_results(position)
-
-            self.display_results(
-                "stdnt_bkend_view_results_cand_one",
-                results_array[0][0],
-                results_array[0][1],
-                results_array[0][2],
-                results_array[0][3],
-                results_array[0][4]
+            
+            # Call function to output results to the screen.
+            # Include percentage calculation.
+            self.display_position_results(
+                results.get_pos_total_results(position),
+                "stdnt_bkend_view_results",
+                True
             )
-
-            self.display_results(
-                "stdnt_bkend_view_results_cand_two",
-                results_array[1][0],
-                results_array[1][1],
-                results_array[1][2],
-                results_array[1][3],
-                results_array[1][4]
-            )
-            self.display_results(
-                "stdnt_bkend_view_results_cand_three",
-                results_array[2][0],
-                results_array[2][1],
-                results_array[2][2],
-                results_array[2][3],
-                results_array[2][4]
-            )
-            self.display_results(
-                "stdnt_bkend_view_results_cand_four",
-                results_array[3][0],
-                results_array[3][1],
-                results_array[3][2],
-                results_array[3][3],
-                results_array[3][4]
-            )
-
-            # Final labels for the winner and total votes
-            self.ui_builder.get_object(
-                'stdnt_bkend_view_results_winner_name_lbl'
-            ).configure(text="Winner: " + results_array[4])
-            self.ui_builder.get_object(
-                'stdnt_bkend_view_results_winner_votes_lbl'
-            ).configure(text="Winner Total Votes: " + results_array[5])
-            self.ui_builder.get_object(
-                'stdnt_bkend_view_results_winner_percentage_lbl'
-            ).configure(text="Winner Total Percentage: " + str("%.2f" % ((int(results_array[5]) / int(results_array[6]))*100)) + "%")
-            self.ui_builder.get_object(
-                'stdnt_bkend_view_results_total_votes_lbl'
-            ).configure(text="Position total votes: " + results_array[6])
             
 
 # --------------------------------------------------------------------------- #

@@ -83,6 +83,7 @@
     <child>
       <object id="bkend_create_cand_create_btn" class="ttk.Button">
         <property name="command">create_application</property>
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Submit</property>
         <property name="width">50</property>
         <layout>
@@ -107,6 +108,7 @@
     <child>
       <object id="bkend_create_cand_return_btn" class="ttk.Button">
         <property name="command">return_to_backend</property>
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Cancel</property>
         <property name="width">50</property>
         <layout>
@@ -534,6 +536,7 @@
     <child>
       <object id="bkend_menu_create_application_btn" class="ttk.Button">
         <property name="command">menu_create_application</property>
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Create Candidate Application</property>
         <property name="width">100</property>
         <layout>
@@ -614,6 +617,7 @@
     <child>
       <object id="bkend_sel_results_pos_confirm_btn" class="ttk.Button">
         <property name="command">results_view_select_position</property>
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Submit</property>
         <property name="width">50</property>
         <layout>
@@ -627,6 +631,7 @@
     <child>
       <object id="bkend_sel_results_pos_return_btn" class="ttk.Button">
         <property name="command">return_to_backend</property>
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Cancel</property>
         <property name="width">50</property>
         <layout>
@@ -674,6 +679,7 @@
     <child>
       <object id="bkend_view_results_return_btn" class="ttk.Button">
         <property name="command">return_to_backend</property>
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Back</property>
         <property name="width">100</property>
         <layout>
@@ -984,7 +990,7 @@
     <child>
       <object id="bkend_view_results_graph_btn" class="ttk.Button">
         <property name="command">display_graph</property>
-        <property name="cursor">arrow</property>
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Click to view Graph</property>
         <property name="width">100</property>
         <layout>
@@ -1222,6 +1228,7 @@
     <child>
       <object id="stdnt_results_sel_return_btn" class="ttk.Button">
         <property name="command">return_to_student</property>
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Cancel</property>
         <property name="width">104</property>
         <layout>
@@ -1236,6 +1243,7 @@
     <child>
       <object id="stdnt_results_sel_view_election_results_btn" class="ttk.Button">
         <property name="command">student_view_election_results</property>
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">View Election Results</property>
         <property name="width">104</property>
         <layout>
@@ -1249,6 +1257,7 @@
     <child>
       <object id="stdnt_results_sel_view_pos_results_btn" class="ttk.Button">
         <property name="command">student_view_position_results</property>
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">View Position Results</property>
         <property name="width">50</property>
         <layout>
@@ -1284,6 +1293,7 @@
     <child>
       <object id="stdnt_pos_results_return_btn" class="ttk.Button">
         <property name="command">return_to_student</property>
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Back</property>
         <property name="width">100</property>
         <layout>
@@ -1638,6 +1648,7 @@
     <child>
       <object id="stdnt_election_results_return_btn" class="ttk.Button">
         <property name="command">return_to_student</property>
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Back to Login</property>
         <property name="width">100</property>
         <layout>
@@ -1650,6 +1661,7 @@
     <child>
       <object id="stdnt_election_results_export_btn" class="ttk.Button">
         <property name="command">export_election_results</property>
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Export Results to File</property>
         <property name="width">100</property>
         <layout>
@@ -1706,6 +1718,7 @@
     <child>
       <object id="stdnt_vote_first_choice_btn" class="ttk.Button">
         <property name="command">first_choice_confirm</property>
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Confirm</property>
         <property name="width">40</property>
         <layout>
@@ -1741,6 +1754,7 @@
       <object id="stdnt_vote_second_choice_btn" class="ttk.Button">
         <property name="command">second_choice_confirm</property>
         <property name="state">disabled</property>
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Confirm</property>
         <property name="width">40</property>
         <layout>
@@ -1776,6 +1790,7 @@
       <object id="stdnt_vote_third_choice_btn" class="ttk.Button">
         <property name="command">third_choice_confirm</property>
         <property name="state">disabled</property>
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Confirm</property>
         <property name="width">40</property>
         <layout>
@@ -1811,6 +1826,7 @@
       <object id="stdnt_vote_fourth_choice_btn" class="ttk.Button">
         <property name="command">fourth_choice_confirm</property>
         <property name="state">disabled</property>
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Confirm</property>
         <property name="width">40</property>
         <layout>
@@ -1823,6 +1839,7 @@
     <child>
       <object id="stdnt_vote_return_btn" class="ttk.Button">
         <property name="command">return_to_student</property>
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Cancel</property>
         <property name="width">102</property>
         <layout>
@@ -1916,6 +1933,7 @@
     <child>
       <object id="stdnt_vote_pos_confirm_btn" class="ttk.Button">
         <property name="command">vote_select_position</property>
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Submit</property>
         <property name="width">50</property>
         <layout>
@@ -1929,6 +1947,7 @@
     <child>
       <object id="stdnt_vote_pos_return_btn" class="ttk.Button">
         <property name="command">return_to_student</property>
+        <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Cancel</property>
         <property name="width">50</property>
         <layout>
