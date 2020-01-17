@@ -68,7 +68,7 @@ class Student(Control):
             VALUES (%s, %s, %s)",
             [self.username, self._hashed_password, self._salt]
         )
-        database_connection.commit()
+        db_connect.commit()
 
         # Return ID for use if required.
         return mysql_cursor.lastrowid
@@ -197,7 +197,7 @@ class Student(Control):
         )
 
         # Save changes to the database.
-        database_connection.commit()
+        db_connect.commit()
 
 # --------------------------------------------------------------------------- #
 #                              3. Candidate Class                             #
@@ -223,7 +223,7 @@ class Candidate(Control):
             VALUES (%s, %s)",
             [self.name, self.email]
         )
-        database_connection.commit()
+        db_connect.commit()
 
         # Inform user of successful creation.
         messagebox.showinfo('Success', 'Created successfully.')
@@ -316,7 +316,7 @@ class Candidate(Control):
             VALUES (%s, %s, %s)",
             [self.id, position_id, election_id]
         )
-        database_connection.commit()
+        db_connect.commit()
 
 # --------------------------------------------------------------------------- #
 #                              4. Election Class                              #
@@ -355,7 +355,7 @@ class Election:
             VALUES (%s, %s)",
             [self.start_time, self.end_time]
         )
-        database_connection.commit()
+        db_connect.commit()
 
         # Inform user of successful creation.
         messagebox.showinfo('Success', 'Created successfully.')
