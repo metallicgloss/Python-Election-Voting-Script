@@ -4,7 +4,7 @@ from mainApplication import *
 
 # --------------------------------------------------------------------------- #
 #                                  CONTENTS                                   #
-#                            1. Control Class                                 #
+#                            1. Person Class                                  #
 #                            2. Student Class                                 #
 #                            3. Candidate Class                               #
 #                            4. Election Class                                #
@@ -14,12 +14,12 @@ from mainApplication import *
 
 
 # --------------------------------------------------------------------------- #
-#                              1. Control Class                               #
+#                              1. Person Class                                #
 # --------------------------------------------------------------------------- #
 
-# Define control class
+# Define person class
 # Set basic required variables and methods for primary classes.
-class Control:
+class Person:
     def __init__(self):
         # Define class variables.
         self._select_query_output = ""
@@ -37,10 +37,11 @@ class Control:
 # --------------------------------------------------------------------------- #
 
 # Define student class that inherits from the abstract class Control.
-class Student(Control):
+class Student(Person):
 
     # Initialise student class.
     def __init__(self, username="", password=""):
+        Person.__init__(self)
         # Define class variables.
         self.username = username
         self.password = password
@@ -201,10 +202,11 @@ class Student(Control):
 # --------------------------------------------------------------------------- #
 
 # Define candidate class.
-class Candidate(Control):
+class Candidate(Person):
 
     # Initialise candidate class.
     def __init__(self, name="", email="", id=""):
+        Person.__init__(self)
         # Define class variables.
         self.name = name
         self.email = email
