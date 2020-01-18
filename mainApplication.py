@@ -58,7 +58,7 @@ except Error as e:
 # --------------------------------------------------------------------------- #
 
 # Define primary class to initiate the user interface.
-class voting_application(pygubu.TkApplication):
+class VotingApplication(pygubu.TkApplication):
 
     # ----------------------------------------------------------------------- #
     #                          2.1 Core Functions                             #
@@ -335,9 +335,6 @@ class voting_application(pygubu.TkApplication):
 
     # ----------------------------------------------------------------------- #
     #                       2.4 Backend Extra Functions                       #
-    #                                                                         #
-    #                              create_student                             #
-    #      Takes user input, validates it and executes student creation.      #
     #                                                                         #
     #                              create_student                             #
     #      Takes user input, validates it and executes student creation.      #
@@ -954,7 +951,7 @@ class voting_application(pygubu.TkApplication):
 
 if __name__ == '__main__':
     tkinter_app = tk.Tk()
-    main_application = voting_application(tkinter_app)
+    main_application = VotingApplication(tkinter_app)
     tkinter_app.tk.call(
         'wm', 'iconphoto',
         tkinter_app._w,

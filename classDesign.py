@@ -15,6 +15,12 @@ from mainApplication import *
 
 # --------------------------------------------------------------------------- #
 #                              1. Person Class                                #
+#                                                                             #
+#                                  insert_new                                 #
+#        Creates a function that must be implemented by child classes.        #
+#                                                                             #
+#                                    get_id                                   #
+#        Creates a function that must be implemented by child classes.        #
 # --------------------------------------------------------------------------- #
 
 # Define person class
@@ -34,6 +40,28 @@ class Person:
 
 # --------------------------------------------------------------------------- #
 #                              2. Student Class                               #
+#                          Inherits from Person class                         #
+#                                                                             #
+#                                  insert_new                                 #
+#        Calls generate hash function, inserts new student to database.       #
+#                                                                             #
+#                                    get_id                                   #
+#           Returns the ID of the student, querying by the username.          #
+#                                                                             #
+#                            generate_hash_password                           #
+#      Generates hash and salt for given plaintext password for storage.      #
+#                                                                             #
+#                              get_hashed_password                            #
+#                  Uses premade salt to re-gen password hash.                 #
+#                                                                             #
+#                               verify_password                               #
+#             Queries db, uses stored data to validate user login.            #
+#                                                                             #
+#                            verify_unique_username                           #
+#             Queries db, checks if username has been used before.            #
+#                                                                             #
+#                                  cast_votes                                 #
+#         Submits parameters passed to as election vote for position.         #
 # --------------------------------------------------------------------------- #
 
 # Define student class that inherits from the abstract class Control.
@@ -199,6 +227,25 @@ class Student(Person):
 
 # --------------------------------------------------------------------------- #
 #                              3. Candidate Class                             #
+#                          Inherits from Person class                         #
+#                                                                             #
+#                                  insert_new                                 #
+#                      Inserts new candidate to database.                     #
+#                                                                             #
+#                                    get_id                                   #
+#            Returns the ID of the candidate, querying by the name.           #
+#                                                                             #
+#                                     list                                    #
+#                     List all candidates in the database.                    #
+#                                                                             #
+#                              verify_unique_name                             #
+#               Queries db, checks if name has been used before.              #
+#                                                                             #
+#                              get_candidate_name                             #
+#            Returns candidate name, queries db by by candidate id.           #
+#                                                                             #
+#                              create_application                             #
+#           Creates candidate application for an election position.           #
 # --------------------------------------------------------------------------- #
 
 # Define candidate class.
@@ -307,6 +354,15 @@ class Candidate(Person):
 
 # --------------------------------------------------------------------------- #
 #                              4. Election Class                              #
+#                                                                             #
+#                                list_formatted                               #
+#            List the current election in a format for comboboxes.            #
+#                                                                             #
+#                               create_election                               #
+#             Create a new election and submit it to the database.            #
+#                                                                             #
+#                             get_current_election                            #
+#         Query the database and return the current election running.         #
 # --------------------------------------------------------------------------- #
 
 # Define election class.
@@ -394,27 +450,40 @@ class Election:
 
 # --------------------------------------------------------------------------- #
 #                              5. Position Class                              #
+#                                                                             #
+#                              list_all_positions                             #
+#               Lists all positions stored within the database.               #
+#                                                                             #
+#                        list_positions_open_for_apps                         #
+#   Lists all positions still available to be applied for in the election.    #
+#                                                                             #
+#                       list_available_voting_positions                       #
+#     Lists all positions that the student is currently able to vote for.     #
+#                                                                             #
+#                           list_election_positions                           #
+#     Lists all positions running and with 4 candidates in the election.      #
+#                                                                             #
+#                              list_for_position                              #
+#                 Lists all candidates for a given position.                  #
 # --------------------------------------------------------------------------- #
 
 # Define position class.
 class Position:
 
     # Initialise position class.
-    def __init__(self, start_time="", end_time=""):
+    def __init__(self):
         # Define class variables.
-        self.start_time = start_time
-        self.end_time = end_time
-        self._id = ""
+        self._select_query_output = ""
 
     # List all positions currently in the GSU.
     def list_all_positions(self):
         # Execute MySQL Query to get all positions
         mysql_cursor.execute("SELECT * FROM `gsuPositions`")
 
-        # Store query_result as all values returned.
-        query_result = mysql_cursor.fetchall()
+        # Store _select_query_output as all values returned.
+        self._select_query_output = mysql_cursor.fetchall()
 
-        return query_result
+        return self._select_query_output
 
     # Return list of positions not at max candidates.
     def list_positions_open_for_apps(self):
@@ -436,10 +505,10 @@ class Position:
             [election_id]
         )
 
-        # Store query_result as all values returned.
-        query_result = mysql_cursor.fetchall()
+        # Store _select_query_output as all values returned.
+        self._select_query_output = mysql_cursor.fetchall()
 
-        return query_result
+        return self._select_query_output
 
 
     # Return list of positions for a position that the student hasn't for yet.
@@ -471,10 +540,10 @@ class Position:
             ]
         )
 
-        # Store query_result as all values returned.
-        query_result = mysql_cursor.fetchall()
+        # Store _select_query_output as all values returned.
+        self._select_query_output = mysql_cursor.fetchall()
 
-        return query_result
+        return self._select_query_output
 
     # Return list of positions with candidates in an election.
     def list_election_positions(self):
@@ -498,10 +567,10 @@ class Position:
             ]
         )
 
-        # Store query_result as all values returned.
-        query_result = mysql_cursor.fetchall()
+        # Store _select_query_output as all values returned.
+        self._select_query_output = mysql_cursor.fetchall()
 
-        return query_result
+        return self._select_query_output
 
     # List all candidates for given position in election.
     def list_for_position(self, voting_position):
@@ -518,13 +587,34 @@ class Position:
             [voting_position, election_id]
         )
 
-        # Store query_result as all values returned.
-        query_result = mysql_cursor.fetchall()
+        # Store _select_query_output as all values returned.
+        self._select_query_output = mysql_cursor.fetchall()
 
-        return query_result
+        return self._select_query_output
 
 # --------------------------------------------------------------------------- #
 #                              6. Results Class                               #
+#                                                                             #
+#                                  get_count                                  #
+#              Return count of preference for candidate passed.               #
+#                                                                             #
+#                           generate_invalid_count                            #
+#                     Return data for invalid vote count.                     #
+#                                                                             #
+#                            get_election_results                             #
+#             Get results for every position within an election.              #
+#                                                                             #
+#                            get_pos_total_results                            #
+#                      Get results for a given position.                      #
+#                                                                             #
+#                             get_position_winner                             #
+#                   Return the winner for a given position.                   #
+#                                                                             #
+#                          generate_preference_data                           #
+#          Return preference votes from the database for candidate.           #
+#                                                                             #
+#                           calculate_highest_votes                           #
+#               Lists all positions stored within the database.               #
 # --------------------------------------------------------------------------- #
 
 # Define results class.
