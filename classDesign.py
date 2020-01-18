@@ -730,12 +730,20 @@ class Results:
         else:
             winner = highest_first_preference
 
-        winner_id = winner[0][0] - 1
+        winner_id = winner[0][0]
+        
         # Return Winner Candidate ID, Winner Name
+        # To find the index of the candidate list, find all the IDs for
+        # candidates, then index the new list based on the winner ID.
+        
+        winner_id_index = [i[0] for i in candidate_list].index(winner_id)
+        
         return [
-            candidate_list[winner_id][1],
+            candidate_list[winner_id_index][1],
             (
-                Candidate(id=candidate_list[winner_id][1])
+                Candidate(
+                    id=candidate_list[winner_id_index][1]
+                )
             ).get_candidate_name()
         ]
 
