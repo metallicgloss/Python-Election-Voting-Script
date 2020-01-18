@@ -545,6 +545,7 @@ class Results:
         third_preference = 0
         fourth_preference = 0
 
+        # If candidate is in vote position, add 1 to preference accordingly
         for vote in votes:
             if(candidate == vote[0]):
                 first_preference += 1
@@ -555,6 +556,7 @@ class Results:
             elif(candidate == vote[3]):
                 fourth_preference += 1
 
+        # Add all preferences to get total votes.
         total_votes = first_preference + second_preference + third_preference \
             + fourth_preference
 
@@ -571,6 +573,7 @@ class Results:
         ]
 
     def generate_invalid_count(self):
+        # If tie, generate invalid.
         return ["Invalid Vote", 0, 0, 0, 0, 0]
 
     def get_election_results(self):
@@ -580,6 +583,7 @@ class Results:
 
         output_data = ""
 
+        # For every position, get the total votes from position total.
         for position in position_list:
             try:
                 totals = self.get_pos_total_results(position[0])
@@ -587,6 +591,7 @@ class Results:
             except IndexError:
                 break
 
+        # Return formatted data with winner of each position in election.
         return output_data
 
     # Return list of the final results for given position.
@@ -615,7 +620,11 @@ class Results:
         positions = Position()
         candidates = positions.list_for_position(position_id)
 
+        # Call function to get the winner details.
         winner = self.get_position_winner(position_id)
+        
+        # If winner and vote is 0, return invalid vote (complete tie).
+        # Means that first, second, third and fourth prefs are the same.
         if(((winner[0]) and (winner[1])) == 0):
             return [
                 self.generate_invalid_count(),
@@ -627,29 +636,41 @@ class Results:
                 "Invalid Vote"
             ]
 
+        # Get the vote count for each preference based on the above query.
         winer_count = self.get_count(winner[0], query_result)
         first = self.get_count(candidates[0][1], query_result)
         second = self.get_count(candidates[1][1], query_result)
         third = self.get_count(candidates[2][1], query_result)
         fourth = self.get_count(candidates[3][1], query_result)
 
+        # Add together all votes to calculate total votes for every candidate
+        # First, second, third and fourth preferences.
         totalpositionvotes = first[1] + second[1] + third[1] + fourth[1] \
             + first[2] + second[2] + third[2] + fourth[2] + first[3] \
             + second[3] + third[3] + fourth[3] + first[4] + second[4] \
             + third[4] + fourth[4]
 
+        # If winner scored 0 votes, then no winner as no votes.
+        if(winer_count[5] == 0):
+            the_winner = "No Winner - No Votes"
+        else:
+            the_winner = winner[1]
+        
+        
+        # Return data on all candidates to help with formatting to screen.
         return [
             first,
             second,
             third,
             fourth,
-            winner[1],
+            the_winner,
             str(winer_count[5]),
             str(totalpositionvotes)
         ]
 
     # Return list of the winner results for given position.
     def get_position_winner(self, position_id):
+        # Get current election ID.
         election = Election()
         election_id = election.get_current_election()
         election_id = election_id[0][0]
@@ -668,13 +689,30 @@ class Results:
                 position_id
             ]
         )
+        
+        # In PEP8 format, the following block of code looks extremely nasty.
+        # In summary, the following section of code does:
+        # 1. Calculates the winners of the 1st preference votes.
+        # 2. If there are more than one, calculate the 2nd preference votes
+        #    based only on the new list of candidates that won the 1st pref.
+        # 3. If more than one in 2nd pref, repeat with new list of candidates
+        #    on the 3rd preference.
+        # 4. If more than one in 3rd pref, repeat with new list of candidates
+        #    on the 4th.
+        # 5. If 4th preference has more than 2 winners, then call a null vote.
+        # NB: If a winner is found at any pref, skip other checks.
+        
+        # Get highest candidates in first preference.
         highest_first_preference = self.calculate_highest_votes(
             mysql_cursor.fetchall(),
             candidate_list
         )
 
         if len(highest_first_preference[0]) > 1:
-
+            # If there are more than one candidates that had the same highest
+            # number of votes.
+            
+            # Generate a new set of pref data for just the remaining candidates
             candidates_tied = self.generate_preference_data(
                 highest_first_preference[0],
                 "secondVoteCandidateID_FK",
@@ -683,12 +721,17 @@ class Results:
                 candidate_list
             )
 
+            # Get highest candidates in second preference from new list.
             highest_second_preference = self.calculate_highest_votes(
                 candidates_tied,
                 candidate_list
             )
 
             if len(highest_second_preference[0]) > 1:
+                # If there are more than one candidates that had the same 
+                # highest number of votes.
+                
+                # Gen a new set of pref data for just the remaining candidates
                 candidates_tied_second = self.generate_preference_data(
                     highest_second_preference[0],
                     "thirdVoteCandidateID_FK",
@@ -696,15 +739,22 @@ class Results:
                     candidate_list
                 )
 
+                # If candidates tied for second didn't get voted for in that 
+                # preference, keep candidates so can check on the next
+                # level down.
                 if (candidates_tied_second == []):
                     candidates_tied_second = candidates_tied
 
+                # Calculate 3rd preference winner(s) from previous wins
                 highest_third_preference = self.calculate_highest_votes(
                     candidates_tied_second,
                     candidate_list
                 )
 
                 if len(highest_third_preference[0]) > 1:
+                    # If more than 1 3rd pref winner.
+                    
+                    # Get data from remaining cands.
                     candidates_tied_third = self.generate_preference_data(
                         highest_third_preference[0],
                         "fourthVoteCandidateID_FK",
@@ -713,14 +763,19 @@ class Results:
                         candidate_list
                     )
 
+                    # If candidates tied for third didn't get voted for in that 
+                    # preference, keep candidates so can check on the next
+                    # level down.
                     if (candidates_tied_third == []):
                         candidates_tied_third = candidates_tied_second
 
+                    # Get highest candidates in fourth pref from new list.
                     highest_fourth_preference = self.calculate_highest_votes(
                         candidates_tied_third,
                         candidate_list
                     )
 
+                    # Tied through all preferences, revote required.
                     if len(highest_fourth_preference[0]) > 1:
                         return [0, 0, "Revote Required"]
                     else:
@@ -740,6 +795,7 @@ class Results:
         
         winner_id_index = [i[0] for i in candidate_list].index(winner_id)
         
+        # Return winner ID and winner name.
         return [
             candidate_list[winner_id_index][1],
             (
@@ -750,33 +806,38 @@ class Results:
         ]
 
     def generate_preference_data(
-            self,
-            remaining_candidates,
-            search_preference,
-            election_id,
-            position_id,
-            candidate_list):
+            self, remaining_candidates, search_preference, election_id,
+            position_id, candidate_list):
 
+        # Make a string list of %s for the number of candidates passed.
         mysql_format_list = ', '.join(['%s'] * len(remaining_candidates))
+        
+        # Create MySQL command with data substuted.
+        # The %s from the last line will have each one replaced by MySQL
+        # with a value.
         mysql_command_creation = "SELECT `" + search_preference + "` \
         FROM `gsuElectionVotes` \
         WHERE `electionID` = %s \
         AND `positionID` = %s \
         AND `" + search_preference + "` IN (" + mysql_format_list + ")"
 
+        # Create array for data.
         mysql_data_creation = [election_id, position_id]
 
+        # For every candidate in the list, extend the array.
         for i in range(len(remaining_candidates)):
             mysql_data_creation.extend(
                 [candidate_list[remaining_candidates[i] - 1][1]]
             )
 
+        # Execute command and return data.
         mysql_cursor.execute(mysql_command_creation, mysql_data_creation)
         query_result = mysql_cursor.fetchall()
 
         return query_result
 
     def calculate_highest_votes(self, votes, candidates):
+        # Create 0 values.
         candidate_one_count = 0
         candidate_two_count = 0
         candidate_three_count = 0
@@ -784,6 +845,7 @@ class Results:
 
         results = {}
 
+        # If vote selects candidate, add 1 to their count.
         for i in range(len(votes)):
             if (candidates[0][1] == votes[i][0]):
                 candidate_one_count += 1
@@ -794,9 +856,12 @@ class Results:
             elif (candidates[3][1] == votes[i][0]):
                 candidate_four_count += 1
 
+        # If there are more than zero candidates in the candidates list
+        # Add candidate one count to 2d results array.
         if len(candidates) > 0:
             results[candidates[0][0]] = candidate_one_count
 
+        # Repeat adding to 2d array for every additional candidate.
         if (len(candidates) > 1) and (candidate_two_count != 0):
             results[candidates[1][0]] = candidate_two_count
 
@@ -806,6 +871,7 @@ class Results:
         if (len(candidates) > 3) and (candidate_four_count != 0):
             results[candidates[3][0]] = candidate_four_count
 
+        # Sort 2d array into largest to smallest by candidate.
         highest_values = [i for i, candidate in results.items() if candidate == max(results.values())]
 
         return(highest_values, results)

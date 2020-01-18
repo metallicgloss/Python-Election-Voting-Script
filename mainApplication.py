@@ -111,8 +111,8 @@ class voting_application(pygubu.TkApplication):
         self.ui_builder.add_from_file('userInterfaceDesign.ui')
         self.userInterface = self.ui_builder.get_object(frame,self.master)
         self.master.title(title)
-        
-        
+
+
         # Connect buttons to methods.
         self.ui_builder.connect_callbacks(self)
 
@@ -264,7 +264,7 @@ class voting_application(pygubu.TkApplication):
     # Exit backend menu to return to start-up.
     def return_to_startup(self):
         self.change_frame('startup_menu_frm','Startup')
-        
+
 
     # On sub-page access through the backend menu, provide a back button.
     def return_to_backend(self):
@@ -698,7 +698,7 @@ class voting_application(pygubu.TkApplication):
 
                 # Create combo box of positions currently available to vote.
                 positions = classDesign.Position()
-                
+
                 position_list = self.format_for_combo(
                     positions.list_available_voting_positions(
                         student_login.get_id()
@@ -728,7 +728,7 @@ class voting_application(pygubu.TkApplication):
     # Execute vote for the selected positions on the screen.
     def vote_select_position(self):
         try:
-            
+
             # Create election instance, append to list the election times
             elections = classDesign.Election()
             current_election = elections.get_current_election()[0][0]
@@ -873,7 +873,7 @@ class voting_application(pygubu.TkApplication):
                 third_choice = self.get_cmbo_id(
                     'stdnt_vote_third_choice_cmbobx'
                 )
-                
+
                 fourth_choice = self.get_cmbo_id(
                     'stdnt_vote_fourth_choice_cmbobx'
                 )
