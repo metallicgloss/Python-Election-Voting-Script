@@ -239,7 +239,7 @@ class Candidate(Person):
 
         # Store query_result as all values returned.
         query_result = mysql_cursor.fetchall()
-
+        
         self.id = query_result[0][0]
 
     # Get all candidates created.
@@ -296,13 +296,12 @@ class Candidate(Person):
         return self.name
 
     # Create application for the current election.
-    def create_application(self, election_id, position_id):
-        self.get_id()
+    def create_application(self, candidate_id, election_id, position_id):
         mysql_cursor.execute(
             "INSERT INTO `gsuCandidateApplication` \
             (`candidateID`, `positionID`, `electionID`) \
             VALUES (%s, %s, %s)",
-            [self.id, position_id, election_id]
+            [candidate_id, position_id, election_id]
         )
         db_connect.commit()
 

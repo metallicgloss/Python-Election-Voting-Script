@@ -472,10 +472,10 @@ class voting_application(pygubu.TkApplication):
             # If election is not blank.
             if None not in (candidate, position):
                 # If other values are not selected
-                new_application = classDesign.Candidate(candidate)
+                new_application = classDesign.Candidate()
 
                 # Create the application.
-                new_application.create_application(election, position)
+                new_application.create_application(candidate, election, position)
 
                 self.return_to_backend()
             else:
