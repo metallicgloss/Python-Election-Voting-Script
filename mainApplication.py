@@ -955,5 +955,9 @@ class voting_application(pygubu.TkApplication):
 if __name__ == '__main__':
     tkinter_app = tk.Tk()
     main_application = voting_application(tkinter_app)
-    tkinter_app.tk.call('wm', 'iconphoto', tkinter_app._w, tk.PhotoImage(file='icon.gif'))
+    tkinter_app.tk.call(
+        'wm', 'iconphoto',
+        tkinter_app._w,
+        tk.PhotoImage(file='icon.gif')
+    )
     tkinter_app.mainloop()
