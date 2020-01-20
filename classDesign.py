@@ -682,80 +682,166 @@ class Results:
 
         # Return formatted data with winner of each position in election.
         return output_data
+        
+    # Generate results based on CSV line.
+    def csv_results_calculate():
+        pass
 
     # Return list of the final results for given position.
     def get_pos_total_results(self, position_id):
-        election = Election()
-        election_id = election.get_current_election()
-        election_id = election_id[0][0]
+        print(position_id)
+        if(position_id in ['1', '2', '5']):
+            # Hackathon task, based only on the CSV file provider not database
+            with open('fred.csv', newline='') as csvfile:
+                # Open CSV file and store data as data.
+                data = list(csv.reader(csvfile))
 
-        # Select results for the position provided.
-        mysql_cursor.execute(
-            "SELECT `firstVoteCandidateID_FK`, `secondVoteCandidateID_FK`, \
-            `thirdVoteCandidateID_FK`, `fourthVoteCandidateID_FK` \
-            FROM `gsuElectionVotes` \
-            WHERE `electionID` = %s \
-            AND `positionID` = %s",
-            [
-                election_id,
-                position_id
-            ]
-        )
+            candidates = []
+            totalpositionvotes = 0
+            
+            # Implimenting 1st preference vote method, data sample has no tie
+            # so will not use STV as in original spec. Sub-task not requested.
+            winner_first = 0
+            winner_second = 0
+            winner_third = 0
+            winner_fourth = 0
+            
+            for result in data:
+                # For each line in the database (result), use to calculate.
+                if((position_id == '1') and (result[3] == "President")):
+                    # Append candidate to seperate list if running for pos.
+                    candidates.append(result)
+                    
+                    # Add all candidate votes to build total
+                    totalpositionvotes += int(result[4]) + int(result[5]) + int(result[6]) + int(result[7])
+                    
+                    if(int(result[4]) > winner_first):
+                        winner_first = int(result[4])
+                        winner_second = int(result[5])
+                        winner_third = int(result[6])
+                        winner_fourth = int(result[7])
+                        winner_id = int(result[0])
+                elif((position_id == '2') and (result[3] == "GSU Officer")):
+                    # Append candidate to seperate list if running for pos.
+                    candidates.append(result)
+                    
+                    # Add all candidate votes to build total
+                    totalpositionvotes += int(result[4]) + int(result[5]) + int(result[6]) + int(result[7])
+                    
+                    if(int(result[4]) > winner_first):
+                        winner_first = int(result[4])
+                        winner_second = int(result[5])
+                        winner_third = int(result[6])
+                        winner_fourth = int(result[7])
+                        winner_id = int(result[0])
+                elif((position_id == '5') and (result[3] == "FLAS Faculty Officer")):
+                    # Append candidate to seperate list if running for pos.
+                    candidates.append(result)
+                    
+                    # Add all candidate votes to build total
+                    totalpositionvotes += int(result[4]) + int(result[5]) + int(result[6]) + int(result[7])
+                    
+                    if(int(result[4]) > winner_first):
+                        winner_first = int(result[4])
+                        winner_second = int(result[5])
+                        winner_third = int(result[6])
+                        winner_fourth = int(result[7])
+                        winner_id = int(result[0])
+            
+            # Form list of data to allow integration into existing interface
+            # functionality.
+            #
+            # Firstname Lastname, 1st, 2nd, 3rd, 4th
+            first = [candidates[0][1] + " " + candidates[0][2], candidates[0][4], candidates[0][5], candidates[0][6], candidates[0][7]]
+            second = [candidates[1][1] + " " + candidates[1][2], candidates[1][4], candidates[1][5], candidates[1][6], candidates[1][7]]
+            third = [candidates[2][1] + " " + candidates[2][2], candidates[2][4], candidates[2][5], candidates[2][6], candidates[2][7]]
+            fourth = [candidates[3][1] + " " + candidates[3][2], candidates[3][4], candidates[3][5], candidates[3][6], candidates[3][7]]
+                  
+            winner_id_index = [int(i[0]) for i in candidates].index(winner_id)
+            the_winner = candidates[winner_id_index][1] + " " + candidates[winner_id_index][2]
 
-        # Store query_result as all values returned.
-        query_result = mysql_cursor.fetchall()
-
-        # Get list of candidates applied for position.
-        positions = Position()
-        candidates = positions.list_for_position(position_id)
-
-        # Call function to get the winner details.
-        winner = self.get_position_winner(position_id)
-        
-        # If winner and vote is 0, return invalid vote (complete tie).
-        # Means that first, second, third and fourth prefs are the same.
-        if(((winner[0]) and (winner[1])) == 0):
+            # Return data on all candidates to help with formatting to screen.
             return [
-                self.generate_invalid_count(),
-                self.generate_invalid_count(),
-                self.generate_invalid_count(),
-                self.generate_invalid_count(),
-                "Invalid Vote",
-                "Invalid Vote",
-                "Invalid Vote"
+                first,
+                second,
+                third,
+                fourth,
+                the_winner,
+                str(winner_first + winner_second + winner_third + winner_fourth),
+                str(totalpositionvotes)
             ]
-
-        # Get the vote count for each preference based on the above query.
-        winer_count = self.get_count(winner[0], query_result)
-        first = self.get_count(candidates[0][1], query_result)
-        second = self.get_count(candidates[1][1], query_result)
-        third = self.get_count(candidates[2][1], query_result)
-        fourth = self.get_count(candidates[3][1], query_result)
-
-        # Add together all votes to calculate total votes for every candidate
-        # First, second, third and fourth preferences.
-        totalpositionvotes = first[1] + second[1] + third[1] + fourth[1] \
-            + first[2] + second[2] + third[2] + fourth[2] + first[3] \
-            + second[3] + third[3] + fourth[3] + first[4] + second[4] \
-            + third[4] + fourth[4]
-
-        # If winner scored 0 votes, then no winner as no votes.
-        if(winer_count[5] == 0):
-            the_winner = "No Winner - No Votes"
         else:
-            the_winner = winner[1]
-        
-        
-        # Return data on all candidates to help with formatting to screen.
-        return [
-            first,
-            second,
-            third,
-            fourth,
-            the_winner,
-            str(winer_count[5]),
-            str(totalpositionvotes)
-        ]
+            election = Election()
+            election_id = election.get_current_election()
+            election_id = election_id[0][0]
+
+            # Select results for the position provided.
+            mysql_cursor.execute(
+                "SELECT `firstVoteCandidateID_FK`, `secondVoteCandidateID_FK`, \
+                `thirdVoteCandidateID_FK`, `fourthVoteCandidateID_FK` \
+                FROM `gsuElectionVotes` \
+                WHERE `electionID` = %s \
+                AND `positionID` = %s",
+                [
+                    election_id,
+                    position_id
+                ]
+            )
+
+            # Store query_result as all values returned.
+            query_result = mysql_cursor.fetchall()
+
+            # Get list of candidates applied for position.
+            positions = Position()
+            candidates = positions.list_for_position(position_id)
+
+            # Call function to get the winner details.
+            winner = self.get_position_winner(position_id)
+            
+            # If winner and vote is 0, return invalid vote (complete tie).
+            # Means that first, second, third and fourth prefs are the same.
+            if(((winner[0]) and (winner[1])) == 0):
+                return [
+                    self.generate_invalid_count(),
+                    self.generate_invalid_count(),
+                    self.generate_invalid_count(),
+                    self.generate_invalid_count(),
+                    "Invalid Vote",
+                    "Invalid Vote",
+                    "Invalid Vote"
+                ]
+
+            # Get the vote count for each preference based on the above query.
+            winer_count = self.get_count(winner[0], query_result)
+            first = self.get_count(candidates[0][1], query_result)
+            second = self.get_count(candidates[1][1], query_result)
+            third = self.get_count(candidates[2][1], query_result)
+            fourth = self.get_count(candidates[3][1], query_result)
+
+            # Add together all votes to calculate total votes for every candidate
+            # First, second, third and fourth preferences.
+            totalpositionvotes = first[1] + second[1] + third[1] + fourth[1] \
+                + first[2] + second[2] + third[2] + fourth[2] + first[3] \
+                + second[3] + third[3] + fourth[3] + first[4] + second[4] \
+                + third[4] + fourth[4]
+
+            # If winner scored 0 votes, then no winner as no votes.
+            if(winer_count[5] == 0):
+                the_winner = "No Winner - No Votes"
+            else:
+                the_winner = winner[1]
+            
+            
+            # Return data on all candidates to help with formatting to screen.
+            return [
+                first,
+                second,
+                third,
+                fourth,
+                the_winner,
+                str(winer_count[5]),
+                str(totalpositionvotes)
+            ]
 
     # Return list of the winner results for given position.
     def get_position_winner(self, position_id):

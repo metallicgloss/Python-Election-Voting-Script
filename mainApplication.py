@@ -1,5 +1,6 @@
 # Import required modules for program.
 import os
+import csv
 import sys
 import pygubu
 import hashlib
