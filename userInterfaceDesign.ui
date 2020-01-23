@@ -35,6 +35,7 @@
     </child>
     <child>
       <object id="bkend_create_cand_election_cmbobx" class="ttk.Combobox">
+        <property name="state">readonly</property>
         <property name="values">test</property>
         <property name="width">100</property>
         <layout>
@@ -59,6 +60,7 @@
     </child>
     <child>
       <object id="bkend_create_cand_cand_cmbobx" class="ttk.Combobox">
+        <property name="state">readonly</property>
         <property name="width">100</property>
         <layout>
           <property name="column">0</property>
@@ -96,6 +98,7 @@
     </child>
     <child>
       <object id="bkend_create_cand_pos_cmbobx" class="ttk.Combobox">
+        <property name="state">readonly</property>
         <property name="width">100</property>
         <layout>
           <property name="column">0</property>
@@ -582,6 +585,7 @@
     </child>
     <child>
       <object id="bkend_sel_results_pos_election_cmbobx" class="ttk.Combobox">
+        <property name="state">readonly</property>
         <property name="width">100</property>
         <layout>
           <property name="column">0</property>
@@ -605,6 +609,7 @@
     </child>
     <child>
       <object id="bkend_sel_results_pos_pos_cmbobx" class="ttk.Combobox">
+        <property name="state">readonly</property>
         <property name="width">100</property>
         <layout>
           <property name="column">0</property>
@@ -1195,6 +1200,7 @@
     </child>
     <child>
       <object id="stdnt_results_sel_election_confirm_cmbobx" class="ttk.Combobox">
+        <property name="state">readonly</property>
         <property name="width">50</property>
         <layout>
           <property name="column">0</property>
@@ -1217,6 +1223,7 @@
     </child>
     <child>
       <object id="stdnt_results_sel_pos_cmbobx" class="ttk.Combobox">
+        <property name="state">readonly</property>
         <property name="width">50</property>
         <layout>
           <property name="column">0</property>
@@ -1707,6 +1714,7 @@
     </child>
     <child>
       <object id="stdnt_vote_first_choice_cmbobx" class="ttk.Combobox">
+        <property name="state">readonly</property>
         <property name="width">50</property>
         <layout>
           <property name="column">1</property>
@@ -1898,6 +1906,7 @@
     </child>
     <child>
       <object id="stdnt_vote_pos_pos_cmbobx" class="ttk.Combobox">
+        <property name="state">readonly</property>
         <property name="width">100</property>
         <layout>
           <property name="column">0</property>
