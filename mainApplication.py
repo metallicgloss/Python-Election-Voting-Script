@@ -365,7 +365,7 @@ class VotingApplication(pygubu.TkApplication):
             'bkend_create_stdnt_passwd_txbx'
         ).get()
 
-        if None not in (username, password):
+        if "" not in (username, password):
             # If input is not blank, create user.
             new_student = classDesign.Student(username, password)
 
@@ -402,7 +402,7 @@ class VotingApplication(pygubu.TkApplication):
             'bkend_create_cand_email_txtbx'
         ).get()
 
-        if None not in (name, email):
+        if "" not in (name, email):
             # If input fields on the page are not empty.
             new_candidate = classDesign.Candidate(name, email)
 
@@ -434,7 +434,7 @@ class VotingApplication(pygubu.TkApplication):
             'bkend_create_election_end_txbx'
         ).get()), "%H:%M %d/%m/%Y")
 
-        if None not in (start_date_time, end_date_time):
+        if "" not in (start_date_time, end_date_time):
             # If input fields on the page are not empty.
             new_election = classDesign.Election(start_date_time, end_date_time)
 
@@ -465,9 +465,9 @@ class VotingApplication(pygubu.TkApplication):
 
         position = self.get_cmbo_id('bkend_create_cand_pos_cmbobx')
 
-        if(election is not None):
+        if(election != ""):
             # If election is not blank.
-            if None not in (candidate, position):
+            if "" not in (candidate, position):
                 # If other values are not selected
                 new_application = classDesign.Candidate()
 
@@ -496,7 +496,7 @@ class VotingApplication(pygubu.TkApplication):
 
         election = self.get_cmbo_id('bkend_sel_results_pos_election_cmbobx')
 
-        if None not in (self.voting_position, election):
+        if "" not in (self.voting_position, election):
             # If input fields on the page are not empty.
             self.change_frame('bkend_bkend_view_results_frm','View Results')
 
@@ -677,7 +677,8 @@ class VotingApplication(pygubu.TkApplication):
             'stdnt_login_passwd_txtbx'
         ).get()
 
-        if None not in (username, password):
+        print(username)
+        if "" not in (username, password):
             # If input fields on the page are not empty.
 
             student_login = classDesign.Student(username, password)
@@ -740,7 +741,7 @@ class VotingApplication(pygubu.TkApplication):
             ).configure(text="Please enter data for all fields.")
         else:
             # If not except, continue.
-            if None not in (self.voting_position, current_election):
+            if "" not in (self.voting_position, current_election):
                 # If input fields on the page are not empty.
                 self.change_frame('stdnt_vote_frm','Voting')
 
@@ -788,7 +789,7 @@ class VotingApplication(pygubu.TkApplication):
 
         self.ui_builder.get_object(
             end_element + '_cmbobx'
-        ).configure(state="normal", values=self.candidate_list)
+        ).configure(state="readonly", values=self.candidate_list)
 
     def first_choice_confirm(self):
         # Get the user input value for first choice.
