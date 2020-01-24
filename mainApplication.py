@@ -146,7 +146,7 @@ class VotingApplication(pygubu.TkApplication):
     def display_position_results(self, results, page, percentage):
         self.display_candidate_results(
             page + "_cand_one",
-            results[0][0],
+            results[0][0] + " (" + str(results[0][5]) + " Votes)",
             results[0][1],
             results[0][2],
             results[0][3],
@@ -155,7 +155,7 @@ class VotingApplication(pygubu.TkApplication):
 
         self.display_candidate_results(
             page + "_cand_two",
-            results[1][0],
+            results[1][0] + " (" + str(results[1][5]) + " Votes)",
             results[1][1],
             results[1][2],
             results[1][3],
@@ -163,7 +163,7 @@ class VotingApplication(pygubu.TkApplication):
         )
         self.display_candidate_results(
             page + "_cand_three",
-            results[2][0],
+            results[2][0] + " (" + str(results[2][5]) + " Votes)",
             results[2][1],
             results[2][2],
             results[2][3],
@@ -171,7 +171,7 @@ class VotingApplication(pygubu.TkApplication):
         )
         self.display_candidate_results(
             page + "_cand_four",
-            results[3][0],
+            results[3][0] + " (" + str(results[3][5]) + " Votes)",
             results[3][1],
             results[3][2],
             results[3][3],

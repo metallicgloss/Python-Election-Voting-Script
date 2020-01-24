@@ -122,6 +122,18 @@
         </layout>
       </object>
     </child>
+    <child>
+      <object id="bkend_create_cand_app_error_lbl" class="ttk.Label">
+        <property name="font">{Montserrat} 12 {}</property>
+        <property name="foreground">#ff0000</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">8</property>
+        </layout>
+      </object>
+    </child>
   </object>
   <object id="bkend_create_cand_frm" class="ttk.Frame">
     <property name="height">250</property>
