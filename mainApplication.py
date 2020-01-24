@@ -302,15 +302,15 @@ class VotingApplication(pygubu.TkApplication):
 
         # Set choices in combo boxes to lists created.
         self.ui_builder.get_object(
-            'bkend_create_cand_election_cmbobx'
+            'bkend_create_cand_app_election_cmbobx'
         ).configure(values=current_election)
 
         self.ui_builder.get_object(
-            'bkend_create_cand_cand_cmbobx'
+            'bkend_create_cand_app_cand_cmbobx'
         ).configure(values=available_candidates)
 
         self.ui_builder.get_object(
-            'bkend_create_cand_pos_cmbobx'
+            'bkend_create_cand_app_pos_cmbobx'
         ).configure(values=available_positions)
 
     # Navigate to view results page.
@@ -459,32 +459,31 @@ class VotingApplication(pygubu.TkApplication):
     def create_application(self):
         # Get user input from the page
         # Then split on newline and get 1st element to get ID of each.
-        election = self.get_cmbo_id('bkend_create_cand_election_cmbobx')
+        try:
+            election = self.get_cmbo_id(
+                'bkend_create_cand_app_election_cmbobx'
+            )
 
-        candidate = self.get_cmbo_id('bkend_create_cand_cand_cmbobx')
+            candidate = self.get_cmbo_id('bkend_create_cand_app_cand_cmbobx')
 
-        position = self.get_cmbo_id('bkend_create_cand_pos_cmbobx')
-
-        if(election != ""):
-            # If election is not blank.
-            if "" not in (candidate, position):
-                # If other values are not selected
-                new_application = classDesign.Candidate()
-
-                # Create the application.
-                new_application.create_application(candidate, election, position)
-
-                self.return_to_backend()
-            else:
-                # Else change label text to error message.
-                self.ui_builder.get_object(
-                    'bkend_create_cand_error_lbl'
-                ).configure(text="Error: Select one value for all options.")
-        else:
+            position = self.get_cmbo_id('bkend_create_cand_app_pos_cmbobx')
+        except IndexError:
             # Else change label text to error message.
             self.ui_builder.get_object(
-                'bkend_create_cand_error_lbl'
-            ).configure(text="Election not selected. Unable to apply.")
+                'bkend_create_cand_app_error_lbl'
+            ).configure(text="Error: Select one value for all options")
+        else:
+            new_application = classDesign.Candidate()
+
+            # Create the application.
+            # If application returns error, candidate unable to apply.
+            if(new_application.create_application(
+                candidate, election, position) == "error"):
+                self.ui_builder.get_object(
+                    'bkend_create_cand_app_error_lbl'
+                ).configure(text="Error: Candidate cannot apply for multiple positions in one election.")
+            else:
+                self.return_to_backend()
 
     # Retrieve list of results.
     # Then format them to display them on the user interface.
