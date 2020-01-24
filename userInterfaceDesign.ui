@@ -10,7 +10,7 @@
       <property name="row">0</property>
     </layout>
     <child>
-      <object id="bkend_create_cand_title_lbl" class="ttk.Label">
+      <object id="bkend_create_cand_app_title_lbl" class="ttk.Label">
         <property name="font">{Montserrat SemiBold} 12 {}</property>
         <property name="text" translatable="yes">Candidate Application</property>
         <layout>
@@ -22,7 +22,7 @@
       </object>
     </child>
     <child>
-      <object id="bkend_create_cand_sel_election_lbl" class="ttk.Label">
+      <object id="bkend_create_cand_app_sel_election_lbl" class="ttk.Label">
         <property name="text" translatable="yes">Select Election</property>
         <layout>
           <property name="column">0</property>
@@ -34,7 +34,7 @@
       </object>
     </child>
     <child>
-      <object id="bkend_create_cand_election_cmbobx" class="ttk.Combobox">
+      <object id="bkend_create_cand_app_election_cmbobx" class="ttk.Combobox">
         <property name="state">readonly</property>
         <property name="values">test</property>
         <property name="width">100</property>
@@ -47,7 +47,7 @@
       </object>
     </child>
     <child>
-      <object id="bkend_create_cand_sel_candidate_lbl" class="ttk.Label">
+      <object id="bkend_create_cand_app_sel_candidate_lbl" class="ttk.Label">
         <property name="text" translatable="yes">Select Candidate</property>
         <layout>
           <property name="column">0</property>
@@ -59,7 +59,7 @@
       </object>
     </child>
     <child>
-      <object id="bkend_create_cand_cand_cmbobx" class="ttk.Combobox">
+      <object id="bkend_create_cand_app_cand_cmbobx" class="ttk.Combobox">
         <property name="state">readonly</property>
         <property name="width">100</property>
         <layout>
@@ -71,7 +71,7 @@
       </object>
     </child>
     <child>
-      <object id="bkend_create_cand_sel_pos_lbl" class="ttk.Label">
+      <object id="bkend_create_cand_app_sel_pos_lbl" class="ttk.Label">
         <property name="text" translatable="yes">Select Position</property>
         <layout>
           <property name="column">0</property>
@@ -83,7 +83,7 @@
       </object>
     </child>
     <child>
-      <object id="bkend_create_cand_create_btn" class="ttk.Button">
+      <object id="bkend_create_cand_app_create_btn" class="ttk.Button">
         <property name="command">create_application</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Submit</property>
@@ -97,7 +97,7 @@
       </object>
     </child>
     <child>
-      <object id="bkend_create_cand_pos_cmbobx" class="ttk.Combobox">
+      <object id="bkend_create_cand_app_pos_cmbobx" class="ttk.Combobox">
         <property name="state">readonly</property>
         <property name="width">100</property>
         <layout>
@@ -109,7 +109,7 @@
       </object>
     </child>
     <child>
-      <object id="bkend_create_cand_return_btn" class="ttk.Button">
+      <object id="bkend_create_cand_app_return_btn" class="ttk.Button">
         <property name="command">return_to_backend</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Cancel</property>
@@ -134,7 +134,7 @@
       <property name="row">0</property>
     </layout>
     <child>
-      <object id="bkend_create_cand_title_lbl_1" class="ttk.Label">
+      <object id="bkend_create_cand_title_lbl" class="ttk.Label">
         <property name="font">{Montserrat SemiBold} 12 {}</property>
         <property name="text" translatable="yes">Create Candidate</property>
         <layout>
@@ -206,7 +206,7 @@
       </object>
     </child>
     <child>
-      <object id="bkend_create_cand_return_btn_1" class="ttk.Button">
+      <object id="bkend_create_cand_return_btn" class="ttk.Button">
         <property name="command">return_to_backend</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Cancel</property>
