@@ -114,6 +114,8 @@ class Student(Person):
 
     # Generate and store new hashed password
     def generate_hash_password(self):
+        # Method functionality created with assistance of
+        # reference (15, 16, 17)
         # Generate random salt key using hashlib, a random string generated.
         self._salt = hashlib.sha256(os.urandom(64)).hexdigest().encode('ascii')
 
@@ -130,6 +132,8 @@ class Student(Person):
 
     # Generate and return hashed password
     def get_hashed_password(self):
+        # Method functionality created with assistance of
+        # reference (15, 16, 17)
         # Re-calculate generated hashed version of the pass converted to hex.
         self._hashed_password = (binascii.hexlify(
             hashlib.pbkdf2_hmac(
@@ -975,6 +979,7 @@ class Results:
             results[candidates[3][0]] = candidate_four_count
 
         # Sort 2d array into largest to smallest by candidate.
+        # Assisted by reference (19)
         highest_values = [i for i, candidate in results.items() if candidate == max(results.values())]
 
         return(highest_values, results)
