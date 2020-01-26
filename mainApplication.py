@@ -38,6 +38,7 @@ from tkinter import messagebox
 
 # Module initialisation
 # Open MySQL connection using connection query data, initialise cursor.
+# Assisted by reference (7)
 try:
     # Define database connection variable.
     db_connect = mysql.connector.connect(
@@ -55,6 +56,8 @@ except Error as e:
 
 # --------------------------------------------------------------------------- #
 #                            2. Interface Hander Class                        #
+#                                                                             #
+#        NB: Linking button clicks to functions was assisted by ref (6)       #
 # --------------------------------------------------------------------------- #
 
 # Define primary class to initiate the user interface.
@@ -99,6 +102,7 @@ class VotingApplication(pygubu.TkApplication):
     def change_frame(self, frame, title):
         # If userInterface not defined yet (startup), bypass destroy.
         # Destroy current view and load frame of desired window.
+        # Assisted by references (3, 4, 8, 9)
         try:
             self.userInterface.destroy()
         except AttributeError:
@@ -109,6 +113,9 @@ class VotingApplication(pygubu.TkApplication):
 
         # Load main interface design.
         self.ui_builder.add_from_file('userInterfaceDesign.ui')
+        # Assisted by references (1, 5)
+        # Program usage and method documentation of Pygubu
+        # library assisted by references (12, 13)
         self.userInterface = self.ui_builder.get_object(frame,self.master)
         self.master.title(title)
 
@@ -123,6 +130,7 @@ class VotingApplication(pygubu.TkApplication):
     # Sets results page labels, helps to avoid massive amounts of duplication.
     def display_candidate_results(
             self, element, name, first, second, third, fourth):
+        # Assisted by reference (14)
         self.ui_builder.get_object(
             element + '_name_lbl'
         ).configure(text=name)
@@ -358,6 +366,7 @@ class VotingApplication(pygubu.TkApplication):
     # Create new student on submission from user.
     def create_student(self):
         # Get user input from the page.
+        # Assisted by reference (2)
         username = self.ui_builder.get_object(
             'bkend_create_stdnt_username_txtbx'
         ).get()
@@ -427,6 +436,7 @@ class VotingApplication(pygubu.TkApplication):
     def create_election(self):
         # Get user input from the page, parse input as best as possible using
         # library into standard datetime format.
+        # Assisted by references (10, 22)
         start_date_time = datetime.strptime((self.ui_builder.get_object(
             'bkend_create_election_start_txtbx'
         ).get()), "%H:%M %d/%m/%Y")
@@ -516,6 +526,8 @@ class VotingApplication(pygubu.TkApplication):
 
     # Generates a graph based on the results for the position.
     def display_graph(self):
+        # Function functionality created with assistance of
+        # references (18, 20, 21)
         results = classDesign.Results()
         total = results.get_pos_total_results(self.voting_position)
 
@@ -676,7 +688,6 @@ class VotingApplication(pygubu.TkApplication):
             'stdnt_login_passwd_txtbx'
         ).get()
 
-        print(username)
         if "" not in (username, password):
             # If input fields on the page are not empty.
 
@@ -952,6 +963,7 @@ class VotingApplication(pygubu.TkApplication):
 if __name__ == '__main__':
     tkinter_app = tk.Tk()
     main_application = VotingApplication(tkinter_app)
+    # Assisted by reference (25)
     tkinter_app.tk.call(
         'wm', 'iconphoto',
         tkinter_app._w,
