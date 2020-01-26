@@ -437,13 +437,19 @@ class VotingApplication(pygubu.TkApplication):
         # Get user input from the page, parse input as best as possible using
         # library into standard datetime format.
         # Assisted by references (10, 22)
-        start_date_time = datetime.strptime((self.ui_builder.get_object(
-            'bkend_create_election_start_txtbx'
-        ).get()), "%H:%M %d/%m/%Y")
-        end_date_time = datetime.strptime((self.ui_builder.get_object(
-            'bkend_create_election_end_txbx'
-        ).get()), "%H:%M %d/%m/%Y")
-
+        try:
+            start_date_time = datetime.strptime((self.ui_builder.get_object(
+                'bkend_create_election_start_txtbx'
+            ).get()), "%H:%M %d/%m/%Y")
+            end_date_time = datetime.strptime((self.ui_builder.get_object(
+                'bkend_create_election_end_txbx'
+            ).get()), "%H:%M %d/%m/%Y")
+        except ValueError:
+            # If not valid, alert user.
+            self.ui_builder.get_object(
+                'bkend_create_election_error_lbl'
+            ).configure(text="Error: Invalid date input.")
+                
         if "" not in (start_date_time, end_date_time):
             # If input fields on the page are not empty.
             new_election = classDesign.Election(start_date_time, end_date_time)
