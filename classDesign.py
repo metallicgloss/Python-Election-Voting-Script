@@ -465,6 +465,9 @@ class Election:
 #                                                                             #
 #                              list_for_position                              #
 #                 Lists all candidates for a given position.                  #
+#                                                                             #
+#                           get_position_title_by_id                          #
+#                   Returns the position name if ID is set.                   #
 # --------------------------------------------------------------------------- #
 
 # Define position class.
@@ -593,6 +596,10 @@ class Position:
 
         return self._select_query_output
         
+    # ########################################################################
+    # HACKATHON CHANGE
+    # ########################################################################
+    
     # Returns position name by ID.
     def get_position_title_by_id(self):
         # Select all positions where not in election votes from current student
