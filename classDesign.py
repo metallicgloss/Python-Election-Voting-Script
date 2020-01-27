@@ -68,12 +68,12 @@ class Person:
 class Student(Person):
 
     # Initialise student class.
-    def __init__(self, username="", password=""):
+    def __init__(self, username="", password="", id=""):
         Person.__init__(self)
         # Define class variables.
         self.username = username
         self.password = password
-        self._id = ""
+        self.id = ""
         self._salt = ""
         self._hashed_password = ""
 
@@ -107,10 +107,10 @@ class Student(Person):
         self._select_query_output = mysql_cursor.fetchall()
 
         # Set the ID of the student from the query.
-        self._id = self._select_query_output[0][0]
+        self.id = self._select_query_output[0][0]
 
         # Return the ID.
-        return self._id
+        return self.id
 
     # Generate and store new hashed password
     def generate_hash_password(self):
@@ -483,15 +483,19 @@ class Election:
 #                                                                             #
 #                              list_for_position                              #
 #                 Lists all candidates for a given position.                  #
+#                                                                             #
+#                           get_position_title_by_id                          #
+#                   Returns the position name if ID is set.                   #
 # --------------------------------------------------------------------------- #
 
 # Define position class.
 class Position:
 
     # Initialise position class.
-    def __init__(self):
+    def __init__(self, position_id_query = ""):
         # Define class variables.
         self._select_query_output = ""
+        self.position_id_query = position_id_query
 
     # List all positions currently in the GSU.
     def list_all_positions(self):
@@ -609,6 +613,25 @@ class Position:
         self._select_query_output = mysql_cursor.fetchall()
 
         return self._select_query_output
+        
+    # ########################################################################
+    # HACKATHON CHANGE
+    # ########################################################################
+    
+    # Returns position name by ID.
+    def get_position_title_by_id(self):
+        # Select all positions where not in election votes from current student
+        mysql_cursor.execute(
+            "SELECT * \
+            FROM `gsuPositions` \
+            WHERE `positionID` =  %s",
+            [self.position_id_query]
+        )
+
+        # Store _select_query_output as all values returned.
+        self._select_query_output = mysql_cursor.fetchall()
+
+        return self._select_query_output[0][1]
 
 # --------------------------------------------------------------------------- #
 #                              6. Results Class                               #

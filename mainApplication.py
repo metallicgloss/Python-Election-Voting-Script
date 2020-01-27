@@ -89,6 +89,7 @@ class VotingApplication(pygubu.TkApplication):
     def __init__(self, master):
         self.master = master
         self.change_frame('startup_menu_frm','Voting Application')
+        
         # List used when voting to temp store data between interface changes
         self._candidate_list = []
 
@@ -97,6 +98,9 @@ class VotingApplication(pygubu.TkApplication):
 
         # Used to pass position ID between interface changes.
         self.voting_position = ""
+
+        # Used to pass position ID between interface changes.
+        self.session_voting = []
 
     # Function to change/load the frame.
     def change_frame(self, frame, title):
@@ -449,7 +453,6 @@ class VotingApplication(pygubu.TkApplication):
             self.ui_builder.get_object(
                 'bkend_create_election_error_lbl'
             ).configure(text="Error: Invalid date input.")
-                
         if "" not in (start_date_time, end_date_time):
             # If input fields on the page are not empty.
             new_election = classDesign.Election(start_date_time, end_date_time)
@@ -479,18 +482,23 @@ class VotingApplication(pygubu.TkApplication):
             election = self.get_cmbo_id(
                 'bkend_create_cand_app_election_cmbobx'
             )
+            
+            candidate = self.get_cmbo_id(
+                'bkend_create_cand_app_cand_cmbobx'
+            )
 
-            candidate = self.get_cmbo_id('bkend_create_cand_app_cand_cmbobx')
-
-            position = self.get_cmbo_id('bkend_create_cand_app_pos_cmbobx')
+            position = self.get_cmbo_id(
+                'bkend_create_cand_app_pos_cmbobx'
+            )
         except IndexError:
             # Else change label text to error message.
             self.ui_builder.get_object(
                 'bkend_create_cand_app_error_lbl'
             ).configure(text="Error: Select one value for all options")
         else:
+            
             new_application = classDesign.Candidate()
-
+            
             # Create the application.
             # If application returns error, candidate unable to apply.
             if(new_application.create_application(
@@ -656,9 +664,79 @@ class VotingApplication(pygubu.TkApplication):
     #                    Changes frame to `stdnt_login_frm`                   #
     # ----------------------------------------------------------------------- #
 
+    # Hard log out
+    def log_out(self):
+        self.change_frame('stdnt_login_frm','Student Login')
+        
+        
+    # ########################################################################
+    # HACKATHON CHANGE
+    # ########################################################################
+    
     # Exit page within student menu, return to login.
     def return_to_student(self):
-        self.change_frame('stdnt_login_frm','Student Login')
+        results_formatted = ""
+        # When returning to student login, if voted, display message.
+        if(self.session_voting != []):
+            for vote in self.session_voting:
+                # Get the name of the position voted for.
+                position = classDesign.Position(
+                    position_id_query=vote[0]
+                ).get_position_title_by_id()
+                
+                # Get the names of the candidates voted for in each position.
+                first_pref_candidate = classDesign.Candidate(
+                    id=vote[1]
+                ).get_candidate_name()
+                
+                # If voter only voted for one position, skip names.
+                if(vote[2] is not None):
+                    second_pref_candidate = classDesign.Candidate(
+                        id=vote[2]
+                    ).get_candidate_name()
+                    
+                    third_pref_candidate = classDesign.Candidate(
+                        id=vote[3]
+                    ).get_candidate_name()
+                    
+                    fourth_pref_candidate = classDesign.Candidate(
+                        id=vote[4]
+                    ).get_candidate_name()
+                else:
+                    second_pref_candidate = "Not Selected"
+                    third_pref_candidate = "Not Selected"
+                    fourth_pref_candidate = "Not Selected"
+                    
+                # Format into clean list for print and messagebox.
+                results_formatted += "Voted Position: " \
+                    + position \
+                    + " -- First Choice: " \
+                    + first_pref_candidate \
+                    + " -- Second Choice: " \
+                    + second_pref_candidate \
+                    + " -- Third Choice: " \
+                    + third_pref_candidate \
+                    + " -- Fourth Choice: " \
+                    + fourth_pref_candidate \
+                    + "\n"
+
+            self.change_frame('stdnt_vote_receipt_frm','Vote Receipt')
+            
+            self.ui_builder.get_object(
+                'stdnt_vote_receipt_contents_lbl'
+            ).configure(text='You\'ve voted! Your votes:\n' + results_formatted)
+            
+            # Print receipt to console in addition to screen.
+            print(results_formatted)
+            
+            # Clear session voting log.
+            self.session_voting = []
+                    
+        else:
+            messagebox.showinfo("Vote Receipt", "No votes submitted.")
+            self.change_frame('stdnt_login_frm','Student Login')
+            
+        
 
     # ----------------------------------------------------------------------- #
     #                       2.6 Frontend Extra Functions                      #
@@ -685,6 +763,40 @@ class VotingApplication(pygubu.TkApplication):
     #       Select fourth choice, submit votes. If 2nd N/A, skip others.      #
     # ----------------------------------------------------------------------- #
 
+    # ########################################################################
+    # HACKATHON CHANGE
+    # ########################################################################
+    
+    # Fill Student Vote Page
+    def fill_vote_page(self):
+        self.change_frame('stdnt_vote_pos_sel_frm','Select Position')
+
+        # Create election instance, append to list the election times
+        elections = classDesign.Election()
+        current_election = elections.list_formatted()
+
+        # Create combo box of positions currently available to vote.
+        positions = classDesign.Position()
+
+        position_list = self.format_for_combo(
+            positions.list_available_voting_positions(
+                self.logged_in_student
+            )
+        )
+
+        # Set choices in combo boxes to lists created.
+        self.ui_builder.get_object(
+            'stdnt_vote_pos_election_lbl'
+        ).configure(text=current_election[0])
+
+        self.ui_builder.get_object(
+            'stdnt_vote_pos_pos_cmbobx'
+        ).configure(values=position_list)
+    
+    # ########################################################################
+    # HACKATHON CHANGE
+    # ########################################################################
+    
     # Perform student login verification.
     def student_login(self):
         # Get user input from the page.
@@ -703,32 +815,10 @@ class VotingApplication(pygubu.TkApplication):
 
             # If password is valid, login, else, inform user.
             if(student_login.verify_password()):
-                self.change_frame('stdnt_vote_pos_sel_frm','Select Position')
-
                 # Set 'global' class variable for student login.
                 self.logged_in_student = student_login.get_id()
-
-                # Create election instance, append to list the election times
-                elections = classDesign.Election()
-                current_election = elections.list_formatted()
-
-                # Create combo box of positions currently available to vote.
-                positions = classDesign.Position()
-
-                position_list = self.format_for_combo(
-                    positions.list_available_voting_positions(
-                        student_login.get_id()
-                    )
-                )
-
-                # Set choices in combo boxes to lists created.
-                self.ui_builder.get_object(
-                    'stdnt_vote_pos_election_lbl'
-                ).configure(text=current_election[0])
-
-                self.ui_builder.get_object(
-                    'stdnt_vote_pos_pos_cmbobx'
-                ).configure(values=position_list)
+                
+                self.fill_vote_page()
             else:
                 # If not unique, inform user to add custom tag to surname.
                 self.ui_builder.get_object(
@@ -815,7 +905,7 @@ class VotingApplication(pygubu.TkApplication):
             'stdnt_vote_first_choice_cmbobx'
         ).get()
 
-        if(selected_value is not None):
+        if(selected_value != ""):
             # If selection has been made, remove value from list.
             # Make N/A available for future preferences.
             self.candidate_list.remove(selected_value)
@@ -871,6 +961,7 @@ class VotingApplication(pygubu.TkApplication):
         box_two = self.ui_builder.get_object(
             'stdnt_vote_second_choice_cmbobx'
         ).get()
+        
         if(selected_value != "" or box_two == "N/A"):
             student = classDesign.Student()
 
@@ -903,9 +994,19 @@ class VotingApplication(pygubu.TkApplication):
                 third_choice,
                 fourth_choice
             )
+            
+            self.session_voting.append(
+                [
+                    self.voting_position,
+                    first_choice,
+                    second_choice,
+                    third_choice,
+                    fourth_choice
+                ]
+            )
 
             messagebox.showinfo('Success', 'Votes submitted.')
-            self.return_to_student()
+            self.fill_vote_page()
 
     # Change page to the results selection page, fill page with data.
     def select_results_details(self):
