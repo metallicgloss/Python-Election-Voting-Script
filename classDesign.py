@@ -609,6 +609,10 @@ class Position:
         self._select_query_output = mysql_cursor.fetchall()
 
         return self._select_query_output
+        
+    
+        
+          
 
 # --------------------------------------------------------------------------- #
 #                              6. Results Class                               #

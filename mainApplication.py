@@ -98,6 +98,22 @@ class VotingApplication(pygubu.TkApplication):
         # Used to pass position ID between interface changes.
         self.voting_position = ""
 
+        ##Created by Scott during hackathon
+        gsu_position = [
+            ['GSU Officer', 23250],
+            ['President', 27450],
+            ['Faculty Officer', 21620],
+            ['Social', 23670]
+        ]
+
+        salarys = []
+        n = len(gsu_position)
+        self.create_salarys(n,gsu_position,salarys)
+        print(salarys)
+        print("Highest salary is £"+str(self.find_highest_salary(salarys, n)))
+
+        ##
+
     # Function to change/load the frame.
     def change_frame(self, frame, title):
         # If userInterface not defined yet (startup), bypass destroy.
@@ -231,8 +247,23 @@ class VotingApplication(pygubu.TkApplication):
     # Navigate to student voter login.
     def startup_select_student(self):
         self.change_frame('stdnt_login_frm','Login')
-        title = ('Select Student')
+        
+        
+    def find_highest_salary(self, salarys, n): #Created by Scott in hackathon
+            if n == 0:
+                return salarys[0]
+            return max(salarys[n-1], self.find_highest_salary(salarys, n-1))
+            n = len(salarys)
 
+
+    def create_salarys(self, n, gsu_position, salarys): #Created by Scott in hackathon
+        if n == 0:
+            salarys.append(gsu_position[0][1])
+            return salarys
+        else:
+            salarys.append(gsu_position[n-1][1])
+            return self.create_salarys(n-1,gsu_position,salarys)
+    
     # Navigate to backend menu.
     def startup_select_backend(self):
         self.change_frame('bkend_menu_frm','Backend Menu')
