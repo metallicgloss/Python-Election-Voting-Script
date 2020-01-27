@@ -1227,7 +1227,7 @@
     </child>
     <child>
       <object id="stdnt_results_sel_return_btn" class="ttk.Button">
-        <property name="command">return_to_student</property>
+        <property name="command">vote_select_position</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Cancel</property>
         <property name="width">104</property>
@@ -1292,7 +1292,7 @@
     </child>
     <child>
       <object id="stdnt_pos_results_return_btn" class="ttk.Button">
-        <property name="command">return_to_student</property>
+        <property name="command">vote_select_position</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Back</property>
         <property name="width">100</property>
@@ -1838,7 +1838,7 @@
     </child>
     <child>
       <object id="stdnt_vote_return_btn" class="ttk.Button">
-        <property name="command">return_to_student</property>
+        <property name="command">vote_select_position</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Cancel</property>
         <property name="width">102</property>
@@ -1967,6 +1967,37 @@
           <property name="columnspan">2</property>
           <property name="propagate">True</property>
           <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+  <object id="stdnt_vote_receipt_frm" class="ttk.Frame">
+    <property name="height">400</property>
+    <property name="padding">40</property>
+    <property name="width">1000</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="propagate">False</property>
+      <property name="row">0</property>
+    </layout>
+    <child>
+      <object id="stdnt_vote_receipt_contents_lbl" class="ttk.Label">
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object id="stdnt_vote_receipt_close_btn" class="ttk.Button">
+        <property name="command">log_out</property>
+        <property name="text" translatable="yes">Close Window</property>
+        <property name="width">100</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
         </layout>
       </object>
     </child>

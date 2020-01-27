@@ -86,6 +86,7 @@ class VotingApplication(pygubu.TkApplication):
     def __init__(self, master):
         self.master = master
         self.change_frame('startup_menu_frm','Voting Application')
+        
         # List used when voting to temp store data between interface changes
         self._candidate_list = []
 
@@ -94,6 +95,9 @@ class VotingApplication(pygubu.TkApplication):
 
         # Used to pass position ID between interface changes.
         self.voting_position = ""
+
+        # Used to pass position ID between interface changes.
+        self.session_voting = []
 
     # Function to change/load the frame.
     def change_frame(self, frame, title):
@@ -637,9 +641,74 @@ class VotingApplication(pygubu.TkApplication):
     #                    Changes frame to `stdnt_login_frm`                   #
     # ----------------------------------------------------------------------- #
 
+    # Hard log out
+    def log_out(self):
+        self.change_frame('stdnt_login_frm','Student Login')
+        
     # Exit page within student menu, return to login.
     def return_to_student(self):
-        self.change_frame('stdnt_login_frm','Student Login')
+        results_formatted = ""
+        # When returning to student login, if voted, display message.
+        if(self.session_voting != []):
+            for vote in self.session_voting:
+                # Get the name of the position voted for.
+                position = classDesign.Position(
+                    position_id_query=vote[0]
+                ).get_position_title_by_id()
+                
+                # Get the names of the candidates voted for in each position.
+                first_pref_candidate = classDesign.Candidate(
+                    id=vote[1]
+                ).get_candidate_name()
+                
+                # If voter only voted for one position, skip names.
+                if(vote[2] is not None):
+                    second_pref_candidate = classDesign.Candidate(
+                        id=vote[2]
+                    ).get_candidate_name()
+                    
+                    third_pref_candidate = classDesign.Candidate(
+                        id=vote[3]
+                    ).get_candidate_name()
+                    
+                    fourth_pref_candidate = classDesign.Candidate(
+                        id=vote[4]
+                    ).get_candidate_name()
+                else:
+                    second_pref_candidate = "Not Selected"
+                    third_pref_candidate = "Not Selected"
+                    fourth_pref_candidate = "Not Selected"
+                    
+                # Format into clean list for print and messagebox.
+                results_formatted += "Voted Position: " \
+                    + position \
+                    + " -- First Choice: " \
+                    + first_pref_candidate \
+                    + " -- Second Choice: " \
+                    + second_pref_candidate \
+                    + " -- Third Choice: " \
+                    + third_pref_candidate \
+                    + " -- Fourth Choice: " \
+                    + fourth_pref_candidate \
+                    + "\n"
+
+            self.change_frame('stdnt_vote_receipt_frm','Vote Receipt')
+            
+            self.ui_builder.get_object(
+                'stdnt_vote_receipt_contents_lbl'
+            ).configure(text='You\'ve voted! Your votes:\n' + results_formatted)
+            
+            # Print receipt to console in addition to screen.
+            print(results_formatted)
+            
+            # Clear session voting log.
+            self.session_voting = []
+                    
+        else:
+            messagebox.showinfo("Vote Receipt", "No votes submitted.")
+            self.change_frame('stdnt_login_frm','Student Login')
+            
+        
 
     # ----------------------------------------------------------------------- #
     #                       2.6 Frontend Extra Functions                      #
@@ -796,7 +865,7 @@ class VotingApplication(pygubu.TkApplication):
             'stdnt_vote_first_choice_cmbobx'
         ).get()
 
-        if(selected_value is not None):
+        if(selected_value != ""):
             # If selection has been made, remove value from list.
             # Make N/A available for future preferences.
             self.candidate_list.remove(selected_value)
@@ -814,7 +883,7 @@ class VotingApplication(pygubu.TkApplication):
             'stdnt_vote_second_choice_cmbobx'
         ).get()
 
-        if(selected_value is not None):
+        if(selected_value != ""):
             # If selection has been made, continue.
             if(selected_value == "N/A"):
                 self.fourth_choice_confirm()
@@ -834,7 +903,7 @@ class VotingApplication(pygubu.TkApplication):
             'stdnt_vote_third_choice_cmbobx'
         ).get()
 
-        if(selected_value is not None):
+        if(selected_value != ""):
             # If selection has been made, continue.
             self.candidate_list.remove(selected_value)
 
@@ -852,6 +921,7 @@ class VotingApplication(pygubu.TkApplication):
         box_two = self.ui_builder.get_object(
             'stdnt_vote_second_choice_cmbobx'
         ).get()
+        
         if(selected_value != "" or box_two == "N/A"):
             student = classDesign.Student()
 
@@ -884,9 +954,19 @@ class VotingApplication(pygubu.TkApplication):
                 third_choice,
                 fourth_choice
             )
+            
+            self.session_voting.append(
+                [
+                    self.voting_position,
+                    first_choice,
+                    second_choice,
+                    third_choice,
+                    fourth_choice
+                ]
+            )
 
             messagebox.showinfo('Success', 'Votes submitted.')
-            self.return_to_student()
+            self.change_frame('stdnt_vote_pos_sel_frm','Select Position')
 
     # Change page to the results selection page, fill page with data.
     def select_results_details(self):
