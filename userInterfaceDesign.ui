@@ -1227,7 +1227,7 @@
     </child>
     <child>
       <object id="stdnt_results_sel_return_btn" class="ttk.Button">
-        <property name="command">vote_select_position</property>
+        <property name="command">fill_vote_page</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Cancel</property>
         <property name="width">104</property>
@@ -1292,7 +1292,7 @@
     </child>
     <child>
       <object id="stdnt_pos_results_return_btn" class="ttk.Button">
-        <property name="command">vote_select_position</property>
+        <property name="command">fill_vote_page</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Back</property>
         <property name="width">100</property>
@@ -1838,7 +1838,7 @@
     </child>
     <child>
       <object id="stdnt_vote_return_btn" class="ttk.Button">
-        <property name="command">vote_select_position</property>
+        <property name="command">fill_vote_page</property>
         <property name="cursor">hand2</property>
         <property name="text" translatable="yes">Cancel</property>
         <property name="width">102</property>

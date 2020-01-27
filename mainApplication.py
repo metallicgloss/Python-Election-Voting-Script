@@ -739,9 +739,6 @@ class VotingApplication(pygubu.TkApplication):
     def fill_vote_page(self):
         self.change_frame('stdnt_vote_pos_sel_frm','Select Position')
 
-        # Set 'global' class variable for student login.
-        self.logged_in_student = student_login.get_id()
-
         # Create election instance, append to list the election times
         elections = classDesign.Election()
         current_election = elections.list_formatted()
@@ -751,7 +748,7 @@ class VotingApplication(pygubu.TkApplication):
 
         position_list = self.format_for_combo(
             positions.list_available_voting_positions(
-                student_login.get_id()
+                self.logged_in_student
             )
         )
 
@@ -782,6 +779,9 @@ class VotingApplication(pygubu.TkApplication):
 
             # If password is valid, login, else, inform user.
             if(student_login.verify_password()):
+                # Set 'global' class variable for student login.
+                self.logged_in_student = student_login.get_id()
+                
                 self.fill_vote_page()
             else:
                 # If not unique, inform user to add custom tag to surname.
