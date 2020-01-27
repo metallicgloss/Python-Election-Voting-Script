@@ -682,14 +682,10 @@ class Results:
 
         # Return formatted data with winner of each position in election.
         return output_data
-        
-    # Generate results based on CSV line.
-    def csv_results_calculate():
-        pass
 
     # Return list of the final results for given position.
     def get_pos_total_results(self, position_id):
-        print(position_id)
+        ########################################################################################################
         if(position_id in ['1', '2', '5']):
             # Hackathon task, based only on the CSV file provider not database
             with open('fred.csv', newline='') as csvfile:
@@ -713,7 +709,8 @@ class Results:
                     candidates.append(result)
                     
                     # Add all candidate votes to build total
-                    totalpositionvotes += int(result[4]) + int(result[5]) + int(result[6]) + int(result[7])
+                    totalpositionvotes += int(result[4]) + int(result[5]) \
+                    + int(result[6]) + int(result[7])
                     
                     if(int(result[4]) > winner_first):
                         winner_first = int(result[4])
@@ -726,7 +723,8 @@ class Results:
                     candidates.append(result)
                     
                     # Add all candidate votes to build total
-                    totalpositionvotes += int(result[4]) + int(result[5]) + int(result[6]) + int(result[7])
+                    totalpositionvotes += int(result[4]) + int(result[5]) \
+                    + int(result[6]) + int(result[7])
                     
                     if(int(result[4]) > winner_first):
                         winner_first = int(result[4])
@@ -734,12 +732,16 @@ class Results:
                         winner_third = int(result[6])
                         winner_fourth = int(result[7])
                         winner_id = int(result[0])
-                elif((position_id == '5') and (result[3] == "FLAS Faculty Officer")):
+                elif(
+                    (position_id == '5') 
+                    and (result[3] == "FLAS Faculty Officer")
+                ):
                     # Append candidate to seperate list if running for pos.
                     candidates.append(result)
                     
                     # Add all candidate votes to build total
-                    totalpositionvotes += int(result[4]) + int(result[5]) + int(result[6]) + int(result[7])
+                    totalpositionvotes += int(result[4]) + int(result[5]) \
+                    + int(result[6]) + int(result[7])
                     
                     if(int(result[4]) > winner_first):
                         winner_first = int(result[4])
@@ -752,13 +754,38 @@ class Results:
             # functionality.
             #
             # Firstname Lastname, 1st, 2nd, 3rd, 4th
-            first = [candidates[0][1] + " " + candidates[0][2], candidates[0][4], candidates[0][5], candidates[0][6], candidates[0][7]]
-            second = [candidates[1][1] + " " + candidates[1][2], candidates[1][4], candidates[1][5], candidates[1][6], candidates[1][7]]
-            third = [candidates[2][1] + " " + candidates[2][2], candidates[2][4], candidates[2][5], candidates[2][6], candidates[2][7]]
-            fourth = [candidates[3][1] + " " + candidates[3][2], candidates[3][4], candidates[3][5], candidates[3][6], candidates[3][7]]
+            first = [
+                candidates[0][1] + " " + candidates[0][2], 
+                candidates[0][4], 
+                candidates[0][5], 
+                candidates[0][6], 
+                candidates[0][7]
+            ]
+            second = [
+                candidates[1][1] + " " + candidates[1][2],
+                candidates[1][4], 
+                candidates[1][5], 
+                candidates[1][6], 
+                candidates[1][7]
+            ]
+            third = [
+                candidates[2][1] + " " + candidates[2][2],
+                candidates[2][4],
+                candidates[2][5],
+                candidates[2][6],
+                candidates[2][7]
+            ]
+            fourth = [
+                candidates[3][1] + " " + candidates[3][2],
+                candidates[3][4],
+                candidates[3][5],
+                candidates[3][6],
+                candidates[3][7]
+            ]
                   
             winner_id_index = [int(i[0]) for i in candidates].index(winner_id)
-            the_winner = candidates[winner_id_index][1] + " " + candidates[winner_id_index][2]
+            the_winner = candidates[winner_id_index][1] \
+                + " " + candidates[winner_id_index][2]
 
             # Return data on all candidates to help with formatting to screen.
             return [
@@ -767,9 +794,15 @@ class Results:
                 third,
                 fourth,
                 the_winner,
-                str(winner_first + winner_second + winner_third + winner_fourth),
+                str(
+                    winner_first \
+                    + winner_second \
+                    + winner_third \
+                    + winner_fourth
+                ),
                 str(totalpositionvotes)
             ]
+            ###################################################################################################
         else:
             election = Election()
             election_id = election.get_current_election()

@@ -111,6 +111,7 @@ class VotingApplication(pygubu.TkApplication):
         # Load main interface design.
         self.ui_builder.add_from_file('userInterfaceDesign.ui')
         self.userInterface = self.ui_builder.get_object(frame,self.master)
+        # Title change created by 001056108
         self.master.title(title)
 
 
@@ -517,6 +518,7 @@ class VotingApplication(pygubu.TkApplication):
             ).configure(text="Error: Enter data for both fields.")
 
     # Generates a graph based on the results for the position.
+    # Function developed by 001056108, 001058493
     def display_graph(self):
         results = classDesign.Results()
         total = results.get_pos_total_results(self.voting_position)
