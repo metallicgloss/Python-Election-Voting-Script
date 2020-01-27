@@ -814,7 +814,7 @@ class VotingApplication(pygubu.TkApplication):
             'stdnt_vote_second_choice_cmbobx'
         ).get()
 
-        if(selected_value is not None):
+        if(selected_value != ""):
             # If selection has been made, continue.
             if(selected_value == "N/A"):
                 self.fourth_choice_confirm()
@@ -834,7 +834,7 @@ class VotingApplication(pygubu.TkApplication):
             'stdnt_vote_third_choice_cmbobx'
         ).get()
 
-        if(selected_value is not None):
+        if(selected_value != ""):
             # If selection has been made, continue.
             self.candidate_list.remove(selected_value)
 
