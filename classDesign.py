@@ -114,6 +114,8 @@ class Student(Person):
 
     # Generate and store new hashed password
     def generate_hash_password(self):
+        # Method functionality created with assistance of
+        # reference (15, 16, 17)
         # Generate random salt key using hashlib, a random string generated.
         self._salt = hashlib.sha256(os.urandom(64)).hexdigest().encode('ascii')
 
@@ -130,6 +132,8 @@ class Student(Person):
 
     # Generate and return hashed password
     def get_hashed_password(self):
+        # Method functionality created with assistance of
+        # reference (15, 16, 17)
         # Re-calculate generated hashed version of the pass converted to hex.
         self._hashed_password = (binascii.hexlify(
             hashlib.pbkdf2_hmac(
@@ -284,25 +288,25 @@ class Candidate(Person):
             [self.name]
         )
 
-        # Store query_result as all values returned.
-        query_result = mysql_cursor.fetchall()
+        # Store _select_query_output as all values returned.
+        self._select_query_output = mysql_cursor.fetchall()
         
-        self.id = query_result[0][0]
+        self.id = self._select_query_output[0][0]
 
     # Get all candidates created.
     def list(self):
         # Execute MySQL Query
         mysql_cursor.execute("SELECT * FROM `gsuCandidates`")
 
-        # Store query_result as all values returned.
-        query_result = mysql_cursor.fetchall()
+        # Store _select_query_output as all values returned.
+        self._select_query_output = mysql_cursor.fetchall()
 
         if(mysql_cursor.rowcount == 0):
             # No current applications.
             return False
         else:
             # Return array of all candidates running.
-            return query_result
+            return self._select_query_output
 
     # Verify candidate does not have name matching another.
     def verify_unique_name(self):
@@ -314,8 +318,8 @@ class Candidate(Person):
             [self.name]
         )
 
-        # Store query_result as all values returned.
-        query_result = mysql_cursor.fetchall()
+        # Store _select_query_output as all values returned.
+        self._select_query_output = mysql_cursor.fetchall()
 
         if(mysql_cursor.rowcount == 0):
             # No user found.
@@ -334,23 +338,37 @@ class Candidate(Person):
             [self.id]
         )
 
-        # Store query_result as all values returned.
-        query_result = mysql_cursor.fetchall()
+        # Store _select_query_output as all values returned.
+        self._select_query_output = mysql_cursor.fetchall()
 
         # Get name of candidate.
-        self.name = query_result[0][0]
+        self.name = self._select_query_output[0][0]
 
         return self.name
 
     # Create application for the current election.
     def create_application(self, candidate_id, election_id, position_id):
+        # Execute MySQL Query
         mysql_cursor.execute(
-            "INSERT INTO `gsuCandidateApplication` \
-            (`candidateID`, `positionID`, `electionID`) \
-            VALUES (%s, %s, %s)",
-            [candidate_id, position_id, election_id]
+            "SELECT `candidateID` \
+            FROM `gsuCandidateApplication` \
+            WHERE `candidateID` = %s AND `electionID` = %s",
+            [candidate_id, election_id]
         )
-        db_connect.commit()
+
+        # Store _select_query_output as all values returned.
+        mysql_cursor.fetchall()
+        
+        if(mysql_cursor.rowcount == 0):
+            mysql_cursor.execute(
+                "INSERT INTO `gsuCandidateApplication` \
+                (`candidateID`, `positionID`, `electionID`) \
+                VALUES (%s, %s, %s)",
+                [candidate_id, position_id, election_id]
+            )
+            db_connect.commit()
+        else:
+            return "error"
 
 # --------------------------------------------------------------------------- #
 #                              4. Election Class                              #
@@ -961,6 +979,7 @@ class Results:
             results[candidates[3][0]] = candidate_four_count
 
         # Sort 2d array into largest to smallest by candidate.
+        # Assisted by reference (19)
         highest_values = [i for i, candidate in results.items() if candidate == max(results.values())]
 
         return(highest_values, results)

@@ -38,6 +38,7 @@ from tkinter import messagebox
 
 # Module initialisation
 # Open MySQL connection using connection query data, initialise cursor.
+# Assisted by reference (7)
 try:
     # Define database connection variable.
     db_connect = mysql.connector.connect(
@@ -55,6 +56,8 @@ except Error as e:
 
 # --------------------------------------------------------------------------- #
 #                            2. Interface Hander Class                        #
+#                                                                             #
+#        NB: Linking button clicks to functions was assisted by ref (6)       #
 # --------------------------------------------------------------------------- #
 
 # Define primary class to initiate the user interface.
@@ -99,6 +102,7 @@ class VotingApplication(pygubu.TkApplication):
     def change_frame(self, frame, title):
         # If userInterface not defined yet (startup), bypass destroy.
         # Destroy current view and load frame of desired window.
+        # Assisted by references (3, 4, 8, 9)
         try:
             self.userInterface.destroy()
         except AttributeError:
@@ -109,6 +113,9 @@ class VotingApplication(pygubu.TkApplication):
 
         # Load main interface design.
         self.ui_builder.add_from_file('userInterfaceDesign.ui')
+        # Assisted by references (1, 5)
+        # Program usage and method documentation of Pygubu
+        # library assisted by references (12, 13)
         self.userInterface = self.ui_builder.get_object(frame,self.master)
         self.master.title(title)
 
@@ -123,6 +130,7 @@ class VotingApplication(pygubu.TkApplication):
     # Sets results page labels, helps to avoid massive amounts of duplication.
     def display_candidate_results(
             self, element, name, first, second, third, fourth):
+        # Assisted by reference (14)
         self.ui_builder.get_object(
             element + '_name_lbl'
         ).configure(text=name)
@@ -146,7 +154,7 @@ class VotingApplication(pygubu.TkApplication):
     def display_position_results(self, results, page, percentage):
         self.display_candidate_results(
             page + "_cand_one",
-            results[0][0],
+            results[0][0] + " (" + str(results[0][5]) + " Votes)",
             results[0][1],
             results[0][2],
             results[0][3],
@@ -155,7 +163,7 @@ class VotingApplication(pygubu.TkApplication):
 
         self.display_candidate_results(
             page + "_cand_two",
-            results[1][0],
+            results[1][0] + " (" + str(results[1][5]) + " Votes)",
             results[1][1],
             results[1][2],
             results[1][3],
@@ -163,7 +171,7 @@ class VotingApplication(pygubu.TkApplication):
         )
         self.display_candidate_results(
             page + "_cand_three",
-            results[2][0],
+            results[2][0] + " (" + str(results[2][5]) + " Votes)",
             results[2][1],
             results[2][2],
             results[2][3],
@@ -171,7 +179,7 @@ class VotingApplication(pygubu.TkApplication):
         )
         self.display_candidate_results(
             page + "_cand_four",
-            results[3][0],
+            results[3][0] + " (" + str(results[3][5]) + " Votes)",
             results[3][1],
             results[3][2],
             results[3][3],
@@ -302,15 +310,15 @@ class VotingApplication(pygubu.TkApplication):
 
         # Set choices in combo boxes to lists created.
         self.ui_builder.get_object(
-            'bkend_create_cand_election_cmbobx'
+            'bkend_create_cand_app_election_cmbobx'
         ).configure(values=current_election)
 
         self.ui_builder.get_object(
-            'bkend_create_cand_cand_cmbobx'
+            'bkend_create_cand_app_cand_cmbobx'
         ).configure(values=available_candidates)
 
         self.ui_builder.get_object(
-            'bkend_create_cand_pos_cmbobx'
+            'bkend_create_cand_app_pos_cmbobx'
         ).configure(values=available_positions)
 
     # Navigate to view results page.
@@ -358,6 +366,7 @@ class VotingApplication(pygubu.TkApplication):
     # Create new student on submission from user.
     def create_student(self):
         # Get user input from the page.
+        # Assisted by reference (2)
         username = self.ui_builder.get_object(
             'bkend_create_stdnt_username_txtbx'
         ).get()
@@ -365,7 +374,7 @@ class VotingApplication(pygubu.TkApplication):
             'bkend_create_stdnt_passwd_txbx'
         ).get()
 
-        if None not in (username, password):
+        if "" not in (username, password):
             # If input is not blank, create user.
             new_student = classDesign.Student(username, password)
 
@@ -402,7 +411,7 @@ class VotingApplication(pygubu.TkApplication):
             'bkend_create_cand_email_txtbx'
         ).get()
 
-        if None not in (name, email):
+        if "" not in (name, email):
             # If input fields on the page are not empty.
             new_candidate = classDesign.Candidate(name, email)
 
@@ -427,14 +436,21 @@ class VotingApplication(pygubu.TkApplication):
     def create_election(self):
         # Get user input from the page, parse input as best as possible using
         # library into standard datetime format.
-        start_date_time = datetime.strptime((self.ui_builder.get_object(
-            'bkend_create_election_start_txtbx'
-        ).get()), "%H:%M %d/%m/%Y")
-        end_date_time = datetime.strptime((self.ui_builder.get_object(
-            'bkend_create_election_end_txbx'
-        ).get()), "%H:%M %d/%m/%Y")
-
-        if None not in (start_date_time, end_date_time):
+        # Assisted by references (10, 22)
+        try:
+            start_date_time = datetime.strptime((self.ui_builder.get_object(
+                'bkend_create_election_start_txtbx'
+            ).get()), "%H:%M %d/%m/%Y")
+            end_date_time = datetime.strptime((self.ui_builder.get_object(
+                'bkend_create_election_end_txbx'
+            ).get()), "%H:%M %d/%m/%Y")
+        except ValueError:
+            # If not valid, alert user.
+            self.ui_builder.get_object(
+                'bkend_create_election_error_lbl'
+            ).configure(text="Error: Invalid date input.")
+                
+        if "" not in (start_date_time, end_date_time):
             # If input fields on the page are not empty.
             new_election = classDesign.Election(start_date_time, end_date_time)
 
@@ -459,32 +475,31 @@ class VotingApplication(pygubu.TkApplication):
     def create_application(self):
         # Get user input from the page
         # Then split on newline and get 1st element to get ID of each.
-        election = self.get_cmbo_id('bkend_create_cand_election_cmbobx')
+        try:
+            election = self.get_cmbo_id(
+                'bkend_create_cand_app_election_cmbobx'
+            )
 
-        candidate = self.get_cmbo_id('bkend_create_cand_cand_cmbobx')
+            candidate = self.get_cmbo_id('bkend_create_cand_app_cand_cmbobx')
 
-        position = self.get_cmbo_id('bkend_create_cand_pos_cmbobx')
-
-        if(election is not None):
-            # If election is not blank.
-            if None not in (candidate, position):
-                # If other values are not selected
-                new_application = classDesign.Candidate()
-
-                # Create the application.
-                new_application.create_application(candidate, election, position)
-
-                self.return_to_backend()
-            else:
-                # Else change label text to error message.
-                self.ui_builder.get_object(
-                    'bkend_create_cand_error_lbl'
-                ).configure(text="Error: Select one value for all options.")
-        else:
+            position = self.get_cmbo_id('bkend_create_cand_app_pos_cmbobx')
+        except IndexError:
             # Else change label text to error message.
             self.ui_builder.get_object(
-                'bkend_create_cand_error_lbl'
-            ).configure(text="Election not selected. Unable to apply.")
+                'bkend_create_cand_app_error_lbl'
+            ).configure(text="Error: Select one value for all options")
+        else:
+            new_application = classDesign.Candidate()
+
+            # Create the application.
+            # If application returns error, candidate unable to apply.
+            if(new_application.create_application(
+                candidate, election, position) == "error"):
+                self.ui_builder.get_object(
+                    'bkend_create_cand_app_error_lbl'
+                ).configure(text="Error: Candidate cannot apply for multiple positions in one election.")
+            else:
+                self.return_to_backend()
 
     # Retrieve list of results.
     # Then format them to display them on the user interface.
@@ -496,7 +511,7 @@ class VotingApplication(pygubu.TkApplication):
 
         election = self.get_cmbo_id('bkend_sel_results_pos_election_cmbobx')
 
-        if None not in (self.voting_position, election):
+        if "" not in (self.voting_position, election):
             # If input fields on the page are not empty.
             self.change_frame('bkend_bkend_view_results_frm','View Results')
 
@@ -517,6 +532,8 @@ class VotingApplication(pygubu.TkApplication):
 
     # Generates a graph based on the results for the position.
     def display_graph(self):
+        # Function functionality created with assistance of
+        # references (18, 20, 21)
         results = classDesign.Results()
         total = results.get_pos_total_results(self.voting_position)
 
@@ -677,7 +694,7 @@ class VotingApplication(pygubu.TkApplication):
             'stdnt_login_passwd_txtbx'
         ).get()
 
-        if None not in (username, password):
+        if "" not in (username, password):
             # If input fields on the page are not empty.
 
             student_login = classDesign.Student(username, password)
@@ -740,7 +757,7 @@ class VotingApplication(pygubu.TkApplication):
             ).configure(text="Please enter data for all fields.")
         else:
             # If not except, continue.
-            if None not in (self.voting_position, current_election):
+            if "" not in (self.voting_position, current_election):
                 # If input fields on the page are not empty.
                 self.change_frame('stdnt_vote_frm','Voting')
 
@@ -788,7 +805,7 @@ class VotingApplication(pygubu.TkApplication):
 
         self.ui_builder.get_object(
             end_element + '_cmbobx'
-        ).configure(state="normal", values=self.candidate_list)
+        ).configure(state="readonly", values=self.candidate_list)
 
     def first_choice_confirm(self):
         # Get the user input value for first choice.
@@ -952,6 +969,7 @@ class VotingApplication(pygubu.TkApplication):
 if __name__ == '__main__':
     tkinter_app = tk.Tk()
     main_application = VotingApplication(tkinter_app)
+    # Assisted by reference (25)
     tkinter_app.tk.call(
         'wm', 'iconphoto',
         tkinter_app._w,
