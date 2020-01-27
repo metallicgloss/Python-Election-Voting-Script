@@ -503,6 +503,7 @@ class VotingApplication(pygubu.TkApplication):
 
     # Retrieve list of results.
     # Then format them to display them on the user interface.
+    # Pair programmed: William & Scott
     def results_view_select_position(self):
         # Get input from the interface.
         self.voting_position = self.get_cmbo_id(
@@ -531,6 +532,7 @@ class VotingApplication(pygubu.TkApplication):
             ).configure(text="Error: Enter data for both fields.")
 
     # Generates a graph based on the results for the position.
+    # Written fully by Scott
     def display_graph(self):
         # Function functionality created with assistance of
         # references (18, 20, 21)
