@@ -735,6 +735,35 @@ class VotingApplication(pygubu.TkApplication):
     #       Select fourth choice, submit votes. If 2nd N/A, skip others.      #
     # ----------------------------------------------------------------------- #
 
+    # Fill Student Vote Page
+    def fill_vote_page(self):
+        self.change_frame('stdnt_vote_pos_sel_frm','Select Position')
+
+        # Set 'global' class variable for student login.
+        self.logged_in_student = student_login.get_id()
+
+        # Create election instance, append to list the election times
+        elections = classDesign.Election()
+        current_election = elections.list_formatted()
+
+        # Create combo box of positions currently available to vote.
+        positions = classDesign.Position()
+
+        position_list = self.format_for_combo(
+            positions.list_available_voting_positions(
+                student_login.get_id()
+            )
+        )
+
+        # Set choices in combo boxes to lists created.
+        self.ui_builder.get_object(
+            'stdnt_vote_pos_election_lbl'
+        ).configure(text=current_election[0])
+
+        self.ui_builder.get_object(
+            'stdnt_vote_pos_pos_cmbobx'
+        ).configure(values=position_list)
+    
     # Perform student login verification.
     def student_login(self):
         # Get user input from the page.
@@ -753,32 +782,7 @@ class VotingApplication(pygubu.TkApplication):
 
             # If password is valid, login, else, inform user.
             if(student_login.verify_password()):
-                self.change_frame('stdnt_vote_pos_sel_frm','Select Position')
-
-                # Set 'global' class variable for student login.
-                self.logged_in_student = student_login.get_id()
-
-                # Create election instance, append to list the election times
-                elections = classDesign.Election()
-                current_election = elections.list_formatted()
-
-                # Create combo box of positions currently available to vote.
-                positions = classDesign.Position()
-
-                position_list = self.format_for_combo(
-                    positions.list_available_voting_positions(
-                        student_login.get_id()
-                    )
-                )
-
-                # Set choices in combo boxes to lists created.
-                self.ui_builder.get_object(
-                    'stdnt_vote_pos_election_lbl'
-                ).configure(text=current_election[0])
-
-                self.ui_builder.get_object(
-                    'stdnt_vote_pos_pos_cmbobx'
-                ).configure(values=position_list)
+                self.fill_vote_page()
             else:
                 # If not unique, inform user to add custom tag to surname.
                 self.ui_builder.get_object(
@@ -966,7 +970,7 @@ class VotingApplication(pygubu.TkApplication):
             )
 
             messagebox.showinfo('Success', 'Votes submitted.')
-            self.change_frame('stdnt_vote_pos_sel_frm','Select Position')
+            self.fill_vote_page()
 
     # Change page to the results selection page, fill page with data.
     def select_results_details(self):
