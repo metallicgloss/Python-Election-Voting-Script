@@ -248,16 +248,11 @@ class VotingApplication(pygubu.TkApplication):
     #            Destroys mainloop, gracefully closes application.            #
     # ----------------------------------------------------------------------- #
 
-    # Navigate to student voter login.
-    def startup_select_student(self):
-        self.change_frame('stdnt_login_frm','Login')
-        
-        
     def find_highest_salary(self, salarys, n): #Created by Scott in hackathon
-            if n == 0:
-                return salarys[0]
-            return max(salarys[n-1], self.find_highest_salary(salarys, n-1))
-            n = len(salarys)
+        if n == 0:
+            return salarys[0]
+        return max(salarys[n-1], self.find_highest_salary(salarys, n-1))
+        n = len(salarys)
 
 
     def create_salarys(self, n, gsu_position, salarys): #Created by Scott in hackathon
@@ -267,7 +262,15 @@ class VotingApplication(pygubu.TkApplication):
         else:
             salarys.append(gsu_position[n-1][1])
             return self.create_salarys(n-1,gsu_position,salarys)
-    
+            
+    # Navigate to student voter login.
+    def startup_select_student(self):
+        self.change_frame('stdnt_login_frm','Login')
+        
+        # Description function call - from Aiden in the hackathon.
+		position_display = classDesign.Position()
+        position_display.description()
+        
     # Navigate to backend menu.
     def startup_select_backend(self):
         self.change_frame('bkend_menu_frm','Backend Menu')

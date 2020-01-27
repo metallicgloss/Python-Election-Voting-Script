@@ -631,7 +631,37 @@ class Position:
         # Store _select_query_output as all values returned.
         self._select_query_output = mysql_cursor.fetchall()
 
-        return self._select_query_output[0][1]
+        return self._select_query_output[0][1]		
+	
+    # Function by Aiden in hackathon.
+    def description(self):
+        posvar= True
+        f = open('positions.txt','r')
+        positions = []
+        for line in f:
+            print(line)
+            f.close
+         
+        print("")
+        pos_description = []
+        while posvar == True:
+            position_select = input("select position: ")
+            position_select = (position_select+" | ")
+        
+            description = input("enter a description for this position: ")
+            posvar = ("would you like to continue: ")
+            print("---------------------------------------------")
+        
+            pos_des =(position_select, description)
+            pos_description.append(pos_des)
+
+            print(pos_description)
+            posvar = input("would you like to continue: ")
+            if posvar == ("yes"):
+                posvar = True
+            else:
+                with open("description.txt", 'w') as f:
+                    f.writelines('\t'.join(str(j) for j in i) + '\n' for i in pos_description)
 
 # --------------------------------------------------------------------------- #
 #                              6. Results Class                               #
