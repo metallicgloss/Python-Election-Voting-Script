@@ -232,7 +232,8 @@ class VotingApplication(pygubu.TkApplication):
     def startup_select_student(self):
         self.change_frame('stdnt_login_frm','Login')
         title = ('Select Student')
-
+		position_display = classDesign.Position()
+        position_display.description()
     # Navigate to backend menu.
     def startup_select_backend(self):
         self.change_frame('bkend_menu_frm','Backend Menu')
