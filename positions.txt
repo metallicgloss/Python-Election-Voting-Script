@@ -1,8 +1,0 @@
-president
-primary GSU officer 
-secondary GSU officer
-teritary GSU officer
-faculty of liberal arts and aciences officer
-business school faculty officer
-faculty of education and health officer
-faculty of engineering and science officer
